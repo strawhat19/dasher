@@ -1,9 +1,9 @@
 import React from "react";
-import Menuitems from "./MenuItems";
-import { usePathname } from "next/navigation";
-import { Box, List } from "@mui/material";
 import NavItem from "./NavItem";
+import Menuitems from "./MenuItems";
+import { Box, List } from "@mui/material";
 import NavGroup from "./NavGroup/NavGroup";
+import { usePathname } from "next/navigation";
 
 const SidebarItems = ({ toggleMobileSidebar }: any) => {
   const pathname = usePathname();
@@ -13,12 +13,8 @@ const SidebarItems = ({ toggleMobileSidebar }: any) => {
     <Box sx={{ px: 3 }}>
       <List sx={{ pt: 0 }} className="sidebarNav" component="div">
         {Menuitems.map((item) => {
-          // {/********SubHeader**********/}
           if (item.subheader) {
             return <NavGroup item={item} key={item.subheader} />;
-
-            // {/********If Sub Menu**********/}
-            /* eslint no-else-return: "off" */
           } else {
             return (
               <NavItem
@@ -34,4 +30,5 @@ const SidebarItems = ({ toggleMobileSidebar }: any) => {
     </Box>
   );
 };
+
 export default SidebarItems;

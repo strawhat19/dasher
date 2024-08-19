@@ -1,15 +1,6 @@
 import React from "react";
-// mui imports
-import {
-  ListItemIcon,
-  ListItem,
-  List,
-  styled,
-  ListItemText,
-  useTheme,
-  ListItemButton,
-} from "@mui/material";
 import Link from "next/link";
+import { ListItemIcon, ListItem, List, styled, ListItemText, useTheme, ListItemButton } from "@mui/material";
 
 type NavGroup = {
   [x: string]: any;

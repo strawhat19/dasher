@@ -1,8 +1,9 @@
-import { Upgrade } from "./Updrade";
-import SidebarItems from "./SidebarItems";
-import { logo } from "../../../../../server";
-import { Sidebar, Logo } from 'react-mui-sidebar';
-import { useMediaQuery, Box, Drawer } from "@mui/material";
+import Link from 'next/link';
+import { Upgrade } from './Updrade';
+import { Logo } from 'react-mui-sidebar';
+import SidebarItems from './SidebarItems';
+import { logo } from '../../../../../server';
+import { useMediaQuery, Box, Drawer } from '@mui/material';
 
 interface ItemType {
   isSidebarOpen: boolean;
@@ -30,13 +31,13 @@ const MSidebar = ({
 
   if (lgUp) {
     return (
-      <Box
+      <Box className={`drawerContainer`}
         sx={{
           width: sidebarWidth,
           flexShrink: 0,
         }}
       >
-        <Drawer
+        <Drawer className={`drawer`}
           anchor={`left`}
           open={isSidebarOpen}
           variant={`permanent`}
@@ -47,25 +48,16 @@ const MSidebar = ({
             },
           }}
         >
-          <Box
-            sx={{
-              height: `100%`,
-            }}
-          >
-            <Sidebar 
-              width={`270px`} 
-              showProfile={false} 
-              open={isSidebarOpen} 
-              themeColor={`#5d87ff`} 
-              collapsewidth={`80px`} 
-              themeSecondaryColor={`#49beff`}
-            >
-              <Logo img={`/images/logos/${logo}`} />
-              <Box>
-                <SidebarItems />
-                <Upgrade />
-              </Box>
-            </Sidebar >
+          <Box className={`sidebarContainer spaceBetween gap15 flex column`} sx={{ height: `100%` }}>
+            <div className={`sidebarTop w100`}>
+              <Link href={`/`}>
+                <Logo img={`/images/logos/${logo}`} />
+              </Link>
+              <SidebarItems />
+            </div>
+            <div className={`sidebarBottom w100`}>
+              <Upgrade />
+            </div>
           </Box>
         </Drawer>
       </Box>
@@ -85,21 +77,18 @@ const MSidebar = ({
         },
       }}
     >
-      <Box px={2}>
-        <Sidebar
-          width={'270px'}
-          collapsewidth="80px"
-          isCollapse={false}
-          mode="light"
-          direction="ltr"
-          themeColor="#5d87ff"
-          themeSecondaryColor="#49beff"
-          showProfile={false}
-        >
-          <Logo img={`/images/logos/${logo}`} />
-          <SidebarItems />
-          <Upgrade />
-        </Sidebar>
+      <Box className={`h100`} px={2}>
+        <Box className={`sidebarContainer spaceBetween gap15 flex column h100`}>
+          <div style={{ marginTop: 15 }} className={`sidebarTop w100`}>
+            <Link href={`/`}>
+              <Logo img={`/images/logos/${logo}`} />
+            </Link>
+            <SidebarItems />
+          </div>
+          <div className={`sidebarBottom w100`}>
+            <Upgrade />
+          </div>
+        </Box>
       </Box>
     </Drawer>
   );

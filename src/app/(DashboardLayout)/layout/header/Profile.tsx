@@ -1,23 +1,16 @@
-import React, { useState } from "react";
 import Link from "next/link";
-import {
-  Avatar,
-  Box,
-  Menu,
-  Button,
-  IconButton,
-  MenuItem,
-  ListItemIcon,
-  ListItemText,
-} from "@mui/material";
-
+import React, { useState } from "react";
+import { AccountCircle } from "@mui/icons-material";
 import { IconListCheck, IconMail, IconUser } from "@tabler/icons-react";
+import { Box, Menu, Button, IconButton, MenuItem, ListItemIcon, ListItemText } from "@mui/material";
 
 const Profile = () => {
   const [anchorEl2, setAnchorEl2] = useState(null);
+
   const handleClick2 = (event: any) => {
     setAnchorEl2(event.currentTarget);
   };
+
   const handleClose2 = () => {
     setAnchorEl2(null);
   };
@@ -25,7 +18,7 @@ const Profile = () => {
   return (
     <Box>
       <IconButton
-        size="large"
+        size="medium"
         aria-label="show 11 new notifications"
         color="inherit"
         aria-controls="msgs-menu"
@@ -37,18 +30,9 @@ const Profile = () => {
         }}
         onClick={handleClick2}
       >
-        <Avatar
-          src="/images/profile/user-1.jpg"
-          alt="image"
-          sx={{
-            width: 35,
-            height: 35,
-          }}
-        />
+        <AccountCircle style={{ fontSize: 35 }} />
       </IconButton>
-      {/* ------------------------------------------- */}
-      {/* Message Dropdown */}
-      {/* ------------------------------------------- */}
+
       <Menu
         id="msgs-menu"
         anchorEl={anchorEl2}
