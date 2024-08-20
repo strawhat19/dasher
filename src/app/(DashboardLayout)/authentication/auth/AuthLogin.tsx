@@ -59,8 +59,10 @@ const AuthLogin = ({ title, subtitle, subtext }: loginType) => (
         alignItems="center"
         my={2}
       >
-        <FormGroup>
+        <FormGroup id={`authForm`}>
           <FormControlLabel
+            id={`rememberThisDevice`}
+            name={`rememberThisDevice`}
             control={<Checkbox defaultChecked />}
             label="Remeber this Device"
           />

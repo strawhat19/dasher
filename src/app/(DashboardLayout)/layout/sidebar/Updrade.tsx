@@ -6,8 +6,9 @@ export const Upgrade = () => {
     return (
         <Box
             gap={2}
-            display='flex'
-            alignItems="center"
+            display={`flex`}
+            alignItems={`center`}
+            className={`noAccountBox`}
             sx={{ m: 3, p: 3, bgcolor: 'primary.light', borderRadius: '8px' }}
         >
             <>

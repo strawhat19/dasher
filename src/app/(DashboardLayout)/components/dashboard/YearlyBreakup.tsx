@@ -13,6 +13,8 @@ const YearlyBreakup = () => {
   const primary = theme.palette.primary.main;
   const successlight = theme.palette.success.light;
 
+  const seriescolumnchart: any = [38, 40, 25];
+
   const optionscolumnchart: any = {
     chart: {
       type: 'donut',
@@ -58,7 +60,6 @@ const YearlyBreakup = () => {
       },
     ],
   };
-  const seriescolumnchart: any = [38, 40, 25];
 
   return (
     <DashboardCard title="Yearly Breakup">
@@ -98,13 +99,12 @@ const YearlyBreakup = () => {
             </Stack>
           </Stack>
         </Grid>
-        {/* column */}
         <Grid item xs={5} sm={5}>
           <Chart
             options={optionscolumnchart}
             series={seriescolumnchart}
             type="donut"
-            height={150} width={"100%"}
+            height={140} width={"100%"}
           />
         </Grid>
       </Grid>

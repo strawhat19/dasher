@@ -1,15 +1,25 @@
-import React from 'react';
 import Link from 'next/link';
 import Profile from './Profile';
 import PropTypes from 'prop-types';
+import { globalData } from '@/app/layout';
+import React, { useContext } from 'react';
+import { LightMode, NightsStay } from '@mui/icons-material';
 import { IconBellRinging, IconMenu } from '@tabler/icons-react';
 import { Box, AppBar, Toolbar, styled, Stack, IconButton, Badge, Button } from '@mui/material';
+import NavItem from '../sidebar/NavItem';
+import { uniqueId } from 'lodash';
+import { usePathname } from 'next/navigation';
 
 interface ItemType {
   toggleMobileSidebar:  (event: React.MouseEvent<HTMLElement>) => void;
 }
 
 const Header = ({toggleMobileSidebar}: ItemType) => {
+  const pathname = usePathname();
+  const pathDirect = pathname;
+
+  const { darkMode, setDarkMode } = useContext<any>(globalData);
+
   const AppBarStyled = styled(AppBar)(({ theme }) => ({
     boxShadow: 'none',
     background: theme.palette.background.paper,
@@ -42,9 +52,20 @@ const Header = ({toggleMobileSidebar}: ItemType) => {
           <IconMenu width="20" height="20" />
         </IconButton>
 
-        <Link className={`link hoverLink`} href={`/notifications`}>
+        <NavItem
+          key={uniqueId()}
+          onClick={() => null}
+          pathDirect={pathDirect}
+          item={{
+            icon: IconBellRinging,
+            href: `/notifications`,
+            title: `Notification(s)`,
+          }}
+        />
+        
+        {/* <Link className={`link hoverLink`} href={`/notifications`}>
           <IconButton
-            size="large"
+            size="medium"
             aria-label="show 11 new notifications"
             color="inherit"
             aria-controls="msgs-menu"
@@ -54,13 +75,27 @@ const Header = ({toggleMobileSidebar}: ItemType) => {
               <IconBellRinging size="21" stroke="1.5" />
             </Badge>
           </IconButton>
-
           Notification(s)
-        </Link>
+        </Link> */}
 
         <Box flexGrow={1} />
 
         <Stack spacing={1} direction="row" alignItems="center">
+          <IconButton
+            size={`medium`}
+            color={`inherit`}
+            onClick={(e) => setDarkMode(!darkMode)}
+          >
+            {darkMode ? (
+              // <i className={`fas fa-sun`} style={{ color: `var(--main)`, fontSize: 21 }} />
+              // <Brightness7 style={{ color: `var(--main)`, fontSize: 21 }} />
+              <LightMode style={{ color: `var(--main)`, fontSize: 21 }} />
+            ) : (
+              // <i className={`fas fa-moon`} style={{ color: `var(--main)`, fontSize: 21 }} />
+              // <Brightness4 style={{ color: `var(--main)`, fontSize: 21 }} />
+              <NightsStay style={{ color: `var(--main)`, fontSize: 21 }} />
+            )}
+          </IconButton>
           <Button variant="contained" component={Link} href="/authentication/login" disableElevation color="primary">
             Login
           </Button>

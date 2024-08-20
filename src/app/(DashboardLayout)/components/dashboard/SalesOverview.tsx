@@ -1,19 +1,11 @@
 import React from 'react';
 import dynamic from "next/dynamic";
-import { year } from '../../../../../server';
 import { useTheme } from '@mui/material/styles';
-import { Select, MenuItem } from '@mui/material';
 import DashboardCard from '@/app/(DashboardLayout)/components/shared/DashboardCard';
 
 const Chart = dynamic(() => import("react-apexcharts"), { ssr: false });
 
 const SalesOverview = () => {
-    const [month, setMonth] = React.useState('1');
-
-    const handleChange = (event: any) => {
-        setMonth(event.target.value);
-    };
-
     const theme = useTheme();
     const primary = theme.palette.primary.main;
     const secondary = theme.palette.secondary.main;
@@ -75,6 +67,7 @@ const SalesOverview = () => {
             fillSeriesColor: false,
         },
     };
+    
     const seriescolumnchart: any = [
         {
             name: 'Eanings this month',
@@ -87,24 +80,13 @@ const SalesOverview = () => {
     ];
 
     return (
-        <DashboardCard title="Sales Overview" action={
-            <Select
-                labelId="month-dd"
-                id="month-dd"
-                value={month}
-                size="small"
-                onChange={handleChange}
-            >
-                <MenuItem value={1}>March {year}</MenuItem>
-                <MenuItem value={2}>April {year}</MenuItem>
-                <MenuItem value={3}>May {year}</MenuItem>
-            </Select>
-        }>
+        <DashboardCard title={`Sales Overview`}>
             <Chart
-                options={optionscolumnchart}
+                type={`bar`}
+                height={370} 
+                width={`100%`}
                 series={seriescolumnchart}
-                type="bar"
-                height={370} width={"100%"}
+                options={optionscolumnchart}
             />
         </DashboardCard>
     );
