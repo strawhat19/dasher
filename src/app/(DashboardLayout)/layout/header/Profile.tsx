@@ -1,8 +1,8 @@
-import Link from "next/link";
-import React, { useState } from "react";
-import { AccountCircle } from "@mui/icons-material";
-import { IconListCheck, IconMail, IconUser } from "@tabler/icons-react";
-import { Box, Menu, Button, IconButton, MenuItem, ListItemIcon, ListItemText } from "@mui/material";
+import Link from 'next/link';
+import React, { useState } from 'react';
+import { AccountCircle } from '@mui/icons-material';
+import { IconListCheck, IconMail, IconUser } from '@tabler/icons-react';
+import { Box, Menu, Button, IconButton, MenuItem, ListItemIcon, ListItemText } from '@mui/material';
 
 const Profile = () => {
   const [anchorEl2, setAnchorEl2] = useState(null);
@@ -16,7 +16,7 @@ const Profile = () => {
   };
 
   return (
-    <Box>
+    <Box className={`profileOptionsContainer`}>
       <IconButton
         size="medium"
         aria-label="show 11 new notifications"
@@ -34,13 +34,14 @@ const Profile = () => {
       </IconButton>
 
       <Menu
-        id="msgs-menu"
-        anchorEl={anchorEl2}
         keepMounted
-        open={Boolean(anchorEl2)}
+        id={`msgs-menu`}
+        anchorEl={anchorEl2}
         onClose={handleClose2}
-        anchorOrigin={{ horizontal: "right", vertical: "bottom" }}
-        transformOrigin={{ horizontal: "right", vertical: "top" }}
+        open={Boolean(anchorEl2)}
+        className={`profileMenu`}
+        anchorOrigin={{ horizontal: `right`, vertical: `bottom` }}
+        transformOrigin={{ horizontal: `right`, vertical: `top` }}
         sx={{
           "& .MuiMenu-paper": {
             width: "200px",
@@ -67,9 +68,10 @@ const Profile = () => {
         </MenuItem>
         <Box mt={1} py={1} px={2}>
           <Button
-            href="/authentication/login"
-            variant="outlined"
-            color="primary"
+            className={`loginLogoutButton`}
+            href={`/authentication/login`}
+            variant={`outlined`}
+            color={`primary`}
             component={Link}
             fullWidth
           >

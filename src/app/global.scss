@@ -9,38 +9,6 @@
     --transition: 0.24s cubic-bezier(0.77, 0.2, 0.05, 1) !important;
 }
 
-* {
-    &.dark {
-        // Sidebar & Top Bar
-        body {
-            background: var(--bg) !important;
-        }
-        // Cards & Paper Sheets
-        .MuiContainer-root {
-            background: var(--bg) !important;
-        }
-        .MuiPaper-root {
-            color: var(--fontColor) !important;
-            background: var(--cardBg) !important;
-        }
-        // Menu Sub Headers
-        .MuiListSubheader-root {
-            color: var(--main);
-        }
-        // Navigation Links & Buttons
-        a {
-            transition: var(--transition);
-            color: var(--fontColor) !important;
-            &:hover {
-                background: var(--darkMain) !important;
-            }
-        }
-        .noAccountBox {
-            background: var(--darkMain) !important;
-        }
-    }
-}
-
 .w100 { width: 100%; }
 
 .h50 { height: 50%; }
@@ -112,5 +80,53 @@
             transform: scale(1, 1);
             transition: 500ms ease-in-out;
         }
+    }
+}
+
+.dark {
+    .darkItem {
+        transition: var(--transition);
+        color: var(--fontColor) !important;
+        &:hover {
+            background: var(--darkMain) !important;
+        }
+    }
+    // Sidebar & Top Bar
+    body {
+        background: var(--bg) !important;
+    }
+    // Cards & Paper Sheets
+    .MuiContainer-root {
+        background: var(--bg) !important;
+    }
+    .MuiPaper-root {
+        color: var(--fontColor) !important;
+        background: var(--cardBg) !important;
+    }
+    // Menu Sub Headers
+    .MuiListSubheader-root {
+        color: var(--main);
+    }
+    h1, h2, h3, h4, h5, h6, p {
+        color: var(--fontColor);
+    }
+    // Navigation Links & Buttons
+    a {
+        @extend .darkItem;
+    }
+    .profileMenu {
+        .loginLogoutButton {
+            background: var(--main);
+        }
+        li, .MuiListItemIcon-root {
+            @extend .darkItem;
+        }
+    }
+    .noAccountBox {
+        background: var(--darkMain) !important;
+    }
+    // Forms
+    input {
+        background: var(--darkMain);
     }
 }

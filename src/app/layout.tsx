@@ -11,8 +11,8 @@ export default function RootLayout({ children }: { children: React.ReactNode; })
   let [darkMode, setDarkMode] = useState(false);
   return (
     <DataShare value={{darkMode, setDarkMode}}>
-      <html lang={`en`}>
-        <body className={`dasherBody ${darkMode ? `dark` : `light`}`}>
+      <html lang={`en`} className={`dasherHTML ${darkMode ? `dark` : `light`}`}>
+        <body className={`dasherBody`}>
           <ThemeProvider theme={baselightTheme}>
             <CssBaseline />
             {children}
