@@ -7,7 +7,7 @@ import PropTypes from 'prop-types';
 import NavItem from '../sidebar/NavItem';
 import React, { useContext } from 'react';
 import { usePathname } from 'next/navigation';
-import { GlobalDataContext } from '@/app/layout';
+import { GlobalDataContext } from '@/app/datashare';
 import { LightMode, NightsStay } from '@mui/icons-material';
 import { IconBellRinging, IconMenu } from '@tabler/icons-react';
 import { Box, AppBar, Toolbar, styled, Stack, IconButton, Button } from '@mui/material';

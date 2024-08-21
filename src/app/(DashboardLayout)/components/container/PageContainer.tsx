@@ -1,9 +1,9 @@
 'use client';
 
-import { createContext, useContext, useState } from 'react';
+import { useContext } from 'react';
+import { GlobalDataContext } from '@/app/datashare';
 import { brandName, icon } from '../../../../../server';
 import { Helmet, HelmetProvider } from 'react-helmet-async';
-import { GlobalDataContext } from '@/app/layout';
 
 type Props = {
   title?: string;

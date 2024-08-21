@@ -1,32 +1,24 @@
 'use client';
 
 import './global.scss';
-
-import { createContext, useState } from 'react';
+import { useState } from 'react';
+import DataShare from './datashare';
 import CssBaseline from '@mui/material/CssBaseline';
 import { ThemeProvider } from '@mui/material/styles';
 import { baselightTheme } from '@/utils/theme/DefaultColors';
 
-export const GlobalDataContext = createContext({});
-
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
-
+export default function RootLayout({ children }: { children: React.ReactNode; }) {
   let [darkMode, setDarkMode] = useState(false);
-
   return (
-    <GlobalDataContext.Provider value={{ darkMode, setDarkMode }}>
+    <DataShare value={{darkMode, setDarkMode}}>
       <html lang={`en`}>
-        <body className={`dasherBody ${darkMode ? 'dark' : 'light'}`}>
+        <body className={`dasherBody ${darkMode ? `dark` : `light`}`}>
           <ThemeProvider theme={baselightTheme}>
             <CssBaseline />
             {children}
           </ThemeProvider>
         </body>
       </html>
-    </GlobalDataContext.Provider>
+    </DataShare>
   );
 }
