@@ -5,87 +5,91 @@ import CustomTextField from "@/app/(DashboardLayout)/components/forms/theme-elem
 
 interface loginType {
   title?: string;
-  subtitle?: JSX.Element | JSX.Element[];
   subtext?: JSX.Element | JSX.Element[];
+  subtitle?: JSX.Element | JSX.Element[];
 }
 
-const SignInForm = ({ title, subtitle, subtext }: loginType) => (
-  <>
-    {title ? (
-      <Typography fontWeight="700" variant="h2" mb={1}>
-        {title}
-      </Typography>
-    ) : null}
-
-    {subtext}
-
-    <Stack>
+export default function SignInForm({ title, subtitle, subtext }: loginType) {
+  return (
+    <>
+      {title ? (
+        <Typography fontWeight="700" variant="h2" mb={1}>
+          {title}
+        </Typography>
+      ) : null}
+  
+      {subtext}
+  
+      <Stack>
+        <Box>
+          <Typography
+            variant={`subtitle1`}
+            fontWeight={600}
+            component={`label`}
+            htmlFor={`username`}
+            mb={`5px`}
+          >
+            Username
+          </Typography>
+          <CustomTextField variant={`outlined`} fullWidth />
+        </Box>
+        <Box mt={`25px`}>
+          <Typography
+            variant={`subtitle1`}
+            fontWeight={600}
+            component={`label`}
+            htmlFor={`password`}
+            mb={`5px`}
+          >
+            Password
+          </Typography>
+          <CustomTextField type={`password`} variant={`outlined`} fullWidth />
+        </Box>
+  
+        <Stack
+          my={2} 
+          direction={`row`} 
+          alignItems={`center`} 
+          className={`signInOptionsRow`} 
+          justifyContent={`space-between`} 
+        >
+          <FormGroup id={`authForm`}>
+            <FormControlLabel
+              id={`rememberThisDevice`}
+              name={`rememberThisDevice`}
+              label={`Remeber this Device`}
+              control={<Checkbox defaultChecked />}
+            />
+          </FormGroup>
+          <Typography
+            component={Link}
+            href="/"
+            fontWeight="500"
+            sx={{
+              textDecoration: "none",
+              color: "primary.main",
+            }}
+          >
+            Forgot Password?
+          </Typography>
+        </Stack>
+      </Stack>
+  
       <Box>
-        <Typography
-          variant="subtitle1"
-          fontWeight={600}
-          component="label"
-          htmlFor="username"
-          mb="5px"
-        >
-          Username
-        </Typography>
-        <CustomTextField variant="outlined" fullWidth />
-      </Box>
-      <Box mt="25px">
-        <Typography
-          variant="subtitle1"
-          fontWeight={600}
-          component="label"
-          htmlFor="password"
-          mb="5px"
-        >
-          Password
-        </Typography>
-        <CustomTextField type="password" variant="outlined" fullWidth />
-      </Box>
-      <Stack
-        justifyContent="space-between"
-        direction="row"
-        alignItems="center"
-        my={2}
-      >
-        <FormGroup id={`authForm`}>
-          <FormControlLabel
-            id={`rememberThisDevice`}
-            name={`rememberThisDevice`}
-            control={<Checkbox defaultChecked />}
-            label="Remeber this Device"
-          />
-        </FormGroup>
-        <Typography
+        <Button
+          color="primary"
+          variant="contained"
+          size="large"
+          fullWidth
           component={Link}
           href="/"
-          fontWeight="500"
-          sx={{
-            textDecoration: "none",
-            color: "primary.main",
-          }}
+          type="submit"
         >
-          Forgot Password ?
-        </Typography>
-      </Stack>
-    </Stack>
-    <Box>
-      <Button
-        color="primary"
-        variant="contained"
-        size="large"
-        fullWidth
-        component={Link}
-        href="/"
-        type="submit"
-      >
-        Sign In
-      </Button>
-    </Box>
-    {subtitle}
-  </>
-);
-
-export default SignInForm;
+          Sign In
+        </Button>
+      </Box>
+  
+      {subtitle}
+    </>
+  );
+}
