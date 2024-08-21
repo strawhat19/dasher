@@ -1,3 +1,5 @@
+import { pages } from '../../../../../server';
+
 import img1 from 'src/assets/images/profile/user-1.jpg';
 import img2 from 'src/assets/images/profile/user-2.jpg';
 import img3 from 'src/assets/images/profile/user-3.jpg';
@@ -15,7 +17,6 @@ import ddIcon5 from 'src/assets/images/svgs/icon-dd-mobile.svg';
 import ddIcon6 from 'src/assets/images/svgs/icon-dd-lifebuoy.svg';
 import ddIcon7 from 'src/assets/images/svgs/icon-dd-message-box.svg';
 import ddIcon8 from 'src/assets/images/svgs/icon-dd-application.svg';
-
 
 const notifications = [
   {
@@ -138,11 +139,11 @@ const pageLinks = [
     title: 'Pricing Page'
   },
   {
-    href: '/auth/login',
+    href: pages.signin.link,
     title: 'Authentication Design'
   },
   {
-    href: '/auth/register',
+    href: pages.signup.link,
     title: 'Register Now'
   },
   {

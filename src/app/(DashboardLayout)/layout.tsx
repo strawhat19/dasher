@@ -1,6 +1,7 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useContext } from 'react';
+import { GlobalDataContext } from '../datashare';
 import { styled, Container, Box } from '@mui/material';
 import Header from '@/app/(DashboardLayout)/layout/header/Header';
 import Sidebar from '@/app/(DashboardLayout)/layout/sidebar/Sidebar';
@@ -21,17 +22,16 @@ const PageWrapper = styled(`div`)(() => ({
 }));
 
 export default function RootLayout({children}: {children: React.ReactNode}) {
-  const [isSidebarOpen, setSidebarOpen] = useState(true);
-  const [isMobileSidebarOpen, setMobileSidebarOpen] = useState(false);
+  let { isSidebarOpen, isMobileSidebarOpen, setMobileSidebarOpen } = useContext<any>(GlobalDataContext);
   return (
     <MainWrapper className={`mainWrapper mainwrapper`}>
       <Sidebar
         isSidebarOpen={isSidebarOpen}
         isMobileSidebarOpen={isMobileSidebarOpen}
-        onSidebarClose={() => setMobileSidebarOpen(false)}
+        onSidebarClose={() => setMobileSidebarOpen(!isMobileSidebarOpen)}
       />
       <PageWrapper className={`pageWrapper page-wrapper`}>
-        <Header toggleMobileSidebar={() => setMobileSidebarOpen(true)} />
+        <Header />
         <Container sx={{ paddingTop: `20px`, maxWidth: `1200px` }}>
           <Box sx={{ minHeight: `calc(100vh - 170px)` }}>
             {children}

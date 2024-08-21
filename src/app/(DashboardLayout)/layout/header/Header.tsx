@@ -1,6 +1,5 @@
 'use client';
 
-import Link from 'next/link';
 import Profile from './Profile';
 import { uniqueId } from 'lodash';
 import PropTypes from 'prop-types';
@@ -10,17 +9,13 @@ import { usePathname } from 'next/navigation';
 import { GlobalDataContext } from '@/app/datashare';
 import { LightMode, NightsStay } from '@mui/icons-material';
 import { IconBellRinging, IconMenu } from '@tabler/icons-react';
-import { Box, AppBar, Toolbar, styled, Stack, IconButton, Button } from '@mui/material';
+import { Box, AppBar, Toolbar, styled, Stack, IconButton } from '@mui/material';
 
-interface ItemType {
-  toggleMobileSidebar:  (event: React.MouseEvent<HTMLElement>) => void;
-}
-
-const Header = ({toggleMobileSidebar}: ItemType) => {
+const Header = () => {
   const pathname = usePathname();
   const pathDirect = pathname;
 
-  const { darkMode, setDarkMode } = useContext<any>(GlobalDataContext);
+  const { darkMode, setDarkMode, setMobileSidebarOpen, isMobileSidebarOpen } = useContext<any>(GlobalDataContext);
 
   const AppBarStyled = styled(AppBar)(({ theme }) => ({
     boxShadow: 'none',
@@ -43,7 +38,7 @@ const Header = ({toggleMobileSidebar}: ItemType) => {
         <IconButton
           color="inherit"
           aria-label="menu"
-          onClick={toggleMobileSidebar}
+          onClick={() => setMobileSidebarOpen(!isMobileSidebarOpen)}
           sx={{
             display: {
               lg: "none",
@@ -67,21 +62,18 @@ const Header = ({toggleMobileSidebar}: ItemType) => {
 
         <Box flexGrow={1} />
 
-        <Stack spacing={1} direction="row" alignItems="center">
+        <Stack spacing={0} direction="row" alignItems="center">
           <IconButton
             size={`medium`}
             color={`inherit`}
             onClick={(e) => setDarkMode(!darkMode)}
           >
             {darkMode ? (
-              <LightMode style={{ color: `var(--main)`, fontSize: 21 }} />
+              <LightMode style={{ color: `var(--teal)`, fontSize: 30 }} />
             ) : (
-              <NightsStay style={{ color: `var(--main)`, fontSize: 21 }} />
+              <NightsStay style={{ color: `var(--main)`, fontSize: 30 }} />
             )}
           </IconButton>
-          <Button variant="contained" component={Link} href="/authentication/login" disableElevation color="primary">
-            Login
-          </Button>
           <Profile />
         </Stack>
 

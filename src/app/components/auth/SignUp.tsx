@@ -1,9 +1,9 @@
 import React from 'react';
-import { Box, Typography, Button } from '@mui/material';
 import Link  from 'next/link';
-
-import CustomTextField from '@/app/(DashboardLayout)/components/forms/theme-elements/CustomTextField';
 import { Stack } from '@mui/system';
+import { pages } from '../../../../server';
+import { Box, Typography, Button } from '@mui/material';
+import CustomTextField from '@/app/(DashboardLayout)/components/forms/theme-elements/CustomTextField';
 
 interface registerType {
     title?: string;
@@ -11,7 +11,7 @@ interface registerType {
     subtext?: JSX.Element | JSX.Element[];
   }
 
-const AuthRegister = ({ title, subtitle, subtext }: registerType) => (
+const SignUpForm = ({ title, subtitle, subtext }: registerType) => (
     <>
         {title ? (
             <Typography fontWeight="700" variant="h2" mb={1}>
@@ -35,7 +35,7 @@ const AuthRegister = ({ title, subtitle, subtext }: registerType) => (
                     fontWeight={600} component="label" htmlFor='password' mb="5px" mt="25px">Password</Typography>
                 <CustomTextField id="password" variant="outlined" fullWidth />
             </Stack>
-            <Button color="primary" variant="contained" size="large" fullWidth component={Link} href="/authentication/login">
+            <Button color="primary" variant="contained" size="large" fullWidth component={Link} href={pages.signup.link}>
                 Sign Up
             </Button>
         </Box>
@@ -43,4 +43,4 @@ const AuthRegister = ({ title, subtitle, subtext }: registerType) => (
     </>
 );
 
-export default AuthRegister;
+export default SignUpForm;

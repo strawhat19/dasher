@@ -85,8 +85,10 @@ const SalesOverview = () => {
                 type={`bar`}
                 height={370} 
                 width={`100%`}
+                id={`salesOverviewChart`}
                 series={seriescolumnchart}
                 options={optionscolumnchart}
+                className={`salesOverviewChart`}
             />
         </DashboardCard>
     );

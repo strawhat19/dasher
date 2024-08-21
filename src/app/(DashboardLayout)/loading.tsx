@@ -1,7 +1,9 @@
-const Loading = () =>{
+import { Skeleton } from "@mui/material";
+
+export default function Loading() {
     return(
-        <div>Dash Loading</div>
+        <div className={`loading`}>
+            <Skeleton variant={`rounded`} width={210} height={60} />
+        </div>
     )
 }
-
-export default Loading;

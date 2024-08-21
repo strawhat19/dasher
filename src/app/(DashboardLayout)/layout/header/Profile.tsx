@@ -1,10 +1,13 @@
 import Link from 'next/link';
-import React, { useState } from 'react';
+import { pages } from '../../../../../server';
+import React, { useContext, useState } from 'react';
 import { AccountCircle } from '@mui/icons-material';
+import { GlobalDataContext } from '@/app/datashare';
 import { IconListCheck, IconMail, IconUser } from '@tabler/icons-react';
 import { Box, Menu, Button, IconButton, MenuItem, ListItemIcon, ListItemText } from '@mui/material';
 
 const Profile = () => {
+  let { user, darkMode } = useContext<any>(GlobalDataContext);
   const [anchorEl2, setAnchorEl2] = useState(null);
 
   const handleClick2 = (event: any) => {
@@ -30,7 +33,7 @@ const Profile = () => {
         }}
         onClick={handleClick2}
       >
-        <AccountCircle style={{ fontSize: 35 }} />
+        <AccountCircle style={{ color: darkMode ? `var(--teal)` : `var(--main)`, fontSize: 35 }} />
       </IconButton>
 
       <Menu
@@ -69,13 +72,13 @@ const Profile = () => {
         <Box mt={1} py={1} px={2}>
           <Button
             className={`loginLogoutButton`}
-            href={`/authentication/login`}
+            href={pages.signin.link}
             variant={`outlined`}
             color={`primary`}
             component={Link}
             fullWidth
           >
-            Logout
+            {user ? pages.signout.title : pages.signin.title}
           </Button>
         </Box>
       </Menu>

@@ -1,21 +1,22 @@
 'use client';
 
 import Link from 'next/link';
-import AuthLogin from '../auth/AuthLogin';
+import { pages } from '../../../../server';
+import Logo from '@/app/components/logo/logo';
 import { Box, Stack, Typography } from '@mui/material';
-import DashboardCard from '../../components/shared/DashboardCard';
-import Logo from '@/app/(DashboardLayout)/layout/shared/logo/Logo';
+import SignInForm from '../../components/auth/SignIn';
+import DashboardCard from '../components/shared/DashboardCard';
 import PageContainer from '@/app/(DashboardLayout)/components/container/PageContainer';
 
-const Login = () => {
+export default function Signin() {
   return (
-    <PageContainer title={`Login`} description={`Login Page`}>
-      <DashboardCard title={`Login`}>
+    <PageContainer title={pages.signin.title} description={`${pages.signin.title} Page`}>
+      <DashboardCard>
         <>
           <Box display="flex" alignItems="center" justifyContent="center">
-            <Logo />
+            <Logo className={`center`} />
           </Box>
-          <AuthLogin
+          <SignInForm
             subtext={
               <Typography
                 variant="subtitle1"
@@ -42,7 +43,7 @@ const Login = () => {
                 </Typography>
                 <Typography
                   component={Link}
-                  href="/authentication/register"
+                  href={pages.signup.link}
                   fontWeight="500"
                   sx={{
                     textDecoration: "none",
@@ -59,5 +60,3 @@ const Login = () => {
     </PageContainer>
   );
 };
-
-export default Login;

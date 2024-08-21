@@ -1,8 +1,7 @@
 import Link from 'next/link';
 import { Upgrade } from './Updrade';
-import { Logo } from 'react-mui-sidebar';
 import SidebarItems from './SidebarItems';
-import { logo } from '../../../../../server';
+import Logo from '@/app/components/logo/logo';
 import { useMediaQuery, Box, Drawer } from '@mui/material';
 
 interface ItemType {
@@ -37,11 +36,12 @@ const MSidebar = ({
           flexShrink: 0,
         }}
       >
-        <Drawer className={`drawer`}
+        <Drawer className={`drawer sidebarDrawer`}
           anchor={`left`}
           open={isSidebarOpen}
           variant={`permanent`}
           PaperProps={{
+            className: `sidebarPaper`,
             sx: {
               boxSizing: `border-box`,
               ...scrollbarStyles,
@@ -50,8 +50,8 @@ const MSidebar = ({
         >
           <Box className={`sidebarContainer spaceBetween gap15 flex column`} sx={{ height: `100%` }}>
             <div className={`sidebarTop w100`}>
-              <Link href={`/`}>
-                <Logo img={`/images/logos/${logo}`} />
+              <Link href={`/`} className={`link`}>
+                <Logo className={`sidebarLogoContainer`} />
               </Link>
               <SidebarItems />
             </div>
@@ -65,12 +65,13 @@ const MSidebar = ({
   }
 
   return (
-    <Drawer
+    <Drawer className={`drawer mobileMenuDrawer`}
       anchor="left"
       open={isMobileSidebarOpen}
       onClose={onSidebarClose}
       variant="temporary"
       PaperProps={{
+        className: `mobileMenuPaper`,
         sx: {
           boxShadow: (theme) => theme.shadows[8],
           ...scrollbarStyles,
@@ -80,8 +81,8 @@ const MSidebar = ({
       <Box className={`h100`} px={2}>
         <Box className={`sidebarContainer spaceBetween gap15 flex column h100`}>
           <div style={{ marginTop: 15 }} className={`sidebarTop w100`}>
-            <Link href={`/`}>
-              <Logo img={`/images/logos/${logo}`} />
+            <Link href={`/`} className={`link`}>
+              <Logo className={`sidebarLogoContainer`} />
             </Link>
             <SidebarItems />
           </div>

@@ -1,15 +1,6 @@
 import React from "react";
-import {
-  Box,
-  Typography,
-  FormGroup,
-  FormControlLabel,
-  Button,
-  Stack,
-  Checkbox,
-} from "@mui/material";
 import Link from "next/link";
-
+import { Box, Typography, FormGroup, FormControlLabel, Button, Stack, Checkbox } from "@mui/material";
 import CustomTextField from "@/app/(DashboardLayout)/components/forms/theme-elements/CustomTextField";
 
 interface loginType {
@@ -18,7 +9,7 @@ interface loginType {
   subtext?: JSX.Element | JSX.Element[];
 }
 
-const AuthLogin = ({ title, subtitle, subtext }: loginType) => (
+const SignInForm = ({ title, subtitle, subtext }: loginType) => (
   <>
     {title ? (
       <Typography fontWeight="700" variant="h2" mb={1}>
@@ -97,4 +88,4 @@ const AuthLogin = ({ title, subtitle, subtext }: loginType) => (
   </>
 );
 
-export default AuthLogin;
+export default SignInForm;

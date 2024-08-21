@@ -1,43 +1,48 @@
 import dynamic from 'next/dynamic';
+import { useContext } from 'react';
 import { year } from '../../../../../server';
 import { useTheme } from '@mui/material/styles';
 import { IconArrowUpLeft } from '@tabler/icons-react';
+import { GlobalDataContext } from '@/app/datashare';
 import { Grid, Stack, Typography, Avatar } from '@mui/material';
 import DashboardCard from '@/app/(DashboardLayout)/components/shared/DashboardCard';
 
 const Chart = dynamic(() => import("react-apexcharts"), { ssr: false });
 
 const YearlyBreakup = () => {
+
+  let { darkMode } = useContext<any>(GlobalDataContext);
+
   const theme = useTheme();
-  const primarylight = '#ecf2ff';
   const primary = theme.palette.primary.main;
   const successlight = theme.palette.success.light;
+  const primarylight = () => darkMode ? `var(--darkMain)` : `var(--mainLight)`;
 
   const seriescolumnchart: any = [38, 40, 25];
 
   const optionscolumnchart: any = {
     chart: {
-      type: 'donut',
+      type: `donut`,
       fontFamily: "'Plus Jakarta Sans', sans-serif;",
-      foreColor: '#adb0bb',
+      foreColor: `#adb0bb`,
       toolbar: {
         show: false,
       },
       height: 155,
     },
-    colors: [primary, primarylight, '#F9F9FD'],
+    colors: [primary, primarylight(), `#F9F9FD`],
     plotOptions: {
       pie: {
         startAngle: 0,
         endAngle: 360,
         donut: {
-          size: '75%',
-          background: 'transparent',
+          size: `75%`,
+          background: `transparent`,
         },
       },
     },
     tooltip: {
-      theme: theme.palette.mode === 'dark' ? 'dark' : 'light',
+      theme: theme.palette.mode === `dark` ? `dark` : `light`,
       fillSeriesColor: false,
     },
     stroke: {
@@ -62,9 +67,8 @@ const YearlyBreakup = () => {
   };
 
   return (
-    <DashboardCard title="Yearly Breakup">
+    <DashboardCard title={`Yearly Breakup`}>
       <Grid container spacing={3}>
-        {/* column */}
         <Grid item xs={7} sm={7}>
           <Typography variant="h3" fontWeight="700">
             $36,358
@@ -83,7 +87,7 @@ const YearlyBreakup = () => {
           <Stack spacing={3} mt={5} direction="row">
             <Stack direction="row" spacing={1} alignItems="center">
               <Avatar
-                sx={{ width: 9, height: 9, bgcolor: primary, svg: { display: 'none' } }}
+                sx={{ width: 9, height: 9, bgcolor: primary, svg: { display: `none` } }}
               ></Avatar>
               <Typography variant="subtitle2" color="textSecondary">
                 2022
@@ -91,7 +95,7 @@ const YearlyBreakup = () => {
             </Stack>
             <Stack direction="row" spacing={1} alignItems="center">
               <Avatar
-                sx={{ width: 9, height: 9, bgcolor: primarylight, svg: { display: 'none' } }}
+                sx={{ width: 9, height: 9, bgcolor: primarylight(), svg: { display: `none` } }}
               ></Avatar>
               <Typography variant="subtitle2" color="textSecondary">
                 ${year}
@@ -101,10 +105,11 @@ const YearlyBreakup = () => {
         </Grid>
         <Grid item xs={5} sm={5}>
           <Chart
-            options={optionscolumnchart}
+            height={130} 
+            type={`donut`}
+            width={`100%`}
             series={seriescolumnchart}
-            type="donut"
-            height={140} width={"100%"}
+            options={optionscolumnchart}
           />
         </Grid>
       </Grid>
