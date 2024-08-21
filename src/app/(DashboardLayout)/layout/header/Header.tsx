@@ -1,14 +1,16 @@
+'use client';
+
 import Link from 'next/link';
 import Profile from './Profile';
+import { uniqueId } from 'lodash';
 import PropTypes from 'prop-types';
-import { globalData } from '@/app/layout';
+import NavItem from '../sidebar/NavItem';
 import React, { useContext } from 'react';
+import { usePathname } from 'next/navigation';
+import { GlobalDataContext } from '@/app/layout';
 import { LightMode, NightsStay } from '@mui/icons-material';
 import { IconBellRinging, IconMenu } from '@tabler/icons-react';
-import { Box, AppBar, Toolbar, styled, Stack, IconButton, Badge, Button } from '@mui/material';
-import NavItem from '../sidebar/NavItem';
-import { uniqueId } from 'lodash';
-import { usePathname } from 'next/navigation';
+import { Box, AppBar, Toolbar, styled, Stack, IconButton, Button } from '@mui/material';
 
 interface ItemType {
   toggleMobileSidebar:  (event: React.MouseEvent<HTMLElement>) => void;
@@ -18,7 +20,7 @@ const Header = ({toggleMobileSidebar}: ItemType) => {
   const pathname = usePathname();
   const pathDirect = pathname;
 
-  const { darkMode, setDarkMode } = useContext<any>(globalData);
+  const { darkMode, setDarkMode } = useContext<any>(GlobalDataContext);
 
   const AppBarStyled = styled(AppBar)(({ theme }) => ({
     boxShadow: 'none',
@@ -62,21 +64,6 @@ const Header = ({toggleMobileSidebar}: ItemType) => {
             title: `Notification(s)`,
           }}
         />
-        
-        {/* <Link className={`link hoverLink`} href={`/notifications`}>
-          <IconButton
-            size="medium"
-            aria-label="show 11 new notifications"
-            color="inherit"
-            aria-controls="msgs-menu"
-            aria-haspopup="true"
-          >
-            <Badge variant="dot" color="primary">
-              <IconBellRinging size="21" stroke="1.5" />
-            </Badge>
-          </IconButton>
-          Notification(s)
-        </Link> */}
 
         <Box flexGrow={1} />
 
@@ -87,12 +74,8 @@ const Header = ({toggleMobileSidebar}: ItemType) => {
             onClick={(e) => setDarkMode(!darkMode)}
           >
             {darkMode ? (
-              // <i className={`fas fa-sun`} style={{ color: `var(--main)`, fontSize: 21 }} />
-              // <Brightness7 style={{ color: `var(--main)`, fontSize: 21 }} />
               <LightMode style={{ color: `var(--main)`, fontSize: 21 }} />
             ) : (
-              // <i className={`fas fa-moon`} style={{ color: `var(--main)`, fontSize: 21 }} />
-              // <Brightness4 style={{ color: `var(--main)`, fontSize: 21 }} />
               <NightsStay style={{ color: `var(--main)`, fontSize: 21 }} />
             )}
           </IconButton>
