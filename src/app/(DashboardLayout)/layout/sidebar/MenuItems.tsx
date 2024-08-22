@@ -1,6 +1,6 @@
 import { uniqueId } from 'lodash';
 import { pages } from '../../../../../server';
-import { IconLayoutDashboard, IconLogin, IconUserPlus } from '@tabler/icons-react';
+import { IconBellRinging, IconLayoutDashboard, IconLogin, IconUserPlus } from '@tabler/icons-react';
 
 const Menuitems = [
   {
@@ -15,7 +15,7 @@ const Menuitems = [
   },
   {
     navlabel: true,
-    subheader: `Auth`,
+    subheader: `User`,
   },
   {
     id: uniqueId(),
@@ -28,6 +28,13 @@ const Menuitems = [
     icon: IconUserPlus,
     href: pages.signup.link,
     title: pages.signup.title,
+  },
+  {
+    id: uniqueId(),
+    hideOnNoUser: true,
+    icon: IconBellRinging,
+    href: pages.notifications.link,
+    title: pages.notifications.title,
   },
 ];
 

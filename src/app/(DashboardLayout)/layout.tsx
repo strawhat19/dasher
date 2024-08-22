@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useContext } from 'react';
+import Footer from './layout/footer/Footer';
 import { GlobalDataContext } from '../datashare';
 import { styled, Container, Box } from '@mui/material';
 import Header from '@/app/(DashboardLayout)/layout/header/Header';
@@ -16,7 +17,6 @@ const PageWrapper = styled(`div`)(() => ({
   zIndex: 1,
   flexGrow: 1,
   display: `flex`,
-  paddingBottom: `60px`,
   flexDirection: `column`,
   backgroundColor: `transparent`,
 }));
@@ -33,10 +33,11 @@ export default function RootLayout({children}: {children: React.ReactNode}) {
       <PageWrapper className={`pageWrapper page-wrapper`}>
         <Header />
         <Container sx={{ paddingTop: `20px`, maxWidth: `1200px` }}>
-          <Box sx={{ minHeight: `calc(100vh - 170px)` }}>
+          <Box sx={{ minHeight: `calc(100vh - 205px)` }}>
             {children}
           </Box>
         </Container>
+        <Footer />
       </PageWrapper>
     </MainWrapper>
   );

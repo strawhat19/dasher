@@ -15,8 +15,8 @@ const MSidebar = ({
   onSidebarClose,
   isMobileSidebarOpen,
 }: ItemType) => {
-  const lgUp = useMediaQuery((theme: any) => theme.breakpoints.up(`lg`));
-  const sidebarWidth = `270px`;
+  const largeScreenSize = useMediaQuery((theme: any) => theme.breakpoints.up(`lg`));
+  const sidebarWidth = 200;
   const scrollbarStyles = {
     '&::-webkit-scrollbar': {
       width: `7px`,
@@ -28,9 +28,9 @@ const MSidebar = ({
     },
   };
 
-  if (lgUp) {
+  if (largeScreenSize) {
     return (
-      <Box className={`drawerContainer`}
+      <Box className={`sidebar drawerContainer`}
         sx={{
           width: sidebarWidth,
           flexShrink: 0,
@@ -43,6 +43,7 @@ const MSidebar = ({
           PaperProps={{
             className: `sidebarPaper`,
             sx: {
+              width: sidebarWidth - 1,
               boxSizing: `border-box`,
               ...scrollbarStyles,
             },
@@ -55,9 +56,7 @@ const MSidebar = ({
               </Link>
               <SidebarItems />
             </div>
-            <div className={`sidebarBottom w100`}>
-              <Upgrade />
-            </div>
+            <div className={`sidebarBottom w100`} />
           </Box>
         </Drawer>
       </Box>
@@ -65,7 +64,7 @@ const MSidebar = ({
   }
 
   return (
-    <Drawer className={`drawer mobileMenuDrawer`}
+    <Drawer className={`sidebar drawer mobileMenuDrawer`}
       anchor="left"
       open={isMobileSidebarOpen}
       onClose={onSidebarClose}
@@ -86,9 +85,7 @@ const MSidebar = ({
             </Link>
             <SidebarItems />
           </div>
-          <div className={`sidebarBottom w100`}>
-            <Upgrade />
-          </div>
+          <div className={`sidebarBottom w100`} />
         </Box>
       </Box>
     </Drawer>

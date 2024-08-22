@@ -1,6 +1,8 @@
 'use client';
 
+import './theme.scss';
 import './global.scss';
+import './utility.scss';
 import { useState } from 'react';
 import DataShare from './datashare';
 import CssBaseline from '@mui/material/CssBaseline';

@@ -1,5 +1,5 @@
 export const logo = `dark-logo.svg`;
-export const brandName = `Modernize`;
+export const brandName = `Dasher`;
 export const icon = `modernize-icon.svg`;
 export const iconPNG = `Modernize-Icon-Small.png`;
 
@@ -21,5 +21,9 @@ export const pages = {
     signout: {
         link: `/signout`,
         title: `Sign Out`,
-    }
+    },
+    notifications: {
+        link: `/notifications`,
+        title: `Notification(s)`,
+    },
 }

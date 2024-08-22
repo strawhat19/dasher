@@ -1,36 +1,18 @@
-:root {
-    --bg: #041b44;
-    --teal: #3fa5e3;
-    --main: #5D87FF;
-    --cardBg: var(--bg);
-    --borderRadius: 5px;
-    --fontColor: white;
-    --darkSub: #1c2a49;
-    --darkMain: #1c3c81;
-    --tealLight: #49BEFF;
-    --mainLight: #ecf2ff;
-    --navyBlueBG: #071632;
-    --darkBorder: #151515;
-    --defaultColor: #2A3547;
-    --tealSuperLight: #3dd9eb;
-    --transition: 0.24s cubic-bezier(0.77, 0.2, 0.05, 1) !important;
+.footerContainer {
+    width: 100%;
+    margin: 1.5% auto;
+    box-shadow: rgb(145 158 171 / 30%) 0px 1px 2px 0px, rgb(145 158 171 / 12%) 0px 12px 24px -4px !important;
 }
 
-.w100 { width: 100%; }
-
-.h50 { height: 50%; }
-.h80 { height: 80%; }
-.h100 { height: 100%; }
-
-.link {
-    color: inherit;
-    text-decoration: none !important;
+.mobileMenuIconButton {
+    svg {
+        top: 3px;
+        position: relative;
+    }
 }
 
-.spacerBox {
-    min-width: 75px; 
-    min-height: 100px;
-    border-radius: 5px;
+.salesOverviewChart {
+    padding-bottom: 23px !important;
 }
 
 .loginLogoutButton {
@@ -50,155 +32,18 @@
     }
 }
 
-.center {
-    margin: 0 auto;
-    text-align: center;
-    align-items: center !important;
-    justify-content: center !important;
-}
-
-.salesOverviewChart {
-    padding-bottom: 23px !important;
-}
-
-.flex {
-    width: 100%;
-    display: flex;
-    max-width: 100%;
-    align-items: center;
-    justify-content: center;
-    &.gap5 { grid-gap: 5px; }
-    &.gap10 { grid-gap: 10px; }
-    &.gap15 { grid-gap: 15px; }
-    &.end { justify-content: flex-end; }
-    &.start { justify-content: flex-start; }
-    &.column { flex-direction: column !important; }
-    &.spaceBetween { justify-content: space-between; }
-    &.row {
-        grid-gap: 13px;
-        flex-direction: row !important;
-        .innerRow {
-            width: 100%;
-            margin: 0 auto;
-            grid-gap: 10px;
-            padding: 10px 15px;
-            align-items: center;
-            border-radius: var(--borderRadius);
-        }
-    }
-}
-
-.hoverLink {
-    display: flex;
-    grid-gap: 0.3em;
-    position: relative;
-    align-items: center;
-    transition: var(--transition);
-
-    &::before {
-        right: 0;
-        z-index: 0;
-        width: 100%;
-        bottom: 1px;
-        height: 1px;
-        display: block;
-        position: absolute;
-        transform: scale(0, 1);
-        content: "" !important;
-        background: var(--main);
-        transform-origin: 0% 100%;
-        transition: var(--transition);
-    }
-
-    &:hover {
-        transition: var(--transition);
-        &::before {
-            transform: scale(1, 1);
-            transition: 500ms ease-in-out;
-        }
-    }
-}
-
-.dark {
-    .logoContainer {
-        color: var(--fontColor);
-    }
-    .darkItem {
-        transition: var(--transition);
-        color: var(--fontColor) !important;
-        &:hover {
-            background: var(--darkMain) !important;
-        }
-    }
-    // Sidebar & Top Bar
-    body {
-        background: var(--bg) !important;
-    }
-    .sidebarPaper, .mobileMenuPaper {
-        border-color: var(--cardBg);
-    }
-    // Cards & Paper Sheets
-    .MuiContainer-root, .apexcharts-tooltip, .apexcharts-tooltip-title {
-        background: var(--bg) !important;
-    }
-    .apexcharts-menu {
-        background: var(--cardBg);
-        border-color: var(--teal);
-        .apexcharts-menu-item {
-            transition: var(--transition);
-            &:hover {
-                background: var(--darkMain);
-            }
-        }
-    }
-    .apexcharts-tooltip, .apexcharts-theme-dark {
-        border: 1px solid var(--teal) !important;
-        .apexcharts-tooltip-title {
-            border-bottom-color: var(--teal) !important;
-        }
-    }
-    .MuiPaper-root {
-        color: var(--fontColor) !important;
-        background: var(--cardBg) !important;
-    }
-    th, td {
-        border-color: var(--teal) !important;
-    }
-    .MuiTimelineConnector-root {
-        background: var(--teal);
-    }
-    // Menu Sub Headers
-    .MuiListSubheader-root {
-        color: var(--main);
-    }
-    h1, h2, h3, h4, h5, h6, p {
-        color: var(--fontColor);
-    }
-    // Navigation Links & Buttons
-    a {
-        @extend .darkItem;
-    }
-    .profileMenu {
-        li, .MuiListItemIcon-root {
-            @extend .darkItem;
-        }
-    }
-    .noAccountBox {
-        background: var(--darkMain) !important;
-        .MuiButton-root {
-            background: var(--teal);
-            &:hover {
-                background: var(--bg) !important;
-            }
-        }
-    }
-    // Forms
-    input {
-        background: var(--darkMain);
+@media (min-width: 1200px) {
+    .footerContainer {
+        width: 96%;
+        max-width: 1160px;
     }
 }
 
 @media (max-width: 768px) {
+    .footerContainer {
+        width: 92%;
+        margin: 5% auto;
+    }
     .sidebarBottom {
         display: none;
     }

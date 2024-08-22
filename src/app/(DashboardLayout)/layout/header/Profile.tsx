@@ -1,10 +1,10 @@
 import Link from 'next/link';
 import { pages } from '../../../../../server';
 import React, { useContext, useState } from 'react';
-import { AccountCircle } from '@mui/icons-material';
+import { AccountCircle, AccountCircleTwoTone, SettingsTwoTone } from '@mui/icons-material';
 import { GlobalDataContext } from '@/app/datashare';
 import { IconListCheck, IconMail, IconUser } from '@tabler/icons-react';
-import { Box, Menu, Button, IconButton, MenuItem, ListItemIcon, ListItemText } from '@mui/material';
+import { Box, Menu, Button, IconButton, MenuItem, ListItemIcon, ListItemText, Tooltip } from '@mui/material';
 
 const Profile = () => {
   let { user, darkMode } = useContext<any>(GlobalDataContext);
@@ -20,21 +20,23 @@ const Profile = () => {
 
   return (
     <Box className={`profileOptionsContainer`}>
-      <IconButton
-        size="medium"
-        aria-label="show 11 new notifications"
-        color="inherit"
-        aria-controls="msgs-menu"
-        aria-haspopup="true"
-        sx={{
-          ...(typeof anchorEl2 === "object" && {
-            color: "primary.main",
-          }),
-        }}
-        onClick={handleClick2}
-      >
-        <AccountCircle style={{ color: darkMode ? `var(--teal)` : `var(--main)`, fontSize: 35 }} />
-      </IconButton>
+      <Tooltip title={`Settings`} arrow>
+        <IconButton
+          size="medium"
+          aria-label="show 11 new notifications"
+          color="inherit"
+          aria-controls="msgs-menu"
+          aria-haspopup="true"
+          sx={{
+            ...(typeof anchorEl2 === "object" && {
+              color: "primary.main",
+            }),
+          }}
+          onClick={handleClick2}
+        >
+          <SettingsTwoTone style={{ color: darkMode ? `var(--fontColor)` : `var(--main)`, fontSize: 27 }} />
+        </IconButton>
+      </Tooltip>
 
       <Menu
         keepMounted

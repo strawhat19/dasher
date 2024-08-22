@@ -10,12 +10,12 @@ const SidebarItems = () => {
   const pathname = usePathname();
   const pathDirect = pathname;
 
-  let { isMobileSidebarOpen, setMobileSidebarOpen } = useContext<any>(GlobalDataContext);
+  let { user, isMobileSidebarOpen, setMobileSidebarOpen } = useContext<any>(GlobalDataContext);
 
   return (
-    <Box sx={{ px: 3 }}>
-      <List sx={{ pt: 0 }} className="sidebarNav" component="div">
-        {Menuitems.map((item) => {
+    <Box className={`sidebarItems`} sx={{ px: 3 }}>
+      <List className={`sidebarNav`} component={`div`} sx={{ pt: 0 }}>
+        {Menuitems.filter(item => item.hideOnNoUser ? user : true).map((item) => {
           if (item.subheader) {
             return <NavGroup item={item} key={item.subheader} />;
           } else {
