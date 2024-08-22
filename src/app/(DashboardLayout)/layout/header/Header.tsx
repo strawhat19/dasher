@@ -3,11 +3,11 @@
 import Profile from './Profile';
 import PropTypes from 'prop-types';
 import React, { useContext } from 'react';
+import Logo from '@/app/components/logo/logo';
 import { IconMenu } from '@tabler/icons-react';
 import { GlobalDataContext } from '@/app/datashare';
-import { Brightness7TwoTone, LightMode, LightModeTwoTone, NightsStay, NightsStayTwoTone, WbSunnyTwoTone } from '@mui/icons-material';
+import { Brightness7TwoTone, NightsStayTwoTone } from '@mui/icons-material';
 import { Box, AppBar, Toolbar, styled, Stack, IconButton, Tooltip } from '@mui/material';
-import Logo from '@/app/components/logo/logo';
 
 const Header = () => {
   const { 

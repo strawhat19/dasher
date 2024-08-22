@@ -5,6 +5,13 @@ export const iconPNG = `Modernize-Icon-Small.png`;
 
 export const year = new Date().getFullYear();
 
+export const locations = {
+    marietta: {
+        lat: 34.063485,
+        lon: -84.0911,
+    }
+}
+
 export const pages = {
     home: {
         link: `/`,
@@ -25,5 +32,9 @@ export const pages = {
     notifications: {
         link: `/notifications`,
         title: `Notification(s)`,
+    },
+    geodata: {
+        link: `/geodata`,
+        title: `GeoData`,
     },
 }

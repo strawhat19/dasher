@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import { pages } from '../../../../../server';
 import React, { useContext, useState } from 'react';
-import { AccountCircle, AccountCircleTwoTone, SettingsTwoTone } from '@mui/icons-material';
+import { SettingsTwoTone } from '@mui/icons-material';
 import { GlobalDataContext } from '@/app/datashare';
 import { IconListCheck, IconMail, IconUser } from '@tabler/icons-react';
 import { Box, Menu, Button, IconButton, MenuItem, ListItemIcon, ListItemText, Tooltip } from '@mui/material';

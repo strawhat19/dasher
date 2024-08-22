@@ -1,5 +1,6 @@
 import { uniqueId } from 'lodash';
 import { pages } from '../../../../../server';
+import { PublicOutlined } from '@mui/icons-material';
 import { IconBellRinging, IconLayoutDashboard, IconLogin, IconUserPlus } from '@tabler/icons-react';
 
 const Menuitems = [
@@ -35,6 +36,16 @@ const Menuitems = [
     icon: IconBellRinging,
     href: pages.notifications.link,
     title: pages.notifications.title,
+  },
+  {
+    navlabel: true,
+    subheader: `API's`,
+  },
+  {
+    id: uniqueId(),
+    icon: PublicOutlined,
+    href: pages.geodata.link,
+    title: pages.geodata.title,
   },
 ];
 

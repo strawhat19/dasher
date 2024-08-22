@@ -1,10 +1,10 @@
-import NavItem from "./NavItem";
-import Menuitems from "./MenuItems";
-import { Box, List } from "@mui/material";
-import React, { useContext } from "react";
-import NavGroup from "./NavGroup/NavGroup";
-import { usePathname } from "next/navigation";
-import { GlobalDataContext } from "@/app/datashare";
+import NavItem from './NavItem';
+import Menuitems from './MenuItems';
+import { Box, List } from '@mui/material';
+import React, { useContext } from 'react';
+import NavGroup from './NavGroup/NavGroup';
+import { usePathname } from 'next/navigation';
+import { GlobalDataContext } from '@/app/datashare';
 
 const SidebarItems = () => {
   const pathname = usePathname();

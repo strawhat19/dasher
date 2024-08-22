@@ -1,5 +1,4 @@
 import Link from 'next/link';
-import { Upgrade } from './Updrade';
 import SidebarItems from './SidebarItems';
 import Logo from '@/app/components/logo/logo';
 import { useMediaQuery, Box, Drawer } from '@mui/material';
