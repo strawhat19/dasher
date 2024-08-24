@@ -235,13 +235,18 @@ export async function GET(request: NextRequest, { params }: { params: { location
       }
     })
 
-    if (isValid(locations)) {
+    if (locations && isValid(locations)) {
       if (locations.length > 0) timezone = locations[0].timezone;
       return NextResponse.json({
         message: `Based on Timezone and Region: ${timezone}`,
         location: resolvedLocation,
         timezone,
         locations,
+      });
+    } else {
+      return NextResponse.json({
+        error,
+        message: `No Location(s) Found`,
       });
     }
   } catch (APIError) {
