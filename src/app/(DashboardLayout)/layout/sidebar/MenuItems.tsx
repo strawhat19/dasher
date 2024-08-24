@@ -1,7 +1,33 @@
 import { uniqueId } from 'lodash';
-import { pages } from '../../../../../server';
 import { PublicOutlined } from '@mui/icons-material';
 import { IconBellRinging, IconLayoutDashboard, IconLogin, IconUserPlus } from '@tabler/icons-react';
+
+export const pages = {
+  home: {
+    link: `/`,
+    title: `Dashboard`,
+  },
+  signin: {
+    link: `/signin`,
+    title: `Sign In`,
+  },
+  signup: {
+    link: `/signup`,
+    title: `Sign Up`,
+  },
+  signout: {
+    link: `/signout`,
+    title: `Sign Out`,
+  },
+  notifications: {
+    link: `/notifications`,
+    title: `Notification(s)`,
+  },
+  geodata: {
+    link: `/geodata`,
+    title: `GeoData`,
+  },
+}
 
 const Menuitems = [
   {
@@ -13,6 +39,16 @@ const Menuitems = [
     id: uniqueId(),
     title: `Dashboard`,
     icon: IconLayoutDashboard,
+  },
+  {
+    navlabel: true,
+    subheader: `API's`,
+  },
+  {
+    id: uniqueId(),
+    icon: PublicOutlined,
+    href: pages.geodata.link,
+    title: pages.geodata.title,
   },
   {
     navlabel: true,
@@ -36,16 +72,6 @@ const Menuitems = [
     icon: IconBellRinging,
     href: pages.notifications.link,
     title: pages.notifications.title,
-  },
-  {
-    navlabel: true,
-    subheader: `API's`,
-  },
-  {
-    id: uniqueId(),
-    icon: PublicOutlined,
-    href: pages.geodata.link,
-    title: pages.geodata.title,
   },
 ];
 

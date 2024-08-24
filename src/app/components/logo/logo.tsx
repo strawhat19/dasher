@@ -1,11 +1,19 @@
-import Image from 'next/image';
-import { brandName, icon } from '../../../../server';
+import Icon from './icon';
+import { brandName } from '../../../../server';
 
-export default function Logo({src = `/images/logos/${icon}`, className = `logo`}: any) {
+export default function Logo({
+    fontSize = 24,
+    icon = <Icon />,
+    fontWeight = 700,
+    label = brandName,
+    className = `logo`,
+}: any) {
     return (
-        <div className={`logoContainer ${className} flex alignCenter start gap10`}>
-            <Image src={src} alt={`Logo`} width={35} height={26} />
-            <strong>{brandName}</strong>
+        <div className={`logoContainer ${className} flex alignCenter start gap10`} style={{ fontWeight }}>
+            {icon}
+            <strong style={{ fontSize }}>
+                {label}
+            </strong>
         </div>
     )
 }

@@ -1,14 +1,16 @@
 import Link from 'next/link';
-import { pages } from '../../../../../server';
+import { pages } from '../sidebar/MenuItems';
 import React, { useContext, useState } from 'react';
-import { SettingsTwoTone } from '@mui/icons-material';
 import { GlobalDataContext } from '@/app/datashare';
+import { SettingsOutlined, SettingsTwoTone } from '@mui/icons-material';
 import { IconListCheck, IconMail, IconUser } from '@tabler/icons-react';
-import { Box, Menu, Button, IconButton, MenuItem, ListItemIcon, ListItemText, Tooltip } from '@mui/material';
+import { Box, Menu, Button, IconButton, MenuItem, ListItemIcon, ListItemText, Tooltip, useMediaQuery } from '@mui/material';
+import Slashes from '@/app/components/slashes/slashes';
 
-const Profile = () => {
-  let { user, darkMode } = useContext<any>(GlobalDataContext);
+const Settings = () => {
   const [anchorEl2, setAnchorEl2] = useState(null);
+  let { user, darkMode } = useContext<any>(GlobalDataContext);
+  const largeScreenSize = useMediaQuery((theme: any) => theme.breakpoints.up(`lg`));
 
   const handleClick2 = (event: any) => {
     setAnchorEl2(event.currentTarget);
@@ -22,7 +24,7 @@ const Profile = () => {
     <Box className={`profileOptionsContainer`}>
       <Tooltip title={`Settings`} arrow>
         <IconButton
-          size="medium"
+          size={largeScreenSize ? `medium` : `small`}
           aria-label="show 11 new notifications"
           color="inherit"
           aria-controls="msgs-menu"
@@ -34,7 +36,7 @@ const Profile = () => {
           }}
           onClick={handleClick2}
         >
-          <SettingsTwoTone style={{ color: darkMode ? `var(--fontColor)` : `var(--main)`, fontSize: 27 }} />
+          <SettingsTwoTone style={{ color: darkMode ? `var(--fontColor)` : `var(--main)`, fontSize: largeScreenSize ? 27 : 25 }} />
         </IconButton>
       </Tooltip>
 
@@ -55,21 +57,15 @@ const Profile = () => {
       >
         <MenuItem>
           <ListItemIcon>
+            <SettingsOutlined style={{ fontSize: 20 }} />
+          </ListItemIcon>
+          <ListItemText>General <Slashes /> Settings</ListItemText>
+        </MenuItem>
+        <MenuItem>
+          <ListItemIcon>
             <IconUser width={20} />
           </ListItemIcon>
-          <ListItemText>My Profile</ListItemText>
-        </MenuItem>
-        <MenuItem>
-          <ListItemIcon>
-            <IconMail width={20} />
-          </ListItemIcon>
-          <ListItemText>My Account</ListItemText>
-        </MenuItem>
-        <MenuItem>
-          <ListItemIcon>
-            <IconListCheck width={20} />
-          </ListItemIcon>
-          <ListItemText>My Tasks</ListItemText>
+          <ListItemText>Account <Slashes /> Profile</ListItemText>
         </MenuItem>
         <Box mt={1} py={1} px={2}>
           <Button
@@ -88,4 +84,4 @@ const Profile = () => {
   );
 };
 
-export default Profile;
+export default Settings;

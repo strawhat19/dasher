@@ -1,16 +1,16 @@
-'use client';
-
-import Profile from './Profile';
+import Settings from './Profile';
 import PropTypes from 'prop-types';
 import React, { useContext } from 'react';
-import Logo from '@/app/components/logo/logo';
 import { IconMenu } from '@tabler/icons-react';
 import { GlobalDataContext } from '@/app/datashare';
 import { Brightness7TwoTone, NightsStayTwoTone } from '@mui/icons-material';
-import { Box, AppBar, Toolbar, styled, Stack, IconButton, Tooltip } from '@mui/material';
+import { Box, AppBar, Toolbar, styled, Stack, IconButton, Tooltip, Button, useMediaQuery } from '@mui/material';
 
 const Header = () => {
+  const largeScreenSize = useMediaQuery((theme: any) => theme.breakpoints.up(`lg`));
+
   const { 
+    pageTitle,
     darkMode, setDarkMode, 
     isMobileSidebarOpen, setMobileSidebarOpen, 
   } = useContext<any>(GlobalDataContext);
@@ -38,7 +38,7 @@ const Header = () => {
           <IconButton
             size={`medium`}
             color={`inherit`}
-            aria-label="menu"
+            aria-label={`menu`}
             className={`mobileMenuIconButton p0`}
             onClick={() => setMobileSidebarOpen(!isMobileSidebarOpen)}
             sx={{
@@ -51,33 +51,33 @@ const Header = () => {
             <IconMenu style={{ fontSize: 25, color: darkMode ? `var(--teal)` : `var(--main)` }} />
           </IconButton>
 
-          <Box sx={{
+          <Box className={`mobileMenuLogo p0`} sx={{
               display: {
-                lg: `none`,
+                lg: `inline`,
                 xs: `inline`,
               },
-            }}>
-              <Logo className={`mobileMenuLogo p0`} />
+            }}
+          >
+            {pageTitle}
           </Box>
+
         </Stack>
 
         <Box flexGrow={1} />
 
-        <Stack spacing={0} direction={`row`} alignItems={`center`}>
-          <Tooltip title={`${darkMode ? `Light` : `Dark`} Mode`} arrow>  
-            <IconButton
-              size={`medium`}
-              color={`inherit`}
-              onClick={(e) => setDarkMode(!darkMode)}
-            >
-              {darkMode ? (
-                <Brightness7TwoTone style={{ fontSize: 25, color: `var(--fontColor)` }} />
-              ) : (
-                <NightsStayTwoTone style={{ fontSize: 25, color: `var(--main)` }} />
-              )}
-            </IconButton>
+        <Stack className={`headerToolBarRight`} spacing={2} direction={`row`} alignItems={`center`}>
+          <Tooltip title={`${darkMode ? `Light` : `Dark`} Mode`} arrow>
+            {largeScreenSize ? (
+              <Button size={`large`} onClick={(e) => setDarkMode(!darkMode)} startIcon={darkMode ? <Brightness7TwoTone /> : <NightsStayTwoTone />}>
+                {`${darkMode ? `Light` : `Dark`} Mode`}
+              </Button>
+            ) : (
+              <IconButton size={`small`} onClick={(e) => setDarkMode(!darkMode)}>
+                {darkMode ? <Brightness7TwoTone /> : <NightsStayTwoTone />}
+              </IconButton>
+            )}
           </Tooltip>
-          <Profile />
+          <Settings />
         </Stack>
 
       </ToolbarStyled>

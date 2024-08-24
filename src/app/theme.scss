@@ -2,20 +2,26 @@
     --bg: #041b44;
     --teal: #3fa5e3;
     --main: #5D87FF;
-    --cardBg: var(--bg);
+    --cardBg: #1c3c81;
     --borderRadius: 5px;
     --fontColor: white;
     --darkSub: #1c2a49;
-    --darkMain: #1c3c81;
+    --darkMain: var(--bg);
+    --gameBlue: #00c2ff;
+    --iconRight: #3DD9EB;
     --inputHeight: 42.25px;
+    --iconLeft: var(--main);
     --tealLight: #49BEFF;
     --mainLight: #ecf2ff;
     --navyBlueBG: #071632;
     --darkBorder: #151515;
+    --iconLeftOld: #615DFF;
     --lightBorder: #e5eaef;
     --defaultColor: #2A3547;
-    --drawerBorder: #152a37;
     --tealSuperLight: #3dd9eb;
+    --drawerBorderOld: #152a37;
+    --altMain: rgb(61 175 235);
+    --drawerBorder: var(--cardBg);
     --lightRipple: rgba(0, 81, 255, 0.1);
     --darkRipple: rgba(93, 135, 255, 0.25);
     --transition: 0.24s cubic-bezier(0.77, 0.2, 0.05, 1) !important;
@@ -34,6 +40,46 @@
     transition: var(--transition);
 }
 
+.MuiInputLabel-root {
+    font-weight: 900;
+    font-size: 15px;
+}
+
+.cardTitle {
+    padding-bottom: 5px;
+    border-bottom: 2px solid var(--iconRight);
+}
+
+.headerToolBarRight {
+    button {
+        @extend .mainButton;
+    }
+}
+
+.coordinateField {
+    .MuiInputBase-root {
+        max-width: 120px !important;
+    }
+}
+
+.mobileMenuIconButton {
+    &:hover {
+        background: transparent !important;
+        .MuiTouchRipple-root {
+            background: transparent !important;
+        }
+    }
+}
+
+input {
+    padding-top: 0 !important;
+    padding-bottom: 0 !important;
+    min-height: var(--inputHeight);
+    max-height: var(--inputHeight);
+    border-radius: var(--borderRadius);
+    height: var(--inputHeight) !important;
+}
+
 .mapContainer {
     width: 100%;
     height: 100%;
@@ -48,19 +94,68 @@
     }
 }
 
-input {
-    padding-top: 0 !important;
-    padding-bottom: 0 !important;
-    min-height: var(--inputHeight);
-    max-height: var(--inputHeight);
-    border-radius: var(--borderRadius);
-    height: var(--inputHeight) !important;
+.mainButton {
+    background: var(--main);
+    border: none !important;
+    color: var(--fontColor) !important;
+    &:not(.MuiIconButton-root) {
+        padding-left: 15px;
+    }
+    svg {
+        font-size: 25px !important;
+        color: var(--fontColor) !important;
+    }
+    &:hover {
+        background: var(--darkMain);
+    }
+}
+
+.geoDataFormTypesToggle {
+    width: 100%;
+    border: none !important;
+    .geoDataFormTypesToggleBtn {
+        width: 100%;
+        border-top: none;
+        border-bottom: none;
+        color: var(--fontColor);
+        background: var(--darkMain);
+        &.Mui-selected {
+            background: var(--main);
+        }
+        &:not(.noBorder) {
+            border-left: 1px solid var(--fontColor) !important;
+        }
+        &.first, &.last {
+            border: none;
+            &.first {
+                border-left: none !important;
+            }
+        }
+    }
 }
 
 // Theme Colors
 .light {
+    --darkMain: var(--cardBg);
+    --labelColor: var(--main);
+    --drawerBorder: var(--fontColor);
     header {
-        border-bottom: 1px solid var(--lightBorder);
+        border-bottom: 1px solid var(--drawerBorder);
+    }
+    .pageWrapper {
+        background: var(--main);
+    }
+    .logoContainer strong {
+        color: var(--darkMain) !important;
+    }
+    .sidebarPaper {
+        border-color: var(--drawerBorder);
+    }
+    .MuiListSubheader-root {
+        color: var(--labelColor);
+    }
+    .MuiInputLabel-root {
+        color: var(--labelColor);
     }
     button {
         &:hover {
@@ -75,6 +170,8 @@ input {
 }
 
 .dark {
+    --main: var(--altMain);
+    --labelColor: var(--iconRight);
     // Sidebar & Top Bar
     body {
         background: var(--bg) !important;
@@ -82,7 +179,48 @@ input {
     header {
         border-bottom: 1px solid var(--drawerBorder);
     }
+    // Menu
+    // Menu Sub Headers
+    .MuiListSubheader-root {
+        color: var(--labelColor);
+    }
+    // Menu Active
+    .MuiListItem-root {
+        .MuiButtonBase-root {
+            &.Mui-selected {
+                background: var(--main);
+            }
+        }
+    }
+    h1, h2, h3, h4, h5, h6, p {
+        color: var(--fontColor);
+    }
+    .MuiInputLabel-root {
+        color: var(--labelColor);
+    }
     input {
+        color: var(--fontColor);
+        background: var(--darkMain);
+    }
+    // Navigation Links & Buttons
+    a, .actionBtn {
+        @extend .darkItem;
+    }
+    .profileMenu {
+        li, .MuiListItemIcon-root {
+            @extend .darkItem;
+        }
+    }
+    .noAccountBox {
+        background: var(--darkMain) !important;
+        .MuiButton-root {
+            background: var(--teal);
+            &:hover {
+                background: var(--bg) !important;
+            }
+        }
+    }
+    .geoDataFormTypesToggleBtn {
         color: var(--fontColor);
     }
     button {
@@ -140,34 +278,5 @@ input {
     }
     .MuiTimelineConnector-root {
         background: var(--teal);
-    }
-    // Menu Sub Headers
-    .MuiListSubheader-root {
-        color: var(--main);
-    }
-    h1, h2, h3, h4, h5, h6, p {
-        color: var(--fontColor);
-    }
-    // Navigation Links & Buttons
-    a, .actionBtn {
-        @extend .darkItem;
-    }
-    .profileMenu {
-        li, .MuiListItemIcon-root {
-            @extend .darkItem;
-        }
-    }
-    .noAccountBox {
-        background: var(--darkMain) !important;
-        .MuiButton-root {
-            background: var(--teal);
-            &:hover {
-                background: var(--bg) !important;
-            }
-        }
-    }
-    // Forms
-    input {
-        background: var(--darkMain);
     }
 }

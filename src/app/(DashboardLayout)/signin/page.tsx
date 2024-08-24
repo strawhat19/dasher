@@ -1,10 +1,10 @@
 'use client';
 
 import Link from 'next/link';
-import { pages } from '../../../../server';
 import Logo from '@/app/components/logo/logo';
-import { Box, Stack, Typography } from '@mui/material';
+import { pages } from '../layout/sidebar/MenuItems';
 import SignInForm from '../../components/auth/SignIn';
+import { Box, Stack, Typography } from '@mui/material';
 import DashboardCard from '../components/shared/DashboardCard';
 import PageContainer from '@/app/(DashboardLayout)/components/container/PageContainer';
 

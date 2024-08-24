@@ -1,26 +1,42 @@
 import { useState } from 'react';
-import { locations } from '../../../../server';
-import { Box, Button, Stack, Typography } from '@mui/material';
+import { isValid, locations } from '../../../../server';
+import { PublicOutlined } from '@mui/icons-material';
+import { Button, Grid, Stack, Theme, useMediaQuery, useTheme } from '@mui/material';
+import { GeoDataFormTypes, GeoTypes, GoogleMapZoomLevels } from '../../../../enums';
 import CustomTextField from '@/app/(DashboardLayout)/components/forms/theme-elements/CustomTextField';
 
-export enum GoogleMapZoomLevels {
-    EnableCustomZoom = `!1m14!1m12!1m3!1d132`,
-    Street = `!1m14!1m12!1m3!1d132` + ``,
-    Neighborhood  = `!1m14!1m12!1m3!1d132` + `4`,
-    City = `!1m14!1m12!1m3!1d132` + `44`,
-    Region = `!1m14!1m12!1m3!1d132` + `444`,
-    State = `!1m14!1m12!1m3!1d132` + `4444`,
-    Coast = `!1m14!1m12!1m3!1d132` + `44444`,
-    World = ``,
-    x300 = `!1m14!1m12!1m3!1d132` + `444444`,
+export const minsAndMaxes = {
+    lat: {
+        max: 90,
+        min: -90,
+    },
+    lon: {
+        max: 180,
+        min: -180,
+    }
 }
 
 export default function Map({
     showForm = false,
-    latitude = locations.marietta.lat, 
-    longitude = locations.marietta.lon, 
+    latitude = locations.atlanta.lat, 
+    longitude = locations.atlanta.lon, 
+    location = locations.atlanta.name,
+    formType = GeoDataFormTypes.Locations,
     initialZoomLevel = GoogleMapZoomLevels.Region,
 }) {
+    const theme = useTheme<Theme>();
+    let [error, setError] = useState(``);
+
+    // const extraLargeScreenSize = useMediaQuery(theme.breakpoints.up(`lg`));
+    // const largeScreenSize = useMediaQuery(theme.breakpoints.down(`lg`));
+    const mediumScreenSize = useMediaQuery(theme.breakpoints.down(`md`));
+    const smallScreenSize = useMediaQuery(theme.breakpoints.down(`sm`));
+    const extraSmallScreenSize = useMediaQuery(theme.breakpoints.down(`xs`));
+
+    // const desktop = largeScreenSize || extraLargeScreenSize;
+    const tablet = mediumScreenSize;
+    const mobile = smallScreenSize || extraSmallScreenSize;
+    
     const googleMapsEmbedURLDomain = `https://www.google.com/maps`;
     const googleMapsEmbedURLMapDefaultOptions = `2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0`;
     const getMapEmbedURL = (lat: number = latitude, lon: number = longitude) => `${googleMapsEmbedURLDomain}` 
@@ -33,57 +49,98 @@ export default function Map({
     const [googleMapsIframeURL, setGoogleMapsIframeURL] = useState(getMapEmbedURL(latitude, longitude));
 
     const onCoordChange = (type: string, e: any) => {
+        let latError = false;
+        let lonError = false;
         let newEmbedURL = ``;
-        if (type == `lat`) {
-            latitude = parseFloat(e.target.value);
-        } else if (type == `lon`) {
-            longitude = parseFloat(e.target.value);
+        let val = e.target.value;
+        if (type == GeoTypes.Lat) {
+            latitude = parseFloat(val);
+            if (latitude > minsAndMaxes.lat.max) {
+                latError = true;
+                setError(prevError => `${prevError} Latitude too high`);
+            } else if (latitude < minsAndMaxes.lat.min) {
+                latError = true;
+                setError(prevError => `${prevError} Latitude too low`);
+            } else {
+                latError = false;
+            }
+        } else if (type == GeoTypes.Lon) {
+            longitude = parseFloat(val);
+            if (longitude > minsAndMaxes.lon.max) {
+                lonError = true;
+                setError(prevError => `${prevError} Longitude too high`);
+            } else if (longitude < minsAndMaxes.lon.min) {
+                lonError = true;
+                setError(prevError => `${prevError} Longitude too low`);
+            } else {
+                lonError = false;
+            }
+        } else if (type == GeoTypes.Loc) {
+            console.log(`onGeoChange Loc`, type);
         } else {
-            newEmbedURL = getMapEmbedURL(latitude, longitude);
-            setGoogleMapsIframeURL(newEmbedURL);
+            if (isValid(val)) location = val;
+            else location = locations.atlanta.name; 
+            console.log(`location`, {val, type, location});
+        }
+
+        if (type != GeoTypes.Loc) {
+            if (!latError && !lonError) {
+                setError(``);
+                if (type != `lat` && type != `lon`) {
+                    newEmbedURL = getMapEmbedURL(latitude, longitude);
+                    setGoogleMapsIframeURL(newEmbedURL);
+                }
+            }
         }
     }
 
     return (
         <>
             {showForm && (
-                <Stack spacing={3} direction={`row`} alignItems={`flex-end`} className={`mb25`}>
-                    <Box mt={`25px`}>
-                        <Typography
-                            mb={`5px`}
-                            fontWeight={600}
-                            component={`label`}
-                            htmlFor={`latitude`}
-                            variant={`subtitle1`}
-                        >
-                            Latitude
-                        </Typography>
-                        <CustomTextField onChange={(e: any) => onCoordChange(`lat`, e)} type={`number`} defaultValue={latitude} variant={`outlined`} fullWidth />
-                    </Box>
-                    <Box mt={`25px`}>
-                        <Typography
-                            mb={`5px`}
-                            fontWeight={600}
-                            component={`label`}
-                            htmlFor={`longitude`}
-                            variant={`subtitle1`}
-                        >
-                            Longitude
-                        </Typography>
-                        <CustomTextField onChange={(e: any) => onCoordChange(`lon`, e)} type={`number`} defaultValue={longitude} variant={`outlined`} fullWidth />
-                    </Box>
-                    <Button
-                        fullWidth
-                        size="large"
-                        type="submit"
-                        color="primary"
-                        variant="contained"
-                        className={`actionBtn`}
-                        onClick={(e: any) => onCoordChange(``, e)}
-                    >
-                        GeoData
-                    </Button>
-                </Stack>    
+                <Stack spacing={2.5} direction={mobile ? `column` : `row`} alignItems={`center`} className={`geoDataRow mb20`}>
+                    {formType == GeoDataFormTypes.Locations ? (
+                        <CustomTextField 
+                            fullWidth 
+                            type={`text`} 
+                            label={`Location`} 
+                            variant={`outlined`} 
+                            className={`formField`} 
+                            defaultValue={locations.atlanta.name} 
+                            error={error != `` && error.includes(`Loc`)} 
+                            onChange={(e: any) => onCoordChange(GeoTypes.Loc, e)} 
+                        />
+                    ) : (
+                        <>
+                            <CustomTextField 
+                                type={`number`} 
+                                label={`Latitude`} 
+                                variant={`outlined`} 
+                                defaultValue={latitude} 
+                                min={minsAndMaxes.lat.min} 
+                                max={minsAndMaxes.lat.max} 
+                                error={error != `` && error.includes(`Lat`)} 
+                                onChange={(e: any) => onCoordChange(GeoTypes.Lat, e)} 
+                                className={`formField ${mobile ? `w100` : `fit`} ${tablet && !mobile ? `coordinateField` : ``}`} 
+                            />
+                            <CustomTextField 
+                                type={`number`} 
+                                label={`Longitude`} 
+                                variant={`outlined`} 
+                                defaultValue={longitude} 
+                                min={minsAndMaxes.lon.min} 
+                                max={minsAndMaxes.lon.max} 
+                                error={error != `` && error.includes(`Lon`)} 
+                                onChange={(e: any) => onCoordChange(GeoTypes.Lon, e)} 
+                                className={`formField ${mobile ? `w100` : `fit`} ${tablet && !mobile ? `coordinateField` : ``}`} 
+                            />
+                        </>
+                    )}
+                    <Grid className={`w100`} xs={12} sm={12} md={12} lg={12}>
+                        <Button size={`large`} className={`mainButton w100`} style={{paddingLeft: 6}} onClick={(e: any) => onCoordChange(``, e)} startIcon={<PublicOutlined />}>
+                            GeoData
+                        </Button>
+                    </Grid>
+                </Stack>
             )}
             <div className={`mapContainer`}>
                 <iframe 

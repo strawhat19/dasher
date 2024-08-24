@@ -1,7 +1,7 @@
 'use client';
 
 import { Typography } from '@mui/material';
-import { pages } from '../../../../server';
+import { pages } from '../layout/sidebar/MenuItems';
 import DashboardCard from '@/app/(DashboardLayout)/components/shared/DashboardCard';
 import PageContainer from '@/app/(DashboardLayout)/components/container/PageContainer';
 
