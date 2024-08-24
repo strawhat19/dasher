@@ -1,11 +1,11 @@
 import Link from 'next/link';
 import { pages } from '../sidebar/MenuItems';
+import { IconUser } from '@tabler/icons-react';
 import React, { useContext, useState } from 'react';
 import { GlobalDataContext } from '@/app/datashare';
-import { SettingsOutlined, SettingsTwoTone } from '@mui/icons-material';
-import { IconListCheck, IconMail, IconUser } from '@tabler/icons-react';
-import { Box, Menu, Button, IconButton, MenuItem, ListItemIcon, ListItemText, Tooltip, useMediaQuery } from '@mui/material';
 import Slashes from '@/app/components/slashes/slashes';
+import { SettingsOutlined, SettingsTwoTone } from '@mui/icons-material';
+import { Box, Menu, Button, IconButton, MenuItem, ListItemIcon, ListItemText, Tooltip, useMediaQuery } from '@mui/material';
 
 const Settings = () => {
   const [anchorEl2, setAnchorEl2] = useState(null);
