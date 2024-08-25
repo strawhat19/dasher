@@ -50,19 +50,19 @@ const GeoDataPage = () => {
           <Grid className={`h100`} item xs={12} lg={4}>
             <Grid container className={`h100`} spacing={3}>
               <Grid item xs={12}>
-                <DashboardCard title={`Locations`} className={`h100`}>
+                <DashboardCard minHeight={220} title={`Locations`} className={`h100`}>
                   Locations
                 </DashboardCard>
               </Grid>
               <Grid item xs={12}>
-                <DashboardCard title={`Other`} className={`h100`}>
+                <DashboardCard minHeight={220} title={`Other`} className={`h100`}>
                   Other
                 </DashboardCard>
               </Grid>
             </Grid>
           </Grid>
         </Grid>
-        <DashboardCard title={`GeoData Weather & Time`} className={`m25t`}>
+        <DashboardCard minHeight={280} title={`GeoData Weather & Time`} className={`m25t`}>
           GeoData Weather & Time
         </DashboardCard>
       </Box>

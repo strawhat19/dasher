@@ -1,22 +1,17 @@
 import dynamic from 'next/dynamic';
-import { useContext } from 'react';
 import { year } from '../../../../../server';
 import { useTheme } from '@mui/material/styles';
 import { IconArrowUpLeft } from '@tabler/icons-react';
-import { GlobalDataContext } from '@/app/datashare';
 import { Grid, Stack, Typography, Avatar } from '@mui/material';
 import DashboardCard from '@/app/(DashboardLayout)/components/shared/DashboardCard';
 
 const Chart = dynamic(() => import("react-apexcharts"), { ssr: false });
 
 const YearlyBreakup = () => {
-
-  let { darkMode } = useContext<any>(GlobalDataContext);
-
   const theme = useTheme();
+  const successlight = `var(--tealLight)`;
   const primary = theme.palette.primary.main;
-  const successlight = theme.palette.success.light;
-  const primarylight = () => darkMode ? `var(--darkMain)` : `var(--mainLight)`;
+  const primarylight = () => `var(--darkMain)`;
 
   const seriescolumnchart: any = [38, 40, 25];
 
@@ -30,7 +25,7 @@ const YearlyBreakup = () => {
       },
       height: 155,
     },
-    colors: [primary, primarylight(), `#F9F9FD`],
+    colors: [primary, primarylight(), `var(--tealLight)`],
     plotOptions: {
       pie: {
         startAngle: 0,
@@ -75,7 +70,7 @@ const YearlyBreakup = () => {
           </Typography>
           <Stack direction="row" spacing={1} mt={1} alignItems="center">
             <Avatar sx={{ bgcolor: successlight, width: 27, height: 27 }}>
-              <IconArrowUpLeft width={20} color="#39B69A" />
+              <IconArrowUpLeft width={20} color="var(--fontColor)" />
             </Avatar>
             <Typography variant="subtitle2" fontWeight="600">
               +9%

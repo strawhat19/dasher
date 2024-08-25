@@ -1,19 +1,16 @@
 
-import dynamic from "next/dynamic";
-const Chart = dynamic(() => import("react-apexcharts"), { ssr: false });
+import dynamic from 'next/dynamic';
 import { useTheme } from '@mui/material/styles';
 import { Stack, Typography, Avatar, Fab } from '@mui/material';
+const Chart = dynamic(() => import('react-apexcharts'), { ssr: false });
 import { IconArrowDownRight, IconCurrencyDollar } from '@tabler/icons-react';
 import DashboardCard from '@/app/(DashboardLayout)/components/shared/DashboardCard';
 
 const MonthlyEarnings = () => {
-  // chart color
   const theme = useTheme();
+  const secondarylight = `#f5fcff`;
   const secondary = theme.palette.secondary.main;
-  const secondarylight = '#f5fcff';
-  const errorlight = '#fdede8';
 
-  // chart
   const optionscolumnchart: any = {
     chart: {
       type: 'area',
@@ -69,11 +66,11 @@ const MonthlyEarnings = () => {
           $6,820
         </Typography>
         <Stack direction="row" spacing={1} my={1} alignItems="center">
-          <Avatar sx={{ bgcolor: errorlight, width: 27, height: 27 }}>
-            <IconArrowDownRight width={20} color="#FA896B" />
+          <Avatar sx={{ bgcolor: `var(--tealLight)`, width: 27, height: 27 }}>
+            <IconArrowDownRight width={20} color="var(--fontColor)" />
           </Avatar>
           <Typography variant="subtitle2" fontWeight="600">
-            +9%
+            -9%
           </Typography>
           <Typography variant="subtitle2" color="textSecondary">
             last year

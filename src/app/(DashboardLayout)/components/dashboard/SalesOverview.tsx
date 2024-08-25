@@ -5,7 +5,6 @@ import { Skeleton, Box, Stack, styled } from '@mui/material';
 import React, { useState, useEffect, useContext } from 'react';
 import DashboardCard from '@/app/(DashboardLayout)/components/shared/DashboardCard';
 
-// Dynamically import the Chart component with suspense
 const Chart = dynamic(() => import("react-apexcharts"), { ssr: false });
 
 const SalesOverview = () => {
@@ -14,7 +13,6 @@ const SalesOverview = () => {
     const secondary = theme.palette.secondary.main;
     const [isLoading, setIsLoading] = useState(true);
     let { darkMode } = useContext<any>(GlobalDataContext);
-    // const getRandomInt = (max: number) => Math.floor(Math.random() * max);
 
     let [skeletonStacks, ] = useState([
         [275, 400],
@@ -25,14 +23,8 @@ const SalesOverview = () => {
         [369, 200],
         [215, 15],
         [400, 300],
+        [275, 400],
     ]);
-
-    useEffect(() => {
-        // const timer = setTimeout(() => {
-            setIsLoading(false);
-        // }); // Simulates loading time
-        // return () => clearTimeout(timer);
-    }, []);
 
     const optionscolumnchart: any = {
         chart: {
@@ -102,9 +94,13 @@ const SalesOverview = () => {
         },
     ];
 
+    useEffect(() => {
+        setIsLoading(false);
+    }, []);
+
     const CustomSkeleton = styled(Skeleton)<any>(({ 
-        sweepColor = `var(--teal)`,
         background = `var(--darkMain)`, 
+        sweepColor = `var(--tealLight)`,
     }) => (darkMode && {
         background,
         [`&::after`]: {
@@ -113,24 +109,24 @@ const SalesOverview = () => {
     }));
 
     return (
-        <DashboardCard title={`Sales Overview`} height={495}>
+        <DashboardCard title={`Sales Overview`} minHeight={500}>
             {isLoading ? (
                 <Box sx={{ height: 370, width: '100%' }}>
                     <Stack spacing={4.2} direction={`row`}>    
-                        {skeletonStacks.map((skelStack, index) => {
+                        {skeletonStacks.map(([firstSkel, secondSkel], index) => {
                             return (
                                 <Stack spacing={2} key={index} direction={`row`} alignItems={`flex-end`}>
                                     <CustomSkeleton 
                                         width={15} 
                                         animation={`wave`} 
                                         variant={`rounded`} 
-                                        height={skelStack[0]} 
+                                        height={firstSkel} 
                                     />
                                     <CustomSkeleton 
                                         width={15} 
                                         animation={`wave`} 
                                         variant={`rounded`} 
-                                        height={skelStack[1]} 
+                                        height={secondSkel} 
                                     />
                                 </Stack>
                             )
@@ -139,13 +135,13 @@ const SalesOverview = () => {
                 </Box>
             ) : (
                 <Chart
-                    type="bar"
+                    type={`bar`}
                     height={370} 
-                    width="100%"
-                    id="salesOverviewChart"
+                    width={`100%`}
+                    id={`salesOverviewChart`}
                     series={seriescolumnchart}
                     options={optionscolumnchart}
-                    className="salesOverviewChart"
+                    className={`salesOverviewChart`}
                 />
             )}
         </DashboardCard>
