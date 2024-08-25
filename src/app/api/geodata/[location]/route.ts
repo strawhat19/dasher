@@ -41,7 +41,6 @@ export async function GET(request: NextRequest, { params }: { params: { location
     };
 
     let newLocation: any = {
-
       id,
       type,
       name,
@@ -55,18 +54,15 @@ export async function GET(request: NextRequest, { params }: { params: { location
       coordinates,
       nameDetails,
       locationType,
-      
       class: loc.class,
       people: population.toLocaleString(),
-      
       address: {
         latitude,
         longitude,
         coordinates,
         ...loc.address,
         name: loc.display_name
-      },
-
+      }
     }
     
     if (loc.extratags) {
@@ -170,7 +166,7 @@ export async function GET(request: NextRequest, { params }: { params: { location
         }
       }
     } catch (getWeatherAndTimeDataError) {
-      return { error: `Couldn't get Weather for ${location}`, messsage: `Couldn't get Weather for ${location}` };
+      return { getWeatherAndTimeDataError, error: `Couldn't get Weather for ${location}`, messsage: `Couldn't get Weather for ${location}` };
     }
   }
 
@@ -206,16 +202,12 @@ export async function GET(request: NextRequest, { params }: { params: { location
       let openStreetMapsNominatimAPIURL = `https://nominatim.openstreetmap.org/search`;
       let openStreetMapsNominatimLocationQuery = `${openStreetMapsNominatimAPIURL}?addressdetails=1&extratags=1&namedetails=1&q=${location}&format=json`;
       let openStreetMapsNominatimLocationResponse = await fetch(openStreetMapsNominatimLocationQuery);
-    
       if (openStreetMapsNominatimLocationResponse.ok == true) {
-          
         let openStreetMapsNominatimLocationData = await openStreetMapsNominatimLocationResponse.json();
         let locations = openStreetMapsNominatimLocationData;
-    
         if (Array.isArray(locations) && locations.length > 0) {
           locations = await generateNewLocations(locations);
         }
-    
         return locations;
       } else {
         return openStreetMapsNominatimLocationResponse;
@@ -226,29 +218,26 @@ export async function GET(request: NextRequest, { params }: { params: { location
   }
 
   try {
-    let locations = [];
-    locations = await getLocations(resolvedLocation);
-    locations = await locations.map((locat: any, locatIndex: any) => {
-      return {
-        index: locatIndex + 1,
-        ...locat,
-      }
-    })
-
-    if (locations && isValid(locations)) {
-      if (locations.length > 0) timezone = locations[0].timezone;
-      return NextResponse.json({
-        message: `Based on Timezone and Region: ${timezone}`,
-        location: resolvedLocation,
-        timezone,
-        locations,
-      });
-    } else {
-      return NextResponse.json({
-        error,
-        message: `No Location(s) Found`,
-      });
-    }
+    let locations = await getLocations(resolvedLocation);
+    if (locations) { 
+      if (isValid(locations)) {
+        if (locations.length > 0) {
+          timezone = locations[0].timezone;
+          locations = await locations.map((locat: any, locatIndex: any) => {
+            return {
+              index: locatIndex + 1,
+              ...locat,
+            }
+          })
+          return NextResponse.json({
+            message: `Based on Timezone and Region: ${timezone}`,
+            location: resolvedLocation,
+            timezone,
+            locations,
+          });
+        } else return NextResponse.json({ error });
+      } else return NextResponse.json({ error });
+    } else return NextResponse.json({ error });
   } catch (APIError) {
     return NextResponse.json({ APIError, error });
   }
