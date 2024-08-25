@@ -250,6 +250,6 @@ export async function GET(request: NextRequest, { params }: { params: { location
       });
     }
   } catch (APIError) {
-    NextResponse.json({ APIError, error });
+    return NextResponse.json({ APIError, error });
   }
 }
