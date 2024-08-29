@@ -7,6 +7,7 @@ import SignInForm from '../../components/auth/SignIn';
 import { Box, Stack, Typography } from '@mui/material';
 import DashboardCard from '../components/shared/DashboardCard';
 import PageContainer from '@/app/(DashboardLayout)/components/container/PageContainer';
+import DataGridDemo from '@/app/components/datagrid/datagrid';
 
 export default function Signin() {
   return (
@@ -57,6 +58,9 @@ export default function Signin() {
           />
         </>
       </DashboardCard>
+      {/* <DashboardCard className={`m35t m35b`}>
+        <DataGridDemo />
+      </DashboardCard> */}
     </PageContainer>
   );
 };
