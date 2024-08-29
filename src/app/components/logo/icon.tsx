@@ -4,7 +4,7 @@ import { icon } from "../../../../server";
 export default function Icon({
     width = 35,
     height = 26,
-    useSVG = true,
+    useSVG = false,
     className = `brandIcon`,
     src = `/images/logos/${icon}`,
     iconLeftColor = `var(--iconLeft)`,
