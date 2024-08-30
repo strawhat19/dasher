@@ -5,13 +5,13 @@ import { IconArrowUpLeft } from '@tabler/icons-react';
 import { Grid, Stack, Typography, Avatar } from '@mui/material';
 import DashboardCard from '@/app/(DashboardLayout)/components/shared/DashboardCard';
 
-const Chart = dynamic(() => import("react-apexcharts"), { ssr: false });
+const Chart = dynamic(() => import('react-apexcharts'), { ssr: false });
 
 const YearlyBreakup = () => {
   const theme = useTheme();
+  const primarylight = `var(--darkMain)`;
   const successlight = `var(--tealLight)`;
   const primary = theme.palette.primary.main;
-  const primarylight = () => `var(--darkMain)`;
 
   const seriescolumnchart: any = [38, 40, 25];
 
@@ -19,13 +19,13 @@ const YearlyBreakup = () => {
     chart: {
       type: `donut`,
       fontFamily: "'Plus Jakarta Sans', sans-serif;",
-      foreColor: `#adb0bb`,
+      foreColor: `var(--defFontColor)`,
       toolbar: {
         show: false,
       },
       height: 155,
     },
-    colors: [primary, primarylight(), `var(--tealLight)`],
+    colors: [primary, primarylight, `var(--tealLight)`],
     plotOptions: {
       pie: {
         startAngle: 0,
@@ -90,7 +90,7 @@ const YearlyBreakup = () => {
             </Stack>
             <Stack direction="row" spacing={1} alignItems="center">
               <Avatar
-                sx={{ width: 9, height: 9, bgcolor: primarylight(), svg: { display: `none` } }}
+                sx={{ width: 9, height: 9, bgcolor: primarylight, svg: { display: `none` } }}
               ></Avatar>
               <Typography variant="subtitle2" color="textSecondary">
                 ${year}

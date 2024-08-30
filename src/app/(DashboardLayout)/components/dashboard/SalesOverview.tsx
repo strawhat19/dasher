@@ -5,7 +5,7 @@ import { Skeleton, Box, Stack, styled } from '@mui/material';
 import React, { useState, useEffect, useContext } from 'react';
 import DashboardCard from '@/app/(DashboardLayout)/components/shared/DashboardCard';
 
-const Chart = dynamic(() => import("react-apexcharts"), { ssr: false });
+const Chart = dynamic(() => import('react-apexcharts'), { ssr: false });
 
 const SalesOverview = () => {
     const theme = useTheme();
@@ -30,19 +30,22 @@ const SalesOverview = () => {
         chart: {
             type: 'bar',
             fontFamily: "'Plus Jakarta Sans', sans-serif;",
-            foreColor: '#adb0bb',
+            foreColor: darkMode ? `var(--fontColor)` : `var(--darkMain)`,
             toolbar: {
                 show: true,
+                icons: {
+                    fill: darkMode ? `var(--fontColor)` : `var(--darkMain)`,
+                },
             },
             height: 370,
         },
         colors: [primary, secondary],
         plotOptions: {
             bar: {
-                horizontal: false,
                 barHeight: '60%',
-                columnWidth: '42%',
+                horizontal: false,
                 borderRadius: [6],
+                columnWidth: '42%',
                 borderRadiusApplication: 'end',
                 borderRadiusWhenStacked: 'all',
             },

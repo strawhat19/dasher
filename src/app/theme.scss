@@ -17,6 +17,7 @@
     --darkBorder: #151515;
     --iconLeftOld: #615DFF;
     --lightBorder: #e5eaef;
+    --defFontColor: #adb0bb;
     --defaultColor: #2A3547;
     --tealSuperLight: #3dd9eb;
     --drawerBorderOld: #152a37;
@@ -244,6 +245,15 @@ input {
         color: var(--fontColor) !important;
         &:hover {
             background: var(--darkMain) !important;
+        }
+    }
+    .apexcharts-menu-icon {
+        svg {
+            path {
+                &:last-child {
+                    fill: var(--fontColor);
+                }
+            }
         }
     }
     .sidebarPaper, .mobileMenuPaper {

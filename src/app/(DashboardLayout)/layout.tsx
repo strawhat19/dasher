@@ -32,8 +32,8 @@ export default function RootLayout({children}: {children: React.ReactNode}) {
       />
       <PageWrapper className={`pageWrapper page-wrapper`}>
         <Header />
-        <Container sx={{ paddingTop: `20px`, maxWidth: `1200px` }}>
-          <Box sx={{ minHeight: `calc(100vh - 220px)` }}>
+        <Container className={`mainContainer`} sx={{ paddingTop: `20px` }}>
+          <Box className={`main`} sx={{ minHeight: `calc(100vh - 220px)` }}>
             {children}
           </Box>
         </Container>

@@ -15,7 +15,7 @@ const MonthlyEarnings = () => {
     chart: {
       type: 'area',
       fontFamily: "'Plus Jakarta Sans', sans-serif;",
-      foreColor: '#adb0bb',
+      foreColor: 'var(--defFontColor)',
       toolbar: {
         show: false,
       },
