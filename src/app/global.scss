@@ -1,13 +1,3 @@
-.mainContainer {
-    max-width: 100%;
-}
-
-.footerContainer {
-    width: 100%;
-    margin: 1.5% auto;
-    box-shadow: var(--cardShadow);
-}
-
 .mobileMenuIconButton {
     svg {
         top: 3px;
@@ -36,18 +26,14 @@
     }
 }
 
-@media (min-width: 1200px) {
-    .footerContainer {
-        width: 96%;
-        max-width: 1160px;
+@media (max-width: 1200px) {
+    .footerComponent {
+        padding-bottom: 10px;
+        padding: var(--sideSpace);
     }
 }
 
 @media (max-width: 768px) {
-    .footerContainer {
-        width: 92%;
-        margin: 5% auto;
-    }
     .sidebarBottom {
         display: none;
     }
@@ -55,5 +41,24 @@
         span, a {
             font-size: 12px;
         }
+    }
+}
+
+@media (max-width: 600px) {
+    :root {
+        --sideSpace: 16px;
+    }
+}
+
+@media (max-width: 450px) {
+    .geoDataFormTypesToggle {
+        flex-direction: column;
+    }
+}
+
+@media (max-width: 365px) {
+    footer {
+        grid-gap: 15px;
+        flex-direction: column;
     }
 }

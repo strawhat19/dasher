@@ -1,5 +1,6 @@
 :root {
     --bg: #041b44;
+    --sideSpace: 24px;
     --teal: #3fa5e3;
     --main: #5D87FF;
     --cardBg: #1c3c81;
@@ -27,6 +28,19 @@
     --darkRipple: rgba(93, 135, 255, 0.25);
     --transition: 0.24s cubic-bezier(0.77, 0.2, 0.05, 1) !important;
     --cardShadow: rgb(145 158 171 / 30%) 0px 1px 2px 0px, rgb(145 158 171 / 12%) 0px 12px 24px -4px !important;
+}
+
+.mainContainer {
+    max-width: 100%;
+}
+
+.footerComponent {
+    padding: 0 var(--sideSpace);
+    .footerContainer {
+        width: 100%;
+        margin: 1.5% auto;
+        box-shadow: var(--cardShadow);
+    }
 }
 
 .MuiTooltip-arrow {
