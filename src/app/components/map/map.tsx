@@ -1,6 +1,6 @@
 import { useState } from 'react';
-import { isValid, locations } from '../../../../server';
 import { PublicOutlined } from '@mui/icons-material';
+import { getGeoData, isValid, locations } from '../../../../server';
 import { Button, Grid, Stack, Theme, useMediaQuery, useTheme } from '@mui/material';
 import { GeoDataFormTypes, GeoTypes, GoogleMapZoomLevels } from '../../../../enums';
 import CustomTextField from '@/app/(DashboardLayout)/components/forms/theme-elements/CustomTextField';
@@ -26,15 +26,16 @@ export default function Map({
 }) {
     const theme = useTheme<Theme>();
     let [error, setError] = useState(``);
+    let [geoLoc, setGeoLoc] = useState(location);
 
-    // const extraLargeScreenSize = useMediaQuery(theme.breakpoints.up(`lg`));
-    // const largeScreenSize = useMediaQuery(theme.breakpoints.down(`lg`));
-    const mediumScreenSize = useMediaQuery(theme.breakpoints.down(`md`));
+    // const xlScreenSize = useMediaQuery(theme.breakpoints.up(`lg`));
+    // const lgScreenSize = useMediaQuery(theme.breakpoints.down(`lg`));
+    const medScreenSize = useMediaQuery(theme.breakpoints.down(`md`));
     const smallScreenSize = useMediaQuery(theme.breakpoints.down(`sm`));
     const extraSmallScreenSize = useMediaQuery(theme.breakpoints.down(`xs`));
 
-    // const desktop = largeScreenSize || extraLargeScreenSize;
-    const tablet = mediumScreenSize;
+    // const desktop = lgScreenSize || xlScreenSize;
+    const tablet = medScreenSize;
     const mobile = smallScreenSize || extraSmallScreenSize;
     
     const googleMapsEmbedURLDomain = `https://www.google.com/maps`;
@@ -76,11 +77,12 @@ export default function Map({
                 lonError = false;
             }
         } else if (type == GeoTypes.Loc) {
-            console.log(`onGeoChange Loc`, type);
-        } else {
             if (isValid(val)) location = val;
             else location = locations.atlanta.name; 
-            console.log(`location`, {val, type, location});
+            setGeoLoc(location);
+        } else {
+            let locationsData = getGeoData(geoLoc);
+            console.log(`Locations`, locationsData);
         }
 
         if (type != GeoTypes.Loc) {
