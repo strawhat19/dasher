@@ -229,12 +229,7 @@ export async function GET(request: NextRequest, { params }: { params: { location
               ...locat,
             }
           })
-          return NextResponse.json({
-            message: `Based on Timezone and Region: ${timezone}`,
-            location: resolvedLocation,
-            timezone,
-            locations,
-          });
+          return NextResponse.json(locations);
         } else return NextResponse.json({ error });
       } else return NextResponse.json({ error });
     } else return NextResponse.json({ error });

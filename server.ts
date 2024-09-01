@@ -19,23 +19,20 @@ export const dataSize = (data?: any) => {
   return dataInfo.size;
 }
 
-export const getGeoDataFromAPI = async (location: string = ``) => {
+export const momentTimezoneFormats = {
+  smallDateTime: `ddd, M/D, h:mm a`,
+  extraSmallDateTime: `M/D, h:mm:ss a`,
+  mediumDateTime: `ddd, MMM Do, h:mm a`,
+  fullDateTime: `dddd, MMMM Do, h:mm:ss a`,
+}
+
+export const getGeoData = async (location: string = ``) => {
   if (location != ``) location = `/` + location;
   let geoDataResponse = await fetch(`/api/geodata${location}`);
   if (geoDataResponse.status === 200) {
     let geoData = await geoDataResponse.json();
-    if (geoData) {
-      return geoData;
-    }
+    if (geoData) return geoData;
   }
-}
-
-export const getGeoData = async (location: string = ``) => {
-  await getGeoDataFromAPI(location).then(data => {
-    return data;
-  }).catch(error => {
-    return error;
-  });
 }
 
 export const locations = {
@@ -45,13 +42,6 @@ export const locations = {
     name: `Atlanta`,
     timezone: defaultTimezone,
   }
-}
-
-export const momentTimezoneFormats = {
-  smallDateTime: `ddd, M/D, h:mm a`,
-  extraSmallDateTime: `M/D, h:mm:ss a`,
-  mediumDateTime: `ddd, MMM Do, h:mm a`,
-  fullDateTime: `dddd, MMMM Do, h:mm:ss a`,
 }
 
 export const removeTrailingZeroDecimal = (limit: any, number: any) => {
