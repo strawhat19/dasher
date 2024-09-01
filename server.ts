@@ -1,3 +1,5 @@
+import { Atlanta } from './database';
+
 export const logo = `dark-logo.svg`;
 export const brandName = `Dasher`;
 export const icon = `modernize-icon.svg`;
@@ -35,13 +37,9 @@ export const getGeoData = async (location: string = ``) => {
   }
 }
 
-export const locations = {
-  atlanta: {
-    lon: -84.0911,
-    lat: 34.063485,
-    name: `Atlanta`,
-    timezone: defaultTimezone,
-  }
+export const locations: any = {
+  atlanta: Atlanta,
+  default: () => locations.atlanta,
 }
 
 export const removeTrailingZeroDecimal = (limit: any, number: any) => {

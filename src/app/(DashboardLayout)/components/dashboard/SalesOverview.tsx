@@ -1,8 +1,9 @@
 import dynamic from 'next/dynamic';
+import { Box, Stack } from '@mui/material';
 import { useTheme } from '@mui/material/styles';
-import { GlobalDataContext } from '@/app/datashare';
-import { Skeleton, Box, Stack, styled } from '@mui/material';
+import { GlobalDataContext } from '@/app/globaldata';
 import React, { useState, useEffect, useContext } from 'react';
+import { Skeleton } from '@/app/components/loading/skeleton/skeleton';
 import DashboardCard from '@/app/(DashboardLayout)/components/shared/DashboardCard';
 
 const Chart = dynamic(() => import('react-apexcharts'), { ssr: false });
@@ -101,16 +102,6 @@ const SalesOverview = () => {
         setIsLoading(false);
     }, []);
 
-    const CustomSkeleton = styled(Skeleton)<any>(({ 
-        background = `var(--darkMain)`, 
-        sweepColor = `var(--tealLight)`,
-    }) => (darkMode && {
-        background,
-        [`&::after`]: {
-          background: `linear-gradient(90deg, transparent, ${sweepColor}, transparent)`,
-        },
-    }));
-
     return (
         <DashboardCard title={`Sales Overview`} minHeight={500}>
             {isLoading ? (
@@ -119,16 +110,12 @@ const SalesOverview = () => {
                         {skeletonStacks.map(([firstSkel, secondSkel], index) => {
                             return (
                                 <Stack spacing={2} key={index} direction={`row`} alignItems={`flex-end`}>
-                                    <CustomSkeleton 
+                                    <Skeleton 
                                         width={15} 
-                                        animation={`wave`} 
-                                        variant={`rounded`} 
                                         height={firstSkel} 
                                     />
-                                    <CustomSkeleton 
+                                    <Skeleton 
                                         width={15} 
-                                        animation={`wave`} 
-                                        variant={`rounded`} 
                                         height={secondSkel} 
                                     />
                                 </Stack>

@@ -2,7 +2,7 @@ import Link from 'next/link';
 import { pages } from '../sidebar/MenuItems';
 import { IconUser } from '@tabler/icons-react';
 import React, { useContext, useState } from 'react';
-import { GlobalDataContext } from '@/app/datashare';
+import { GlobalDataContext } from '@/app/globaldata';
 import Slashes from '@/app/components/slashes/slashes';
 import { SettingsOutlined, SettingsTwoTone } from '@mui/icons-material';
 import { Box, Menu, Button, IconButton, MenuItem, ListItemIcon, ListItemText, Tooltip, useMediaQuery } from '@mui/material';

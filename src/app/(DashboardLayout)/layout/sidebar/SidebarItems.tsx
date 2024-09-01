@@ -4,7 +4,7 @@ import { Box, List } from '@mui/material';
 import React, { useContext } from 'react';
 import NavGroup from './NavGroup/NavGroup';
 import { usePathname } from 'next/navigation';
-import { GlobalDataContext } from '@/app/datashare';
+import { GlobalDataContext } from '@/app/globaldata';
 
 const SidebarItems = () => {
   const pathname = usePathname();

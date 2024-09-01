@@ -2,7 +2,7 @@
 
 import React, { useContext } from 'react';
 import Footer from './layout/footer/Footer';
-import { GlobalDataContext } from '../datashare';
+import { GlobalDataContext } from '../globaldata';
 import { styled, Container, Box } from '@mui/material';
 import Header from '@/app/(DashboardLayout)/layout/header/Header';
 import Sidebar from '@/app/(DashboardLayout)/layout/sidebar/Sidebar';
@@ -22,9 +22,9 @@ const PageWrapper = styled(`div`)(() => ({
 }));
 
 export default function RootLayout({children}: {children: React.ReactNode}) {
-  let { isSidebarOpen, isMobileSidebarOpen, setMobileSidebarOpen } = useContext<any>(GlobalDataContext);
+  let { darkMode, isSidebarOpen, isMobileSidebarOpen, setMobileSidebarOpen } = useContext<any>(GlobalDataContext);
   return (
-    <MainWrapper className={`mainWrapper mainwrapper`}>
+    <MainWrapper className={`mainWrapper mainwrapper ${darkMode ? `dark darkTheme` : `light lightTheme`}`}>
       <Sidebar
         isSidebarOpen={isSidebarOpen}
         isMobileSidebarOpen={isMobileSidebarOpen}

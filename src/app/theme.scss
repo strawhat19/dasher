@@ -184,6 +184,12 @@ input {
     }
 }
 
+body {
+    &:has(.darkTheme) {
+        background: var(--bg) !important;
+    }
+}
+
 .dark {
     --main: var(--altMain);
     --labelColor: var(--iconRight);

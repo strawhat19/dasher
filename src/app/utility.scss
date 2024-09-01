@@ -100,9 +100,9 @@
 .fit {  @extend .fitMin; @extend .fitMax; }
 .pointerEventsNone { pointer-events: none; }
 .mauto { margin-left: auto; margin-right: auto; }
-.fitMin { width: fit-content;  min-width: fit-content; }
-.fitMax { width: fit-content;  max-width: fit-content; }
 .link { color: inherit; text-decoration: none !important; }
+.fitMin { width: fit-content !important;  min-width: fit-content !important; height: fit-content !important;  min-height: fit-content !important; }
+.fitMax { width: fit-content !important;  max-width: fit-content !important; height: fit-content !important;  max-height: fit-content !important; }
 
 .spacerBox {
     min-width: 75px; 
@@ -148,6 +148,26 @@
             border-radius: var(--borderRadius);
         }
     }
+}
+
+.textOverflow {
+    margin: 0;
+    max-width: 60%;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    &.tflow100 { max-width: 100%; }
+    &.tflow95 { max-width: 95%; }
+    &.tflow90 { max-width: 90%; }
+    &.tflow80 { max-width: 80%; }
+    &.tflow72 { max-width: 72%; }
+    &.tflow65 { max-width: 65%; }
+    &.tflow54 { max-width: 54%; }
+    &.tflow50 { max-width: 50%; }
+    &.tflow45 { max-width: 45%; }
+    &.tflow40 { max-width: 40%; }
+    &.tflow35 { max-width: 35%; }
+    &.tFlowBlock { display: block; }
 }
 
 .hoverLink {

@@ -2,7 +2,7 @@ import Link from 'next/link';
 import { useContext } from 'react';
 import { pages } from './MenuItems';
 import { AccountCircle } from '@mui/icons-material';
-import { GlobalDataContext } from '@/app/datashare';
+import { GlobalDataContext } from '@/app/globaldata';
 import { Box, Typography, Button } from '@mui/material';
 
 export const Upgrade = () => {

@@ -34,6 +34,10 @@ export async function GET(request: NextRequest, { params }: { params: { location
     } = loc;
 
     let population = loc.extratags && loc.extratags.population ? parseFloat(loc.extratags.population) : 0;
+
+    let city = loc.address.city ? loc.address.city : `City`;
+    let state = loc.address.state ? loc.address.state : `State`;
+    let country = loc.address.country ? loc.address.country : `Country`;
     
     let coordinates = {
       latitude,
@@ -45,7 +49,10 @@ export async function GET(request: NextRequest, { params }: { params: { location
       type,
       name,
       rank,
+      city,
+      state,
       bounds,
+      country,
       location,
       latitude,
       longitude,

@@ -1,7 +1,7 @@
 'use client';
 
 import { useContext } from 'react';
-import { GlobalDataContext } from '@/app/datashare';
+import { GlobalDataContext } from '@/app/globaldata';
 import { brandName, iconPNG } from '../../../../../server';
 import { Helmet, HelmetProvider } from 'react-helmet-async';
 

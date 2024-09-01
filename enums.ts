@@ -1,12 +1,22 @@
+export enum GeoDataFormTypes {
+    Locations = `Locations`,
+    Coordinates = `Coordinates`,
+}
+
 export enum GeoTypes {
     Lat = `lat`,
     Lon = `lon`,
     Loc = `loc`,
 }
 
-export enum GeoDataFormTypes {
-    Locations = `Locations`,
-    Coordinates = `Coordinates`,
+export enum States {
+    Ready = `Ready`,
+    Error = `Error`,
+    Cancel = `Cancel`,
+    Active = `Active`,
+    Success = `Success`,
+    Loading = `Loading`,
+    Disabled = `Disabled`,
 }
 
 export enum GoogleMapZoomLevels {
