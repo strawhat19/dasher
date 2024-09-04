@@ -30,13 +30,6 @@
     }
 }
 
-@media (max-width: 1200px) {
-    .footerComponent {
-        padding-bottom: 10px;
-        padding: var(--sideSpace);
-    }
-}
-
 @media (max-width: 768px) {
     .sidebarBottom {
         display: none;

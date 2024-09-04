@@ -4,7 +4,7 @@
     --teal: #3fa5e3;
     --main: #5D87FF;
     --cardBg: #1c3c81;
-    --borderRadius: 5px;
+    --borderRadius: 7px;
     --fontColor: white;
     --darkSub: #1c2a49;
     --darkMain: var(--bg);
@@ -30,17 +30,12 @@
     --cardShadow: rgb(145 158 171 / 30%) 0px 1px 2px 0px, rgb(145 158 171 / 12%) 0px 12px 24px -4px !important;
 }
 
-.mainContainer {
-    max-width: 100%;
+.bgMain {
+    background: var(--main) !important;
 }
 
-.footerComponent {
-    padding: 0 var(--sideSpace);
-    .footerContainer {
-        width: 100%;
-        margin: 1.5% auto;
-        box-shadow: var(--cardShadow);
-    }
+.borderRadius {
+    border-radius: var(--borderRadius);
 }
 
 .MuiTooltip-arrow {
@@ -87,11 +82,11 @@
 }
 
 input {
+    @extend .borderRadius;
     padding-top: 0 !important;
     padding-bottom: 0 !important;
     min-height: var(--inputHeight);
     max-height: var(--inputHeight);
-    border-radius: var(--borderRadius);
     height: var(--inputHeight) !important;
 }
 
@@ -104,8 +99,8 @@ input {
         width: 100%;
         height: 100%;
         min-height: 280px;
+        @extend .borderRadius;
         box-shadow: var(--cardShadow);
-        border-radius: var(--borderRadius);
     }
 }
 
@@ -157,9 +152,6 @@ input {
     header {
         border-bottom: 1px solid var(--drawerBorder);
     }
-    .pageWrapper {
-        background: var(--main);
-    }
     .logoContainer strong {
         color: var(--darkMain) !important;
     }
@@ -179,9 +171,6 @@ input {
             }
         }
     }
-    footer {
-        border-top: 1px solid var(--lightBorder);
-    }
 }
 
 body {
@@ -199,6 +188,9 @@ body {
     }
     header {
         border-bottom: 1px solid var(--drawerBorder);
+    }
+    .fontColor {
+        color: var(--fontColor);
     }
     // Menu
     // Menu Sub Headers
@@ -250,9 +242,6 @@ body {
                 background: var(--darkRipple);
             }
         }
-    }
-    footer {
-        border-top: 1px solid var(--drawerBorder);
     }
     .drawerContainer {
         border-right: 1px solid var(--drawerBorder);

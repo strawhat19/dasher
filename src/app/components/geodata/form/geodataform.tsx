@@ -56,7 +56,7 @@ export default function GeoDataForm({}: any) {
                     defaultValue={locations.atlanta.name} 
                 />
                 <Grid className={`w100`} xs={12} sm={12} md={12} lg={12}>
-                    <Button disabled={geoDataState == States.Loading} type={`submit`} size={`large`} className={`mainButton w100`} style={{paddingLeft: 6}} startIcon={geoDataState == States.Loading ? <Spinner /> : <PublicOutlined />}>
+                    <Button disabled={geoDataState == States.Loading} type={`submit`} size={`large`} className={`mainButton bgMain w100`} style={{paddingLeft: 6}} startIcon={geoDataState == States.Loading ? <Spinner /> : <PublicOutlined />}>
                         {geoDataState == States.Loading ? `Getting ` : ``}GeoData
                     </Button>
                 </Grid>

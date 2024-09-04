@@ -1,4 +1,5 @@
 import { uniqueId } from 'lodash';
+import { devEnv } from '../../../../../server';
 import { PublicOutlined } from '@mui/icons-material';
 import { IconBellRinging, IconLayoutDashboard, IconLogin, IconUserPlus } from '@tabler/icons-react';
 
@@ -68,7 +69,7 @@ const Menuitems = [
   },
   {
     id: uniqueId(),
-    hideOnNoUser: true,
+    hideOnNoUser: !devEnv,
     icon: IconBellRinging,
     href: pages.notifications.link,
     title: pages.notifications.title,

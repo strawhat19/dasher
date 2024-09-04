@@ -31,9 +31,9 @@ const Header = () => {
   }));
 
   return (
-    <AppBarStyled className={`header`} position={`sticky`} color={`default`}>
+    <AppBarStyled id={`header`} className={`header`} position={`sticky`} color={`default`}>
       <ToolbarStyled className={`headerToolbar`}>
-
+        
         <Stack spacing={2} direction={`row`} alignItems={`center`}>
           <IconButton
             size={`medium`}

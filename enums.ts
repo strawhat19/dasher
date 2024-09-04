@@ -1,3 +1,8 @@
+export enum NavVariants {
+    temporary = `temporary`,
+    permanent = `permanent`,
+}
+
 export enum GeoDataFormTypes {
     Locations = `Locations`,
     Coordinates = `Coordinates`,

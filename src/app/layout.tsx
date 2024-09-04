@@ -1,8 +1,6 @@
 'use client';
 
-import './theme.scss';
-import './global.scss';
-import './utility.scss';
+import './main.scss';
 
 import GlobalData from './globaldata';
 import CssBaseline from '@mui/material/CssBaseline';

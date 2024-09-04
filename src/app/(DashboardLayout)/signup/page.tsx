@@ -1,3 +1,5 @@
+'use client';
+
 import Link from 'next/link';
 import Logo from '@/app/components/logo/logo';
 import { pages } from '../layout/sidebar/MenuItems';

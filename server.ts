@@ -7,6 +7,7 @@ export const defaultTimezone = `America/New_York`;
 export const iconPNG = `Modernize-Icon-Small.png`;
 
 export const year = new Date().getFullYear();
+export const genUUID = () => Math.floor(Math.random() * 1000000);
 
 export const { OPENWEATHERAPIKEY, NEXT_PUBLIC_OPENWEATHERAPIKEY } = process.env;
 export const openWeatherAPIKey = OPENWEATHERAPIKEY || NEXT_PUBLIC_OPENWEATHERAPIKEY;
@@ -14,6 +15,11 @@ export const openWeatherAPIKey = OPENWEATHERAPIKEY || NEXT_PUBLIC_OPENWEATHERAPI
 export const convertWindSpeedFromMetersPerSecondToMilesPerHour = (speedInMS: any) => Math.floor(speedInMS * 2.237);
 export const convertTemperatureFromKelvinToCelsius = (tempInKelvin: any) => parseFloat(removeTrailingZeroDecimal(5, (tempInKelvin - 273.15)));
 export const convertTemperatureFromKelvinToFahrenheit = (tempInKelvin: any) => parseFloat(removeTrailingZeroDecimal(5, ((tempInKelvin - 273.15) * (9/5) + 32)));
+
+export const locations: any = {
+  atlanta: Atlanta,
+  default: () => locations.atlanta,
+}
 
 export const dataSize = (data?: any) => {
   let stringData = JSON.stringify(data);
@@ -37,11 +43,6 @@ export const getGeoData = async (location: string = ``) => {
   }
 }
 
-export const locations: any = {
-  atlanta: Atlanta,
-  default: () => locations.atlanta,
-}
-
 export const removeTrailingZeroDecimal = (limit: any, number: any) => {
   let num = typeof number == `string` ? parseFloat(number) : number;
   const wholeNumber = Math.trunc(num);
@@ -52,6 +53,21 @@ export const removeTrailingZeroDecimal = (limit: any, number: any) => {
     return num.toFixed(limit);
   }
 }
+
+export const dev = (item?: any, source?: any) => {
+  if (window.location.host.includes(`local`)) {
+    if (item) {
+      console.log(`Dev Log`, item);
+    } else if (item && source) {
+      console.log(`Dev Log`, item, `From`, source);
+    }
+    return true;
+  } else {
+    return false;
+  }
+}
+
+export const devEnv = dev();
 
 export const isValid = (item: any) => {
   if (typeof item == `string`) {

@@ -27,68 +27,55 @@ const MSidebar = ({
     },
   };
 
-  if (largeScreenSize) {
+  const Nav = () => {
     return (
-      <Box className={`sidebar drawerContainer`}
-        sx={{
-          width: sidebarWidth,
-          flexShrink: 0,
-        }}
-      >
-        <Drawer className={`drawer sidebarDrawer`}
-          anchor={`left`}
-          open={isSidebarOpen}
-          variant={`permanent`}
-          PaperProps={{
-            className: `sidebarPaper`,
-            sx: {
+      <Drawer 
+        anchor={`left`}
+        variant={largeScreenSize ? `permanent` : `temporary`}
+        onClose={largeScreenSize ? undefined : onSidebarClose}
+        open={largeScreenSize ? isSidebarOpen : isMobileSidebarOpen}
+        className={`drawer ${largeScreenSize ? `` : `sidebarDrawer mobileMenuDrawer`}`}
+        PaperProps={{
+          className: largeScreenSize ? `sidebarPaper` : `mobileMenuPaper`,
+          sx: {
+            ...(largeScreenSize ? {
               width: sidebarWidth - 1,
               boxSizing: `border-box`,
-              ...scrollbarStyles,
-            },
-          }}
-        >
-          <Box className={`sidebarContainer spaceBetween gap15 flex column`} sx={{ height: `100%` }}>
-            <div className={`sidebarTop w100`}>
-              <Link href={`/`} className={`link`}>
-                <Logo className={`sidebarLogoContainer`} />
-              </Link>
-              <SidebarItems />
-            </div>
-            <div className={`sidebarBottom w100`} />
-          </Box>
-        </Drawer>
-      </Box>
-    );
-  }
-
-  return (
-    <Drawer className={`sidebar drawer mobileMenuDrawer`}
-      anchor="left"
-      open={isMobileSidebarOpen}
-      onClose={onSidebarClose}
-      variant="temporary"
-      PaperProps={{
-        className: `mobileMenuPaper`,
-        sx: {
-          boxShadow: (theme) => theme.shadows[8],
-          ...scrollbarStyles,
-        },
-      }}
-    >
-      <Box className={`h100`} px={2}>
-        <Box className={`sidebarContainer spaceBetween gap15 flex column h100`}>
-          <div style={{ marginTop: 15 }} className={`sidebarTop w100`}>
+            } : {
+              boxShadow: (theme) => theme.shadows[8],
+            }),
+            ...scrollbarStyles,
+          },
+        }}
+      >
+        <nav className={`sidebarContainer spaceBetween h100 gap15 flex column`}>
+          <div className={`sidebarTop w100 ${largeScreenSize ? `` : `m15t`}`}>
             <Link href={`/`} className={`link`}>
               <Logo className={`sidebarLogoContainer`} />
             </Link>
             <SidebarItems />
           </div>
           <div className={`sidebarBottom w100`} />
+        </nav>
+      </Drawer>
+    )
+  }
+
+  if (largeScreenSize) {
+    return (
+      <aside className={`sidebar`}>
+        <Box className={`drawerContainer`} sx={{ width: sidebarWidth, flexShrink: 0 }}>
+          <Nav />
         </Box>
-      </Box>
-    </Drawer>
+      </aside>
+    );
+  }
+
+  return (
+    <aside className={`sidebar`}>
+      <Nav />
+    </aside>
   );
-};
+}
 
 export default MSidebar;
