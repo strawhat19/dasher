@@ -35,7 +35,9 @@ export default function GeoDataPage() {
       <Grid className={`foreCast geoDataGrid`} container spacing={3} alignItems={`center`}>
         {Array(6).fill(`Weather`).map((itm: any, idx) => (
           <Grid item lg={2} xs={6} key={idx}>
-            <DCard />
+            <DCard >
+              {/* {itm} */}
+            </DCard>
           </Grid>
         ))}
       </Grid>

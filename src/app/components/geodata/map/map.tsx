@@ -18,7 +18,7 @@ type MapOptions = {
 }
 
 export default function Map({
-    height = 333,
+    height = 318,
     shadow = true,
     rounded = true,
     latitude = locations.default().latitude, 

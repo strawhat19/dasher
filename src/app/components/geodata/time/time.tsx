@@ -3,27 +3,32 @@ import { useContext, useEffect } from 'react';
 import { GlobalDataContext } from '@/app/globaldata';
 import { momentTimezoneFormats } from '../../../../../server';
 
-export default function Time({updater = false}: any) {
-    let { time, location, setTime } = useContext<any>(GlobalDataContext);
-
-    useEffect(() => {
-      if (updater == true) {
-        console.log(`Time & Location`, location);
-        let currentTime = moment().tz(location.timezone).format(momentTimezoneFormats.fullDateTime);
+export default function Time({updateTimeDynamically = false}: any) {
+  let { time, location, setTime } = useContext<any>(GlobalDataContext);
+  
+  useEffect(() => {
+      let { mediumDateTime, fullDateTime } = momentTimezoneFormats;
+      const updateTime = (timezone = location.timezone, format = fullDateTime) => {
+        let currentTime = moment().tz(timezone).format(format);
         setTime(currentTime);
+        console.log(`Time & Location`, {time: currentTime, location});
+      }
+
+      updateTime(undefined, mediumDateTime);
+
+      if (updateTimeDynamically == true) {
         const intervalId = setInterval(() => {
-          currentTime = moment().tz(location.timezone).format(momentTimezoneFormats.fullDateTime);
-          setTime(currentTime);
+          updateTime();
         }, 1000);
     
         return () => clearInterval(intervalId);
       }
-    }, [updater, location, setTime])
+    }, [updateTimeDynamically, location, setTime])
   
   return <>
     <div className={`currentTime fit cityNameCountryDateTime flex end gap10`}>
       <h2 className={`cityName textOverflow`}>{location.name}, {location.country}</h2>
-      <span className={`hideOnMobile`}>-</span>
+      <span className={`hideOnMobileS`}>-</span>
       <span className={`currentTime`}>{time}</span>
     </div>
   </>

@@ -54,8 +54,40 @@ export const removeTrailingZeroDecimal = (limit: any, number: any) => {
   }
 }
 
+export const isValid = (item: any) => {
+  let itemInvalid = item == undefined || item == null;
+  if (typeof item == `string`) {
+    if (!item || item == `` || item.trim() == `` || itemInvalid) {
+      return false;
+    } else {
+      return true;
+    }
+  } else if (typeof item == `number`) {
+    if (isNaN(item) || itemInvalid) {
+      return false;
+    } else {
+      return true;
+    }
+  } else if (typeof item == `object` && item != undefined && item != null) {
+    if (Object.keys(item).length == 0 || itemInvalid) {
+      return false;
+    } else {
+      return true;
+    }
+  } else if (Array.isArray(item) && item != undefined && item != null) {
+    return item.length > 0;
+  } else {
+    if (itemInvalid) {
+      return false;
+    } else {
+      return true;
+    }
+  }
+}
+
 export const dev = (item?: any, source?: any) => {
-  if (window) {
+  let validWindow = typeof window !== undefined;
+  if (window && validWindow) {
     if (window.location) {
       if (window.location.host) {
         if (window.location.host.includes(`local`)) {
@@ -72,33 +104,3 @@ export const dev = (item?: any, source?: any) => {
 }
 
 export const devEnv = dev();
-
-export const isValid = (item: any) => {
-  if (typeof item == `string`) {
-    if (!item || item == `` || item.trim() == `` || item == undefined || item == null) {
-      return false;
-    } else {
-      return true;
-    }
-  } else if (typeof item == `number`) {
-    if (isNaN(item) || item == undefined || item == null) {
-      return false;
-    } else {
-      return true;
-    }
-  } else if (typeof item == `object` && item != undefined && item != null) {
-    if (Object.keys(item).length == 0 || item == undefined || item == null) {
-      return false;
-    } else {
-      return true;
-    }
-  } else if (Array.isArray(item) && item != undefined && item != null) {
-    return item.length > 0;
-  } else {
-    if (item == undefined || item == null) {
-      return false;
-    } else {
-      return true;
-    }
-  }
-}

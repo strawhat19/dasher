@@ -14,7 +14,7 @@ import { Link, Typography } from '@mui/material';
 
 const RecentTransactions = () => {
   return (
-    <DCard title="Recent Transactions">
+    <DCard title={`Recent Transactions`}>
       <>
         <Timeline
           className="theme-timeline"
