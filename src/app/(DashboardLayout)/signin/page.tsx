@@ -5,14 +5,14 @@ import Logo from '@/app/components/logo/logo';
 import { pages } from '../layout/sidebar/MenuItems';
 import SignInForm from '../../components/auth/SignIn';
 import { Box, Stack, Typography } from '@mui/material';
-import DashboardCard from '../components/shared/DashboardCard';
+import DCard from '../components/shared/DCard';
 // import DataGridDemo from '@/app/components/datagrid/datagrid';
 import PageContainer from '@/app/(DashboardLayout)/components/container/PageContainer';
 
 export default function Signin() {
   return (
-    <PageContainer title={pages.signin.title} description={`${pages.signin.title} Page`}>
-      <DashboardCard>
+    <PageContainer className title={pages.signin.title} description={`${pages.signin.title} Page`}>
+      <DCard className={`w100`}>
         <>
           <Box display="flex" alignItems="center" justifyContent="center">
             <Logo className={`center`} />
@@ -57,10 +57,10 @@ export default function Signin() {
             }
           />
         </>
-      </DashboardCard>
-      {/* <DashboardCard className={`m35t m35b`}>
+      </DCard>
+      {/* <DCard className={`m35t m35b`}>
         <DataGridDemo />
-      </DashboardCard> */}
+      </DCard> */}
     </PageContainer>
   );
 };

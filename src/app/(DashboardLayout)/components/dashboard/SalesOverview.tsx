@@ -4,7 +4,7 @@ import { useTheme } from '@mui/material/styles';
 import { GlobalDataContext } from '@/app/globaldata';
 import React, { useState, useEffect, useContext } from 'react';
 import { Skeleton } from '@/app/components/loading/skeleton/skeleton';
-import DashboardCard from '@/app/(DashboardLayout)/components/shared/DashboardCard';
+import DCard from '@/app/(DashboardLayout)/components/shared/DCard';
 
 const Chart = dynamic(() => import('react-apexcharts'), { ssr: false });
 
@@ -103,7 +103,7 @@ const SalesOverview = () => {
     }, []);
 
     return (
-        <DashboardCard title={`Sales Overview`} minHeight={500}>
+        <DCard title={`Sales Overview`} minHeight={500}>
             {isLoading ? (
                 <Box sx={{ height: 370, width: '100%' }}>
                     <Stack spacing={4.2} direction={`row`}>    
@@ -134,7 +134,7 @@ const SalesOverview = () => {
                     className={`salesOverviewChart`}
                 />
             )}
-        </DashboardCard>
+        </DCard>
     );
 };
 

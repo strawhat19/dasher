@@ -1,6 +1,6 @@
-import React from "react";
-import Link from "next/link";
-import { ListItemIcon, ListItem, List, styled, ListItemText, useTheme, ListItemButton } from "@mui/material";
+import React from 'react';
+import Link from 'next/link';
+import { ListItemIcon, ListItem, List, styled, ListItemText, useTheme, ListItemButton } from '@mui/material';
 
 type NavGroup = {
   [x: string]: any;
@@ -63,9 +63,10 @@ const NavItem = ({ item, level, pathDirect, onClick }: ItemType) => {
           onClick={onClick}
         >
           <ListItemIcon
+            className={`menuIcon listItemIcon`}
             sx={{
-              minWidth: "36px",
               p: "3px 0",
+              minWidth: "36px",
               color: "inherit",
             }}
           >

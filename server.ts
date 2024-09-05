@@ -55,16 +55,20 @@ export const removeTrailingZeroDecimal = (limit: any, number: any) => {
 }
 
 export const dev = (item?: any, source?: any) => {
-  if (window.location.host.includes(`local`)) {
-    if (item) {
-      console.log(`Dev Log`, item);
-    } else if (item && source) {
-      console.log(`Dev Log`, item, `From`, source);
-    }
-    return true;
-  } else {
-    return false;
-  }
+  if (window) {
+    if (window.location) {
+      if (window.location.host) {
+        if (window.location.host.includes(`local`)) {
+          if (item) {
+            console.log(`Dev Log`, item);
+          } else if (item && source) {
+            console.log(`Dev Log`, item, `From`, source);
+          }
+          return true;
+        } else return false;
+      } else return false;
+    } else return false;
+  } else return false;
 }
 
 export const devEnv = dev();

@@ -9,7 +9,7 @@ type Props = {
   children: JSX.Element | JSX.Element[];
 };
 
-const PageContainer = ({ title, description, children }: Props | any) => {
+export default function PageContainer({ title, description, children }: Props | any) {
   return (
     <HelmetProvider>
       <Helmet>
@@ -22,5 +22,3 @@ const PageContainer = ({ title, description, children }: Props | any) => {
     </HelmetProvider>
   )
 };
-
-export default PageContainer;

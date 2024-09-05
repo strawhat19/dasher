@@ -5,13 +5,13 @@ import Logo from '@/app/components/logo/logo';
 import { pages } from '../layout/sidebar/MenuItems';
 import SignUpForm from '../../components/auth/SignUp';
 import { Box, Typography, Stack } from '@mui/material';
-import DashboardCard from '../components/shared/DashboardCard';
+import DCard from '../components/shared/DCard';
 import PageContainer from '@/app/(DashboardLayout)/components/container/PageContainer';
 
 export default function SignUp() {
   return (
     <PageContainer title={pages.signup.title} description={`${pages.signup.title} Page`}>
-      <DashboardCard>
+      <DCard>
         <>
           <Box display="flex" alignItems="center" justifyContent="center">
             <Logo className={`center`} />
@@ -56,7 +56,7 @@ export default function SignUp() {
             }
           />
         </>
-      </DashboardCard>
+      </DCard>
     </PageContainer>
   )
 };

@@ -1,5 +1,5 @@
 
-import DashboardCard from '@/app/(DashboardLayout)/components/shared/DashboardCard';
+import DCard from '@/app/(DashboardLayout)/components/shared/DCard';
 import {
   Timeline,
   TimelineItem,
@@ -14,7 +14,7 @@ import { Link, Typography } from '@mui/material';
 
 const RecentTransactions = () => {
   return (
-    <DashboardCard title="Recent Transactions">
+    <DCard title="Recent Transactions">
       <>
         <Timeline
           className="theme-timeline"
@@ -95,7 +95,7 @@ const RecentTransactions = () => {
           </TimelineItem>
         </Timeline>
       </>
-    </DashboardCard>
+    </DCard>
   );
 };
 

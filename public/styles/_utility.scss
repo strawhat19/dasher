@@ -91,6 +91,7 @@
 .ttu { text-transform: uppercase; }
 .cursorPointer { cursor: pointer; }
 .ttl { text-transform: lowercase; }
+.zero { @extend .m0; @extend .p0; }
 .ttc { text-transform: capitalize; }
 .text-center { text-align: center; }
 .bgTrans { background: transparent; }
@@ -107,15 +108,16 @@
 .mb15I { margin-bottom: 15px !important; }
 .fit {  @extend .fitMin; @extend .fitMax; }
 .pointerEventsNone { pointer-events: none; }
-.topSpace { padding-top: var(--sideSpace); }
-.leftSpace { padding-left: var(--sideSpace); }
-.rightSpace { padding-right: var(--sideSpace); }
+.topSpace { padding-top: var(--space); }
+.leftSpace { padding-left: var(--space); }
+.rightSpace { padding-right: var(--space); }
 .mauto { margin-left: auto; margin-right: auto; }
-.bottomSpace { padding-bottom: var(--sideSpace); }
+.bottomSpace { padding-bottom: var(--space); }
 .space { @extend .vertSpace; @extend .sideSpace; }
 .vertSpace { @extend .topSpace; @extend .bottomSpace; }
 .sideSpace { @extend .leftSpace; @extend .rightSpace; }
 .link { color: inherit; text-decoration: none !important; }
+.zeroImportant { @extend .m0Important; @extend .p0Important; }
 .fitMin { width: fit-content !important;  min-width: fit-content !important; height: fit-content !important;  min-height: fit-content !important; }
 .fitMax { width: fit-content !important;  max-width: fit-content !important; height: fit-content !important;  max-height: fit-content !important; }
 
@@ -159,7 +161,7 @@
 .alignEnd { align-items: flex-end; }
 .start { justify-content: flex-start; }
 .alignStart { align-items: flex-start; }
-.gapSpace { grid-gap: var(--sideSpace); }
+.gapSpace { grid-gap: var(--space); }
 .column { flex-direction: column !important; }
 .spaceBetween { justify-content: space-between; }
 .row {

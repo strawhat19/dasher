@@ -8,7 +8,7 @@ import {
     TableRow,
     Chip
 } from '@mui/material';
-import DashboardCard from '@/app/(DashboardLayout)//components/shared/DashboardCard';
+import DCard from '@/app/(DashboardLayout)//components/shared/DCard';
 
 const products = [
     {
@@ -53,7 +53,7 @@ const products = [
 const ProductPerformance = () => {
     return (
 
-        <DashboardCard title="Product Performance">
+        <DCard title="Product Performance">
             <Box sx={{ overflow: 'auto', width: { xs: '280px', sm: 'auto' } }}>
                 <Table
                     aria-label="simple table"
@@ -150,7 +150,7 @@ const ProductPerformance = () => {
                     </TableBody>
                 </Table>
             </Box>
-        </DashboardCard>
+        </DCard>
     );
 };
 

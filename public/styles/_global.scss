@@ -30,8 +30,20 @@
     }
 }
 
-@media (max-width: 768px) {
-    .sidebarBottom {
+@media (max-width: $mobileMenuBreakPointL) {
+    .hideOnMobileL {
+        display: none;
+    }
+}
+
+@media (max-width: $mobileMenuBreakPointM) {
+    .hideOnMobileM {
+        display: none;
+    }
+}
+
+@media (max-width: $mobileMenuBreakPointS) {
+    .hideOnMobileS {
         display: none;
     }
     .signInOptionsRow {
@@ -43,7 +55,7 @@
 
 @media (max-width: 600px) {
     :root {
-        --sideSpace: 16px;
+        --space: 16px;
     }
 }
 

@@ -6,10 +6,10 @@ import NavGroup from './NavGroup/NavGroup';
 import { usePathname } from 'next/navigation';
 import { GlobalDataContext } from '@/app/globaldata';
 
-const SidebarItems = () => {
+export default function SidebarItems() {
   const pathname = usePathname();
   const pathDirect = pathname;
-
+  
   let { user, isMobileSidebarOpen, setMobileSidebarOpen } = useContext<any>(GlobalDataContext);
 
   return (
@@ -33,5 +33,3 @@ const SidebarItems = () => {
     </Box>
   );
 };
-
-export default SidebarItems;

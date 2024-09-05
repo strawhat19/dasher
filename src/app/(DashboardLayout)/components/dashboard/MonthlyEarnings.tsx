@@ -4,7 +4,7 @@ import { useTheme } from '@mui/material/styles';
 import { Stack, Typography, Avatar, Fab } from '@mui/material';
 const Chart = dynamic(() => import('react-apexcharts'), { ssr: false });
 import { IconArrowDownRight, IconCurrencyDollar } from '@tabler/icons-react';
-import DashboardCard from '@/app/(DashboardLayout)/components/shared/DashboardCard';
+import DCard from '@/app/(DashboardLayout)/components/shared/DCard';
 
 const MonthlyEarnings = () => {
   const theme = useTheme();
@@ -50,7 +50,7 @@ const MonthlyEarnings = () => {
   ];
 
   return (
-    <DashboardCard
+    <DCard
       title={`Monthly Earnings`}
       action={
         <Fab color="secondary" size="medium" sx={{color: '#ffffff'}}>
@@ -77,7 +77,7 @@ const MonthlyEarnings = () => {
           </Typography>
         </Stack>
       </>
-    </DashboardCard>
+    </DCard>
   );
 };
 

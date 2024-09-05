@@ -3,7 +3,7 @@ import { year } from '../../../../../server';
 import { useTheme } from '@mui/material/styles';
 import { IconArrowUpLeft } from '@tabler/icons-react';
 import { Grid, Stack, Typography, Avatar } from '@mui/material';
-import DashboardCard from '@/app/(DashboardLayout)/components/shared/DashboardCard';
+import DCard from '@/app/(DashboardLayout)/components/shared/DCard';
 
 const Chart = dynamic(() => import('react-apexcharts'), { ssr: false });
 
@@ -62,7 +62,7 @@ const YearlyBreakup = () => {
   };
 
   return (
-    <DashboardCard title={`Yearly Breakup`}>
+    <DCard title={`Yearly Breakup`}>
       <Grid container spacing={3}>
         <Grid item xs={7} sm={7}>
           <Typography variant="h3" fontWeight="700">
@@ -108,7 +108,7 @@ const YearlyBreakup = () => {
           />
         </Grid>
       </Grid>
-    </DashboardCard>
+    </DCard>
   );
 };
 
