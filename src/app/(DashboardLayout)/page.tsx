@@ -9,7 +9,7 @@ import MonthlyEarnings from '@/app/(DashboardLayout)/components/dashboard/Monthl
 import RecentTransactions from '@/app/(DashboardLayout)/components/dashboard/RecentTransactions';
 import ProductPerformance from '@/app/(DashboardLayout)/components/dashboard/ProductPerformance';
 
-const Dashboard = () => {
+export default function Dashboard() {
   return (
     <PageContainer title={`Dashboard`} description={`Dashboard Page`}>
       <Box>
@@ -41,5 +41,3 @@ const Dashboard = () => {
     </PageContainer>
   )
 }
-
-export default Dashboard;

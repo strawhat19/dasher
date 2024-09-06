@@ -11,7 +11,7 @@ import PageContainer from '@/app/(DashboardLayout)/components/container/PageCont
 export default function SignUp() {
   return (
     <PageContainer title={pages.signup.title} description={`${pages.signup.title} Page`}>
-      <DCard>
+      <DCard className={`w100`}>
         <>
           <Box display="flex" alignItems="center" justifyContent="center">
             <Logo className={`center`} />

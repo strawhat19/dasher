@@ -43,7 +43,7 @@ export default function SignUpForm({ title, subtitle, subtext }: registerType) {
                     <CustomTextField id="password" variant="outlined" fullWidth />
                 </Stack>
     
-                <Button color="primary" variant="contained" size="large" fullWidth component={Link} href={pages.signup.link}>
+                <Button className={`button`} color="primary" variant="contained" size="large" fullWidth component={Link} href={pages.signup.link}>
                     {pages.signup.title}
                 </Button>
             </Box>

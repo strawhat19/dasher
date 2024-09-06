@@ -7,7 +7,7 @@ $mobileMenuBreakPointL: 1200px;
     --bg: #041b44;
     --teal: #3fa5e3;
     --main: #5D87FF;
-    --cardBg: #1c3c81;
+    --cardBg: #04397b;
     --borderRadius: 7px;
     --fontColor: white;
     --darkSub: #1c2a49;
@@ -23,6 +23,7 @@ $mobileMenuBreakPointL: 1200px;
     --iconLeftOld: #615DFF;
     --lightBorder: #e5eaef;
     --defFontColor: #adb0bb;
+    --cardBgViolet: #1c3c81;
     --defaultColor: #2A3547;
     --tealSuperLight: #3dd9eb;
     --drawerBorderOld: #152a37;
@@ -180,10 +181,11 @@ body {
             }
         }
     }
+
     &:has(.darkTheme) {
-        background: var(--bg) !important;
         --main: var(--altMain);
         --labelColor: var(--iconRight);
+        background: var(--bg) !important;
         // Sidebar & Top Bar
         header {
             border-bottom: 1px solid var(--drawerBorder);
@@ -224,6 +226,9 @@ body {
             background: var(--darkMain);
         }
         // Navigation Links & Buttons
+        .button {
+            background: var(--altMain);
+        }
         a, .actionBtn {
             @extend .darkItem;
         }

@@ -18,6 +18,7 @@ const DCard = ({
   subtitle,
   children,
   minHeight,
+  container,
   middlecontent,
   id = undefined,
   className = `dCard`,

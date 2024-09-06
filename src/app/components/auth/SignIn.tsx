@@ -77,6 +77,7 @@ export default function SignInForm({ title, subtitle, subtext }: loginType) {
   
       <Box>
         <Button
+          className={`button`}
           color="primary"
           variant="contained"
           size="large"

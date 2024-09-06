@@ -86,21 +86,26 @@ export const isValid = (item: any) => {
 }
 
 export const dev = (item?: any, source?: any) => {
-  let validWindow = typeof window !== undefined;
-  if (window && validWindow) {
-    if (window.location) {
-      if (window.location.host) {
-        if (window.location.host.includes(`local`)) {
-          if (item) {
-            console.log(`Dev Log`, item);
-          } else if (item && source) {
-            console.log(`Dev Log`, item, `From`, source);
-          }
-          return true;
-        } else return false;
-      } else return false;
-    } else return false;
-  } else return false;
+  let isDev = process.env.NODE_ENV == `development`;
+  let validWindow = typeof window !== undefined && typeof window != `undefined`;
+  if (validWindow) {
+    if (window) {
+      if (window.location) {
+        if (window.location.host) {
+          if (window.location.host.includes(`local`)) {
+            if (item) {
+              console.log(`Dev Log`, item);
+            } else if (item && source) {
+              console.log(`Dev Log`, item, `From`, source);
+            }
+            return true;
+          } else return isDev;
+        } else return isDev;
+      } else return isDev;
+    } else return isDev;
+  } else {
+    return isDev;
+  }
 }
 
 export const devEnv = dev();

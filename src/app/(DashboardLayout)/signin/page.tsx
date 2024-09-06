@@ -2,16 +2,23 @@
 
 import Link from 'next/link';
 import Logo from '@/app/components/logo/logo';
+import DCard from '../components/shared/DCard';
 import { pages } from '../layout/sidebar/MenuItems';
 import SignInForm from '../../components/auth/SignIn';
 import { Box, Stack, Typography } from '@mui/material';
-import DCard from '../components/shared/DCard';
-// import DataGridDemo from '@/app/components/datagrid/datagrid';
 import PageContainer from '@/app/(DashboardLayout)/components/container/PageContainer';
 
-export default function Signin() {
+export default function Signin({}: any) {
   return (
-    <PageContainer className title={pages.signin.title} description={`${pages.signin.title} Page`}>
+    <PageContainer title={pages.signin.title} description={`${pages.signin.title} Page`}>
+      {/* <Grid container spacing={3} alignItems={`center`}>
+        <Grid item xs={11}>
+          <DCard />
+        </Grid>
+        <Grid item xs={1}>
+          <DCard />
+        </Grid>
+      </Grid> */}
       <DCard className={`w100`}>
         <>
           <Box display="flex" alignItems="center" justifyContent="center">
