@@ -3,12 +3,12 @@ import { NextRequest, NextResponse } from 'next/server';
 import { 
   isValid, 
   defaultTimezone, 
-  openWeatherAPIKey,
+  openWeatherAPIKey, 
   momentTimezoneFormats, 
   convertTemperatureFromKelvinToCelsius, 
   convertTemperatureFromKelvinToFahrenheit, 
-  convertWindSpeedFromMetersPerSecondToMilesPerHour,
-} from '../../../../../server';
+  convertWindSpeedFromMetersPerSecondToMilesPerHour, 
+} from '@/app/shared/library/common/constants';
 
 export async function GET(request: NextRequest, { params }: { params: { location: string } }) {
   const { location } = params || request;
