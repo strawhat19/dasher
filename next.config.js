@@ -1,6 +1,52 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: true,
+  async rewrites() {
+    return [
+      { source: `/about`, destination: `/pages/about`, },
+      { source: `/signin`, destination: `/pages/signin`, },
+      { source: `/signup`, destination: `/pages/signup`, },
+      { source: `/contact`, destination: `/pages/contact`, },
+      { source: `/geodata`, destination: `/pages/geodata`, },
+      { source: `/profile`, destination: `/pages/profile`, },
+      { source: `/settings`, destination: `/pages/settings`, },
+      { source: `/notifications`, destination: `/pages/notifications`, },
+    ];
+  },
+  async redirects() {
+    return [
+      // Sign In
+      { source: `/log`, destination: `/signin`, permanent: true },
+      { source: `/sign`, destination: `/signin`, permanent: true },
+      { source: `/login`, destination: `/signin`, permanent: true },
+      { source: `/log-in`, destination: `/signin`, permanent: true },
+      { source: `/sign-in`, destination: `/signin`, permanent: true },
+      // Sign Up
+      { source: `/sign-up`, destination: `/signup`, permanent: true },
+      { source: `/register`, destination: `/signup`, permanent: true },
+      { source: `/subscribe`, destination: `/signup`, permanent: true },
+      // Profile
+      { source: `/edit`, destination: `/profile`, permanent: true },
+      { source: `/account`, destination: `/profile`, permanent: true },
+      { source: `/preferences`, destination: `/profile`, permanent: true },
+      // About
+      { source: `/info`, destination: `/about`, permanent: true },
+      { source: `/aboutus`, destination: `/about`, permanent: true },
+      { source: `/aboutme`, destination: `/about`, permanent: true },
+      { source: `/company`, destination: `/about`, permanent: true },
+      { source: `/about-us`, destination: `/about`, permanent: true },
+      { source: `/about-me`, destination: `/about`, permanent: true },
+      { source: `/portfolio`, destination: `/about`, permanent: true },
+      // Contact
+      { source: `/messages`, destination: `/contact`, permanent: true },
+      { source: `/contactus`, destination: `/contact`, permanent: true },
+      { source: `/contactme`, destination: `/contact`, permanent: true },
+      { source: `/contact-us`, destination: `/contact`, permanent: true },
+      { source: `/contact-me`, destination: `/contact`, permanent: true },
+      { source: `/getintouch`, destination: `/contact`, permanent: true },
+      { source: `/get-in-touch`, destination: `/contact`, permanent: true },
+    ]
+  }
 };
 
 module.exports = nextConfig;

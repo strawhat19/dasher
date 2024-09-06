@@ -2,7 +2,7 @@ import Settings from './Profile';
 import PropTypes from 'prop-types';
 import React, { useContext } from 'react';
 import { IconMenu } from '@tabler/icons-react';
-import { GlobalDataContext } from '@/app/globaldata';
+import { SharedDatabase } from '@/app/shared/shared';
 import { Brightness7TwoTone, NightsStayTwoTone } from '@mui/icons-material';
 import { Box, AppBar, Toolbar, styled, Stack, IconButton, Tooltip, Button, useMediaQuery } from '@mui/material';
 
@@ -13,7 +13,7 @@ const Header = () => {
     pageTitle,
     darkMode, setDarkMode, 
     isMobileSidebarOpen, setMobileSidebarOpen, 
-  } = useContext<any>(GlobalDataContext);
+  } = useContext<any>(SharedDatabase);
 
   const ToolbarStyled = styled(Toolbar)(({ theme }) => ({
     width: `100%`,

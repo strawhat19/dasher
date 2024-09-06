@@ -1,7 +1,12 @@
 import Link from 'next/link';
-import { Drawer } from '@mui/material';
+import NavItem from './NavItem';
+import NavGroup from './NavGroup';
+import { useContext } from 'react';
+import { routes } from '@/app/routes/routes';
+import { usePathname } from 'next/navigation';
 import Logo from '@/app/components/logo/logo';
-import SidebarItems from '../../layout/sidebar/SidebarItems';
+import { Box, Drawer, List } from '@mui/material';
+import { SharedDatabase } from '@/app/shared/shared';
 
 export class NavOptions {
   sidebarWidth: any;
@@ -16,6 +21,34 @@ export class NavOptions {
   }
 }
 
+export const Links = [
+  {
+    navlabel: true,
+    subheader: `Home`,
+  },
+  routes.home,
+  {
+    navlabel: true,
+    subheader: `About`,
+  },
+  routes.about,
+  routes.contact,
+  {
+    navlabel: true,
+    subheader: `API's`,
+  },
+  routes.geodata,
+  {
+    navlabel: true,
+    subheader: `Settings`,
+  },
+  routes.signin,
+  routes.signup,
+  routes.profile,
+  routes.settings,
+  routes.notifications,
+];
+
 export default function Nav({
   sidebarWidth,
   isSidebarOpen,
@@ -25,6 +58,11 @@ export default function Nav({
   largeScreenSize,
   isMobileSidebarOpen,
 }: NavOptions) {
+  const pathname = usePathname();
+  const pathDirect = pathname;
+
+  let { user, setMobileSidebarOpen } = useContext<any>(SharedDatabase);
+
   return (
     <Drawer 
       anchor={anchor}
@@ -50,7 +88,24 @@ export default function Nav({
           <Link href={`/`} className={`link`}>
             <Logo className={`sidebarLogoContainer`} />
           </Link>
-          <SidebarItems />
+          <Box className={`sidebarItems`} sx={{ px: 3 }}>
+            <List className={`sidebarNav`} component={`div`} sx={{ pt: 0 }}>
+              {Links.filter((item: any) => item?.auth ? item?.auth == true ? user : false : true).map((item: any) => {
+                if (item?.subheader) {
+                  return <NavGroup item={item} key={item?.subheader} />;
+                } else {
+                  return (
+                    <NavItem
+                      item={item}
+                      key={item.id}
+                      pathDirect={pathDirect}
+                      onClick={() => setMobileSidebarOpen(!isMobileSidebarOpen)}
+                    />
+                  );
+                }
+              })}
+            </List>
+          </Box>
         </div>
         <div className={`sidebarBottom w100 hideOnMobileS`} />
       </nav>

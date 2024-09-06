@@ -2,10 +2,10 @@
 
 import './map.scss';
 import { useContext } from 'react';
-import { locations } from '../../../../../server';
-import { GlobalDataContext } from '@/app/globaldata';
+import { SharedDatabase } from '@/app/shared/shared';
 import { Skeleton } from '../../loading/skeleton/skeleton';
-import { GoogleMapZoomLevels, States } from '../../../../../enums';
+import { locations } from '@/app/shared/library/common/constants';
+import { GoogleMapZoomLevels, States } from '@/app/shared/library/common/enums';
 
 type MapOptions = {
     height?: number;
@@ -25,7 +25,7 @@ export default function Map({
     longitude = locations.default().longitude, 
     initialZoomLevel = GoogleMapZoomLevels.Region,
 }: MapOptions) {    
-    let { geoDataState } = useContext<any>(GlobalDataContext);
+    let { geoDataState } = useContext<any>(SharedDatabase);
     const googleMapsEmbedURLDomain = `https://www.google.com/maps`;
     const googleMapsEmbedURLMapDefaultOptions = `2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0`;
     return <>

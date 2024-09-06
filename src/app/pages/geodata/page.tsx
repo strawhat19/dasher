@@ -2,22 +2,22 @@
 
 import { useContext } from 'react';
 import { Grid } from '@mui/material';
-import { devEnv } from '../../../../server';
+import { routes } from '@/app/routes/routes';
 import Map from '@/app/components/geodata/map/map';
-import { pages } from '../layout/sidebar/MenuItems';
-import { GlobalDataContext } from '@/app/globaldata';
+import { SharedDatabase } from '@/app/shared/shared';
 import Time from '@/app/components/geodata/time/time';
+import { devEnv } from '@/app/shared/library/common/constants';
 import GeoDataForm from '@/app/components/geodata/form/geodataform';
 import DCard from '@/app/(DashboardLayout)/components/shared/DCard';
 import PageContainer from '@/app/(DashboardLayout)/components/container/PageContainer';
 
 export default function GeoDataPage() {
-  let { location } = useContext<any>(GlobalDataContext);
+  let { location } = useContext<any>(SharedDatabase);
   return <>
-    <PageContainer title={pages.geodata.title} description={`${pages.geodata.title} Page`}>
+    <PageContainer title={routes.geodata.title} description={`${routes.geodata.title} Page`}>
       <Grid className={`geoDataGrid`} container spacing={3} alignItems={`center`}>
         <Grid className={`geoDataGridItem`} item xs={12} md={8}>
-          <DCard id={`geoDataCard`} className={`geoDataCard`} title={pages.geodata.title} action={<Time updater={!devEnv} />}>
+          <DCard id={`geoDataCard`} className={`geoDataCard`} title={routes.geodata.title} action={<Time updater={!devEnv} />}>
             <GeoDataForm />
             <Map latitude={location.latitude} longitude={location.longitude} />
           </DCard>

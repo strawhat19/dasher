@@ -1,5 +1,4 @@
 import PropTypes from 'prop-types';
-// mui imports
 import { ListSubheader, styled, Theme } from '@mui/material';
 
 type NavGroup = {
@@ -11,7 +10,7 @@ interface ItemType {
   item: NavGroup;
 }
 
-const NavGroup = ({ item }: ItemType) => {
+export default function NavGroup({ item }: ItemType) {
   const ListSubheaderStyle = styled((props: Theme | any) => <ListSubheader disableSticky {...props} />)(
     ({ theme }) => ({
       ...theme.typography.overline,
@@ -31,5 +30,3 @@ const NavGroup = ({ item }: ItemType) => {
 NavGroup.propTypes = {
   item: PropTypes.object,
 };
-
-export default NavGroup;

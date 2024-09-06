@@ -1,10 +1,10 @@
 import moment from 'moment-timezone';
 import { useContext, useEffect } from 'react';
-import { GlobalDataContext } from '@/app/globaldata';
-import { momentTimezoneFormats } from '../../../../../server';
+import { SharedDatabase } from '@/app/shared/shared';
+import { momentTimezoneFormats } from '@/app/shared/library/common/constants';
 
 export default function Time({updateTimeDynamically = false}: any) {
-  let { time, location, setTime } = useContext<any>(GlobalDataContext);
+  let { time, location, setTime } = useContext<any>(SharedDatabase);
   
   useEffect(() => {
       let { mediumDateTime, fullDateTime } = momentTimezoneFormats;

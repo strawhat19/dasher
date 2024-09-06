@@ -21,7 +21,7 @@ interface ItemType {
   pathDirect: string;
 }
 
-const NavItem = ({ item, level, pathDirect, onClick }: ItemType) => {
+export default function NavItem({ item, level, pathDirect, onClick }: ItemType) {
   const Icon = item.icon;
   const theme = useTheme();
   const itemIcon = <Icon stroke={1.5} size="1.3rem" />;
@@ -80,5 +80,3 @@ const NavItem = ({ item, level, pathDirect, onClick }: ItemType) => {
     </List>
   );
 };
-
-export default NavItem;

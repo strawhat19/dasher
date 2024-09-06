@@ -1,4 +1,4 @@
-import { Atlanta } from './database';
+import { Atlanta } from '../../database/database';
 
 export const logo = `dark-logo.svg`;
 export const brandName = `Dasher`;

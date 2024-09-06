@@ -1,7 +1,7 @@
 'use client';
 
-import { brandName, iconPNG } from '../../../../../server';
 import { Helmet, HelmetProvider } from 'react-helmet-async';
+import { brandName, iconPNG } from '@/app/shared/library/common/constants';
 
 type Props = {
   title?: string;

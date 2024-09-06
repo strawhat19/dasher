@@ -1,11 +1,11 @@
 'use client';
 
 import { useContext } from 'react';
-import { States } from '../../../../../enums';
 import Spinner from '../../loading/spinner/spinner';
-import { GlobalDataContext } from '@/app/globaldata';
 import { PublicOutlined } from '@mui/icons-material';
-import { getGeoData, locations } from '../../../../../server';
+import { SharedDatabase } from '@/app/shared/shared';
+import { States } from '@/app/shared/library/common/enums';
+import { getGeoData, locations } from '@/app/shared/library/common/constants';
 import { Button, Grid, Stack, Theme, useMediaQuery, useTheme } from '@mui/material';
 import CustomTextField from '@/app/(DashboardLayout)/components/forms/theme-elements/CustomTextField';
 
@@ -22,7 +22,7 @@ export const minsAndMaxes = {
 
 export default function GeoDataForm({}: any) {
     const theme = useTheme<Theme>();
-    let { setLocation, geoDataState, setGeoDataState } = useContext<any>(GlobalDataContext);
+    let { setLocation, geoDataState, setGeoDataState } = useContext<any>(SharedDatabase);
 
     const smallScreenSize = useMediaQuery(theme.breakpoints.down(`sm`));
     const extraSmallScreenSize = useMediaQuery(theme.breakpoints.down(`xs`));

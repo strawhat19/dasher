@@ -1,8 +1,8 @@
 import React from 'react';
 import Link  from 'next/link';
 import { Stack } from '@mui/system';
+import { routes } from '@/app/routes/routes';
 import { Box, Typography, Button } from '@mui/material';
-import { pages } from '@/app/(DashboardLayout)/layout/sidebar/MenuItems';
 import CustomTextField from '@/app/(DashboardLayout)/components/forms/theme-elements/CustomTextField';
 
 interface registerType {
@@ -43,8 +43,8 @@ export default function SignUpForm({ title, subtitle, subtext }: registerType) {
                     <CustomTextField id="password" variant="outlined" fullWidth />
                 </Stack>
     
-                <Button className={`button`} color="primary" variant="contained" size="large" fullWidth component={Link} href={pages.signup.link}>
-                    {pages.signup.title}
+                <Button className={`button`} color="primary" variant="contained" size="large" fullWidth component={Link} href={routes.signup.href}>
+                    {routes.signup.title}
                 </Button>
             </Box>
     

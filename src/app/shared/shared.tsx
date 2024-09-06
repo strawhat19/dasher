@@ -1,13 +1,13 @@
 'use client';
 
-import { States } from '../../enums';
-import { Atlanta } from '../../database';
-import Logo from './components/logo/logo';
+import Logo from '../components/logo/logo';
+import { Atlanta } from './database/database';
+import { States } from './library/common/enums';
 import { createContext, useState } from 'react';
 
-export const GlobalDataContext = createContext({});
+export const SharedDatabase = createContext({});
 
-export default function GlobalData({ children }: { children: React.ReactNode; }) {
+export default function SharedData({ children }: { children: React.ReactNode; }) {
     let [user, setUser] = useState(null);
     let [darkMode, setDarkMode] = useState(true);
     let [pageTitle, setPageTitle] = useState(<Logo />);
@@ -18,7 +18,7 @@ export default function GlobalData({ children }: { children: React.ReactNode; })
     let [time, setTime] = useState(`Sunday, September 1st, 5:33:06 am`);
 
     return <>
-        <GlobalDataContext.Provider value={{
+        <SharedDatabase.Provider value={{
             user, setUser, 
             time, setTime,
             location, setLocation,
@@ -29,6 +29,6 @@ export default function GlobalData({ children }: { children: React.ReactNode; })
             isMobileSidebarOpen, setMobileSidebarOpen, 
         }}>
             {children}
-        </GlobalDataContext.Provider>
+        </SharedDatabase.Provider>
     </>
 }

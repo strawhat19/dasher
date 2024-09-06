@@ -153,163 +153,161 @@ input {
 }
 
 // Theme Colors
-body {
-    &:has(.lightTheme) {
-        --darkMain: var(--cardBg);
-        --labelColor: var(--main);
-        --drawerBorder: var(--fontColor);
-        header {
-            border-bottom: 1px solid var(--drawerBorder);
+.light {
+    --darkMain: var(--cardBg);
+    --labelColor: var(--main);
+    --drawerBorder: var(--fontColor);
+    header {
+        border-bottom: 1px solid var(--drawerBorder);
+    }
+    .logoContainer strong {
+        color: var(--darkMain) !important;
+    }
+    .sidebarPaper {
+        border-color: var(--drawerBorder);
+    }
+    .MuiListSubheader-root {
+        color: var(--labelColor);
+    }
+    .MuiInputLabel-root {
+        color: var(--labelColor);
+    }
+    button {
+        &:hover {
+            .MuiTouchRipple-root {
+                background: var(--lightRipple);
+            }
         }
-        .logoContainer strong {
-            color: var(--darkMain) !important;
-        }
-        .sidebarPaper {
-            border-color: var(--drawerBorder);
-        }
-        .MuiListSubheader-root {
-            color: var(--labelColor);
-        }
-        .MuiInputLabel-root {
-            color: var(--labelColor);
-        }
-        button {
-            &:hover {
-                .MuiTouchRipple-root {
-                    background: var(--lightRipple);
+    }
+}
+
+.dark {
+    --main: var(--altMain);
+    --labelColor: var(--iconRight);
+    background: var(--bg) !important;
+    // Sidebar & Top Bar
+    header {
+        border-bottom: 1px solid var(--drawerBorder);
+    }
+    .fontColor {
+        color: var(--fontColor);
+    }
+    // Menu
+    // Menu Sub Headers
+    .MuiListSubheader-root {
+        color: var(--labelColor);
+    }
+    // Menu Active
+    .MuiListItem-root {
+        .MuiButtonBase-root {
+            .menuIcon {
+                color: var(--labelColor);
+                transition: none !important;
+            }
+            &.Mui-selected {
+                background: var(--main);
+                &:not(:hover) {
+                    .menuIcon {
+                        color: var(--cardBg);
+                    }
                 }
             }
         }
     }
-
-    &:has(.darkTheme) {
-        --main: var(--altMain);
-        --labelColor: var(--iconRight);
-        background: var(--bg) !important;
-        // Sidebar & Top Bar
-        header {
-            border-bottom: 1px solid var(--drawerBorder);
-        }
-        .fontColor {
-            color: var(--fontColor);
-        }
-        // Menu
-        // Menu Sub Headers
-        .MuiListSubheader-root {
-            color: var(--labelColor);
-        }
-        // Menu Active
-        .MuiListItem-root {
-            .MuiButtonBase-root {
-                .menuIcon {
-                    color: var(--labelColor);
-                    transition: none !important;
-                }
-                &.Mui-selected {
-                    background: var(--main);
-                    &:not(:hover) {
-                        .menuIcon {
-                            color: var(--cardBg);
-                        }
-                    }
-                }
-            }
-        }
-        h1, h2, h3, h4, h5, h6, p {
-            color: var(--fontColor);
-        }
-        .MuiInputLabel-root {
-            color: var(--labelColor);
-        }
-        input {
-            color: var(--fontColor);
-            background: var(--darkMain);
-        }
-        // Navigation Links & Buttons
-        .button {
-            background: var(--altMain);
-        }
-        a, .actionBtn {
+    h1, h2, h3, h4, h5, h6, p {
+        color: var(--fontColor);
+    }
+    .MuiInputLabel-root {
+        color: var(--labelColor);
+    }
+    input {
+        color: var(--fontColor);
+        background: var(--darkMain);
+    }
+    // Navigation Links & Buttons
+    .button {
+        background: var(--altMain);
+    }
+    a, .actionBtn {
+        @extend .darkItem;
+    }
+    .profileMenu {
+        li, .MuiListItemIcon-root {
             @extend .darkItem;
         }
-        .profileMenu {
-            li, .MuiListItemIcon-root {
-                @extend .darkItem;
-            }
-        }
-        .noAccountBox {
-            background: var(--darkMain) !important;
-            .MuiButton-root {
-                background: var(--teal);
-                &:hover {
-                    background: var(--bg) !important;
-                }
-            }
-        }
-        .geoDataFormTypesToggleBtn {
-            color: var(--fontColor);
-        }
-        button {
-            &:hover {
-                .MuiTouchRipple-root {
-                    background: var(--darkRipple);
-                }
-            }
-        }
-        .drawerContainer {
-            border-right: 1px solid var(--drawerBorder);
-        }
-        .logoContainer {
-            color: var(--fontColor);
-        }
-        .darkItem {
-            transition: var(--transition);
-            color: var(--fontColor) !important;
-            &:hover {
-                background: var(--darkMain) !important;
-            }
-        }
-        .apexcharts-menu-icon {
-            svg {
-                path {
-                    &:last-child {
-                        fill: var(--fontColor);
-                    }
-                }
-            }
-        }
-        .sidebarPaper, .mobileMenuPaper {
-            border-color: var(--cardBg);
-        }
-        // Cards & Paper Sheets
-        .MuiContainer-root, .apexcharts-tooltip, .apexcharts-tooltip-title {
-            background: var(--bg) !important;
-        }
-        .apexcharts-menu {
-            background: var(--cardBg);
-            border-color: var(--teal);
-            .apexcharts-menu-item {
-                transition: var(--transition);
-                &:hover {
-                    background: var(--darkMain);
-                }
-            }
-        }
-        .apexcharts-tooltip, .apexcharts-theme-dark {
-            border: 1px solid var(--teal) !important;
-            .apexcharts-tooltip-title {
-                border-bottom-color: var(--teal) !important;
-            }
-        }
-        .MuiPaper-root {
-            color: var(--fontColor) !important;
-            background: var(--cardBg) !important;
-        }
-        th, td {
-            border-color: var(--teal) !important;
-        }
-        .MuiTimelineConnector-root {
+    }
+    .noAccountBox {
+        background: var(--darkMain) !important;
+        .MuiButton-root {
             background: var(--teal);
+            &:hover {
+                background: var(--bg) !important;
+            }
         }
+    }
+    .geoDataFormTypesToggleBtn {
+        color: var(--fontColor);
+    }
+    button {
+        &:hover {
+            .MuiTouchRipple-root {
+                background: var(--darkRipple);
+            }
+        }
+    }
+    .drawerContainer {
+        border-right: 1px solid var(--drawerBorder);
+    }
+    .logoContainer {
+        color: var(--fontColor);
+    }
+    .darkItem {
+        transition: var(--transition);
+        color: var(--fontColor) !important;
+        &:hover {
+            background: var(--darkMain) !important;
+        }
+    }
+    .apexcharts-menu-icon {
+        svg {
+            path {
+                &:last-child {
+                    fill: var(--fontColor);
+                }
+            }
+        }
+    }
+    .sidebarPaper, .mobileMenuPaper {
+        border-color: var(--cardBg);
+    }
+    // Cards & Paper Sheets
+    .MuiContainer-root, .apexcharts-tooltip, .apexcharts-tooltip-title {
+        background: var(--bg) !important;
+    }
+    .apexcharts-menu {
+        background: var(--cardBg);
+        border-color: var(--teal);
+        .apexcharts-menu-item {
+            transition: var(--transition);
+            &:hover {
+                background: var(--darkMain);
+            }
+        }
+    }
+    .apexcharts-tooltip, .apexcharts-theme-dark {
+        border: 1px solid var(--teal) !important;
+        .apexcharts-tooltip-title {
+            border-bottom-color: var(--teal) !important;
+        }
+    }
+    .MuiPaper-root {
+        color: var(--fontColor) !important;
+        background: var(--cardBg) !important;
+    }
+    th, td {
+        border-color: var(--teal) !important;
+    }
+    .MuiTimelineConnector-root {
+        background: var(--teal);
     }
 }

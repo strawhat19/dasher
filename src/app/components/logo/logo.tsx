@@ -1,5 +1,5 @@
 import Image from 'next/image';
-import { brandName, icon } from '../../../../server';
+import { brandName, icon } from '@/app/shared/library/common/constants';
 
 export default function Logo({
     fontSize = 24,

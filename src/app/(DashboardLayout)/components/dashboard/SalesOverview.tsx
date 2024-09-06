@@ -1,10 +1,10 @@
 import dynamic from 'next/dynamic';
 import { Box, Stack } from '@mui/material';
 import { useTheme } from '@mui/material/styles';
-import { GlobalDataContext } from '@/app/globaldata';
+import { SharedDatabase } from '@/app/shared/shared';
 import React, { useState, useEffect, useContext } from 'react';
-import { Skeleton } from '@/app/components/loading/skeleton/skeleton';
 import DCard from '@/app/(DashboardLayout)/components/shared/DCard';
+import { Skeleton } from '@/app/components/loading/skeleton/skeleton';
 
 const Chart = dynamic(() => import('react-apexcharts'), { ssr: false });
 
@@ -13,7 +13,7 @@ const SalesOverview = () => {
     const primary = theme.palette.primary.main;
     const secondary = theme.palette.secondary.main;
     const [isLoading, setIsLoading] = useState(true);
-    let { darkMode } = useContext<any>(GlobalDataContext);
+    let { darkMode } = useContext<any>(SharedDatabase);
 
     let [skeletonStacks, ] = useState([
         [275, 400],

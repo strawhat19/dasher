@@ -1,15 +1,15 @@
 import Link from 'next/link';
-import { pages } from '../sidebar/MenuItems';
+import { routes } from '@/app/routes/routes';
 import { IconUser } from '@tabler/icons-react';
 import React, { useContext, useState } from 'react';
-import { GlobalDataContext } from '@/app/globaldata';
+import { SharedDatabase } from '@/app/shared/shared';
 import Slashes from '@/app/components/slashes/slashes';
 import { SettingsOutlined, SettingsTwoTone } from '@mui/icons-material';
 import { Box, Menu, Button, IconButton, MenuItem, ListItemIcon, ListItemText, Tooltip, useMediaQuery } from '@mui/material';
 
-const Settings = () => {
+export default function Settings({}: any) {
   const [anchorEl2, setAnchorEl2] = useState(null);
-  let { user, darkMode } = useContext<any>(GlobalDataContext);
+  let { user, darkMode } = useContext<any>(SharedDatabase);
   const largeScreenSize = useMediaQuery((theme: any) => theme.breakpoints.up(`lg`));
 
   const handleClick2 = (event: any) => {
@@ -21,7 +21,7 @@ const Settings = () => {
   };
 
   return (
-    <Box className={`profileOptionsContainer`}>
+    <Box className={`settings profileOptionsContainer`}>
       <Tooltip title={`Settings`} arrow>
         <IconButton
           size={largeScreenSize ? `medium` : `small`}
@@ -70,18 +70,16 @@ const Settings = () => {
         <Box mt={1} py={1} px={2}>
           <Button
             className={`loginLogoutButton`}
-            href={pages.signin.link}
+            href={routes.signin.href}
             variant={`outlined`}
             color={`primary`}
             component={Link}
             fullWidth
           >
-            {user ? pages.signout.title : pages.signin.title}
+            {user ? `Sign Out` : routes.signin.title}
           </Button>
         </Box>
       </Menu>
     </Box>
   );
 };
-
-export default Settings;

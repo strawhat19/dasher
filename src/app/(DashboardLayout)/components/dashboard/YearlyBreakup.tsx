@@ -1,7 +1,7 @@
 import dynamic from 'next/dynamic';
-import { year } from '../../../../../server';
 import { useTheme } from '@mui/material/styles';
 import { IconArrowUpLeft } from '@tabler/icons-react';
+import { year } from '@/app/shared/library/common/constants';
 import { Grid, Stack, Typography, Avatar } from '@mui/material';
 import DCard from '@/app/(DashboardLayout)/components/shared/DCard';
 

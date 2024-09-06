@@ -1,10 +1,10 @@
 import { useContext } from 'react';
 import styled from '@emotion/styled';
-import { GlobalDataContext } from '@/app/globaldata';
+import { SharedDatabase } from '@/app/shared/shared';
 import { Skeleton as MuiSkeleton } from '@mui/material';
 
 export const Skeleton = ({ width, height }: any) => {
-    let { darkMode } = useContext<any>(GlobalDataContext);
+    let { darkMode } = useContext<any>(SharedDatabase);
 
     const CustomSkeleton = styled(MuiSkeleton)<any>(({ 
         background = `var(--darkMain)`, 

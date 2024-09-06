@@ -1,7 +1,8 @@
-import { year } from '../../../../../server';
+
 import Logo from '@/app/components/logo/logo';
 import { Copyright } from '@mui/icons-material';
 import DCard from '../../components/shared/DCard';
+import { year } from '@/app/shared/library/common/constants';
 
 export default function Footer() {
     return (
