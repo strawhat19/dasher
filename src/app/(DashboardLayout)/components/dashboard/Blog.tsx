@@ -49,7 +49,7 @@ const Blog = () => {
           <BlankCard>
             <Typography component={Link} href="/">
               <Avatar
-                src={product.photo} variant="square"
+                alt={`Product Photo`} src={product.photo} variant="square"
                 sx={{
                   height: 250,
                   width: '100%',
