@@ -25,7 +25,6 @@ export default function SharedData({ children }: { children: React.ReactNode; })
         const unsubscribeFromCardsDatabase = onSnapshot(cardsCollection, (currentCardsInDB) => {
             const cardsFromDB: any[] = [];
             currentCardsInDB.forEach((doc) => cardsFromDB.push(doc.data()));
-            console.log(cardsFromDB);
             setCards(cardsFromDB);
           });
     
