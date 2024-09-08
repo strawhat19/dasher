@@ -13,20 +13,8 @@ import MonthlyEarnings from '@/app/(DashboardLayout)/components/dashboard/Monthl
 import RecentTransactions from '@/app/(DashboardLayout)/components/dashboard/RecentTransactions';
 import ProductPerformance from '@/app/(DashboardLayout)/components/dashboard/ProductPerformance';
 
-// Extend MediaTrackConstraintSet to recognize 'torch'
-// interface MediaTrackConstraintSet {
-//   torch?: boolean;
-// }
-
-// // Declare ImageCapture globally for TypeScript
-// declare var ImageCapture: {
-//   new(track: MediaStreamTrack): typeof ImageCapture;
-// };  
-
 export default function Dashboard() {
   let { cards } = useContext<any>(SharedDatabase);
-  // const [isCharging, setIsCharging] = useState<boolean | null>(null);
-  // const [batteryLevel, setBatteryLevel] = useState<number | null>(null);
 
   const openShare = () => {
     if (navigator.share) {
@@ -42,75 +30,23 @@ export default function Dashboard() {
     }
   }
 
-  // const showBatteryStatus = () => {
-  //   if (navigator.getBattery) {
-  //     navigator.getBattery().then((battery) => {
-  //       setBatteryLevel(battery.level * 100); // Convert to percentage
-  //       setIsCharging(battery.charging);
-  //       console.log(`Battery level: ${battery.level * 100}%`);
-  //       console.log(`Is charging: ${battery.charging}`);
-  //     }).catch((error) => {
-  //       console.error('Error getting battery status:', error);
-  //     });
-  //   } else {
-  //     console.log('Battery API not supported');
-  //   }
-  // };  
-
-  // const toggleFlashlight = () => {
-  //   navigator.mediaDevices.getUserMedia({ video: { facingMode: "environment" } })
-  //     .then((stream) => {
-  //       const track = stream.getVideoTracks()[0];
-  
-  //       // ImageCapture is used to control the camera's torch (flashlight)
-  //       const imageCapture = new ImageCapture(track);
-  
-  //       imageCapture.getPhotoCapabilities().then((capabilities: any) => {
-  //         if (capabilities.fillLightMode.includes('torch')) {
-  //           track.applyConstraints({
-  //             advanced: [{ torch: true }]
-  //           }).then(() => {
-  //             console.log('Torch turned on');
-  //           }).catch((error) => {
-  //             console.log('Error turning on torch:', error);
-  //           });
-  //         } else {
-  //           console.log('Torch not supported on this device');
-  //         }
-  //       });
-  //     })
-  //   .catch((error) => {
-  //     console.error('Error accessing flashlight:', error);
-  //   });
-  // };
-
-  const vibrateDevice = () => {
-    if (navigator.vibrate) {
-      navigator.vibrate([200, 100, 200]); // Vibrate 200ms, pause 100ms, vibrate 200ms
-    } else {
-      console.log('Vibration API not supported');
-    }
-  };
-
   const openCamera = () => {
-    const inputElement = document.createElement('input');
-    inputElement.type = 'file';
-    inputElement.accept = 'image/*'; // To capture images
-    inputElement.capture = 'environment'; // 'user' for front camera, 'environment' for back camera
-    inputElement.style.display = 'none'; // Hide the input element
+    const inputElement = document.createElement(`input`);
+    inputElement.type = `file`;
+    inputElement.accept = `image/*`;
+    inputElement.capture = `environment`;
+    inputElement.style.display = `none`;
 
-    inputElement.addEventListener('change', (event: any) => {
+    inputElement.addEventListener(`change`, (event: any) => {
       const file = event.target.files[0];
       if (file) {
-        console.log('Image captured:', file); // You can handle the captured image here
+        console.log(`Image captured`, file);
       }
     });
 
-    // Append the input element to the body and trigger the click
     document.body.appendChild(inputElement);
     inputElement.click();
 
-    // Remove the input element from the DOM after use
     document.body.removeChild(inputElement);
   }
 
@@ -126,17 +62,13 @@ export default function Dashboard() {
                   action={
                     c.name == `Camera` ? <Button style={{ color: `var(--fontColor)` }} onClick={() => openCamera()}>Open Camera</Button> 
                   : 
-                    c.name == `Camera2` ? <input type="file" accept="image/*" capture="environment" /> 
-                  : 
-                    c.name == `Vibrate` ? <Button style={{ color: `var(--fontColor)` }} onClick={() => vibrateDevice()}>Vibrate</Button> 
-                  : 
                     c.name == `Share` ? <Button startIcon={<Share />} style={{ color: `var(--fontColor)` }} onClick={() => openShare()}>Share</Button> 
                   :  <></>} 
                 />
               </Grid>
             ))
           ) : <></>}
-          <Grid item xs={12} lg={8}>
+          <Grid item lg={8} sx={{ display: { xs: `none`, md: `none`, lg: `block` } }}>
             <SalesOverview />
           </Grid>
           <Grid item xs={12} lg={4}>

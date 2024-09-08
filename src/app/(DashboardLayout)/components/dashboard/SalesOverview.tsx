@@ -8,8 +8,11 @@ import { Skeleton } from '@/app/components/loading/skeleton/skeleton';
 
 const Chart = dynamic(() => import('react-apexcharts'), { ssr: false });
 
+// const ForwardedChart = forwardRef((prop: any, ref: any) => <Chart displayName={`he`} {...props} ref={ref} />);
+
 const SalesOverview = () => {
     const theme = useTheme();
+    // const chartRef = useRef<any>(null);
     const primary = theme.palette.primary.main;
     const secondary = theme.palette.secondary.main;
     const [isLoading, setIsLoading] = useState(true);
@@ -100,6 +103,16 @@ const SalesOverview = () => {
 
     useEffect(() => {
         setIsLoading(false);
+        // const handleResize = () => {
+        //     if (chartRef.current) {
+        //         chartRef.current.chart.resize();
+        //     }
+        // };
+
+        // window.addEventListener(`resize`, handleResize);
+        // return () => {
+        //     window.removeEventListener(`resize`, handleResize);
+        // };
     }, []);
 
     return (
@@ -127,7 +140,7 @@ const SalesOverview = () => {
                 <Chart
                     type={`bar`}
                     height={370} 
-                    width={`100%`}
+                    width={`100%`} 
                     id={`salesOverviewChart`}
                     series={seriescolumnchart}
                     options={optionscolumnchart}
