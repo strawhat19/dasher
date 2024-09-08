@@ -13,7 +13,7 @@
 ![Firebase](https://img.shields.io/badge/Firebase-039BE5?style=for-the-badge&logo=Firebase&logoColor=white)
 
 ## About
-Dasher is an application to organize useful dashboards and widgets
+Dasher is an application to help create, manage, and organize useful and beautiful dashboards and widgets. Dasher can also be installed as a native application on Desktops and Mobile.
 
 ## Installation
 ```

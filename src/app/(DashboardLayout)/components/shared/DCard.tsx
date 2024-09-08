@@ -34,13 +34,14 @@ const DCard = ({
         padding: 0, 
         ...(height && height != undefined && height > 0 ? { height: height } : {}), 
         ...(minHeight && minHeight != undefined && minHeight > 0 ? { minHeight: minHeight } : {}) 
-      }}>
+      }}
+    >
       <CardContent className={`cardContent ${cardContentClass}`} sx={{ p: `30px` }}>
         {title ? (
           <Stack
-            mb={3}
             spacing={2}
             direction={`row`}
+            mb={children ? 3 : 0}
             alignItems={`center`}
             justifyContent={`space-between`}
           >
