@@ -48,7 +48,7 @@ const Header = () => {
               },
             }}
           >
-            <IconMenu style={{ fontSize: 25, color: darkMode ? `var(--teal)` : `var(--main)` }} />
+            <IconMenu style={{ fontSize: 25, color: darkMode ? `var(--fontColor)` : `var(--main)` }} />
           </IconButton>
 
           <Box className={`mobileMenuLogo p0`} sx={{

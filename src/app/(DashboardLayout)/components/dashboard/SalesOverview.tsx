@@ -105,7 +105,7 @@ export default function SalesOverview() {
     return (
         <DCard title={`Sales Overview`} minHeight={500}>
             {isLoading ? (
-                <Box className={`mobileMax`} sx={{ height: 370, width: '100%' }}>
+                <Box className={`chartBox`} sx={{ height: 370, width: `100%`, maxWidth: { xs: 325, md: 1045 } }}>
                     <Stack spacing={4.2} direction={`row`}>    
                         {skeletonStacks.map(([firstSkel, secondSkel], index) => {
                             return (
@@ -131,7 +131,7 @@ export default function SalesOverview() {
                     id={`salesOverviewChart`}
                     series={seriescolumnchart}
                     options={optionscolumnchart}
-                    className={`salesOverviewChart mobileMax`}
+                    className={`salesOverviewChart`}
                 />
             )}
         </DCard>

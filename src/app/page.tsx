@@ -14,7 +14,7 @@ import RecentTransactions from '@/app/(DashboardLayout)/components/dashboard/Rec
 import ProductPerformance from '@/app/(DashboardLayout)/components/dashboard/ProductPerformance';
 
 export default function Dashboard() {
-  let { cards } = useContext<any>(SharedDatabase);
+  let { darkMode, cards } = useContext<any>(SharedDatabase);
 
   const openShare = () => {
     if (navigator.share) {
@@ -60,9 +60,9 @@ export default function Dashboard() {
                 <DCard 
                   title={`${cidx + 1}. ${c.name}`} 
                   action={
-                    c.name == `Camera` ? <Button style={{ color: `var(--fontColor)` }} onClick={() => openCamera()}>Open Camera</Button> 
+                    c.name == `Camera` ? <Button style={{ color: darkMode ? `var(--fontColor)` : `var(--labelColor)` }} onClick={() => openCamera()}>Open Camera</Button> 
                   : 
-                    c.name == `Share` ? <Button startIcon={<Share />} style={{ color: `var(--fontColor)` }} onClick={() => openShare()}>Share</Button> 
+                    c.name == `Share` ? <Button startIcon={<Share />} style={{ color: darkMode ? `var(--fontColor)` : `var(--labelColor)` }} onClick={() => openShare()}>Share</Button> 
                   :  <></>} 
                 />
               </Grid>
