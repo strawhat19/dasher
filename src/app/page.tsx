@@ -68,7 +68,7 @@ export default function Dashboard() {
               </Grid>
             ))
           ) : <></>}
-          <Grid item lg={8} sx={{ display: { xs: `none`, md: `none`, lg: `block` } }}>
+          <Grid item lg={8} xs={12}>
             <SalesOverview />
           </Grid>
           <Grid item xs={12} lg={4}>

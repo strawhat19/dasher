@@ -8,11 +8,8 @@ import { Skeleton } from '@/app/components/loading/skeleton/skeleton';
 
 const Chart = dynamic(() => import('react-apexcharts'), { ssr: false });
 
-// const ForwardedChart = forwardRef((prop: any, ref: any) => <Chart displayName={`he`} {...props} ref={ref} />);
-
-const SalesOverview = () => {
+export default function SalesOverview() {
     const theme = useTheme();
-    // const chartRef = useRef<any>(null);
     const primary = theme.palette.primary.main;
     const secondary = theme.palette.secondary.main;
     const [isLoading, setIsLoading] = useState(true);
@@ -103,22 +100,12 @@ const SalesOverview = () => {
 
     useEffect(() => {
         setIsLoading(false);
-        // const handleResize = () => {
-        //     if (chartRef.current) {
-        //         chartRef.current.chart.resize();
-        //     }
-        // };
-
-        // window.addEventListener(`resize`, handleResize);
-        // return () => {
-        //     window.removeEventListener(`resize`, handleResize);
-        // };
     }, []);
 
     return (
         <DCard title={`Sales Overview`} minHeight={500}>
             {isLoading ? (
-                <Box sx={{ height: 370, width: '100%' }}>
+                <Box className={`mobileMax`} sx={{ height: 370, width: '100%' }}>
                     <Stack spacing={4.2} direction={`row`}>    
                         {skeletonStacks.map(([firstSkel, secondSkel], index) => {
                             return (
@@ -144,11 +131,9 @@ const SalesOverview = () => {
                     id={`salesOverviewChart`}
                     series={seriescolumnchart}
                     options={optionscolumnchart}
-                    className={`salesOverviewChart`}
+                    className={`salesOverviewChart mobileMax`}
                 />
             )}
         </DCard>
     );
 };
-
-export default SalesOverview;
