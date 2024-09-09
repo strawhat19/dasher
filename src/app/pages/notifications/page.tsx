@@ -1,6 +1,7 @@
 'use client';
 
 
+import { Grid } from '@mui/material';
 import { routes } from '@/app/routes/routes';
 import DCard from '@/app/(DashboardLayout)/components/shared/DCard';
 import PageContainer from '@/app/(DashboardLayout)/components/container/PageContainer';
@@ -8,7 +9,14 @@ import PageContainer from '@/app/(DashboardLayout)/components/container/PageCont
 export default function NotificationsPage() {
   return (
     <PageContainer title={routes.notifications.title} description={`${routes.notifications.title} Page`}>
-      <div className={`pageGrid notificationsPageGrid flex column gap20 w100`}>
+      <Grid container spacing={3}>
+        <Grid item xs={12} lg={6}>
+          <DCard minHeight={280} title={routes.notifications.title}>
+            This is the {routes.notifications.title} Page
+          </DCard>
+        </Grid>
+      </Grid>
+      {/* <div className={`pageGrid notificationsPageGrid flex column gap20 w100`}>
         <div className={`pageRow notificationsPageRow flex gap20`}>
           <DCard minHeight={280} title={routes.notifications.title} className={`w100`}>
             This is the {routes.notifications.title} Page
@@ -31,7 +39,7 @@ export default function NotificationsPage() {
         <DCard title={routes.notifications.title} className={`w100`}>
           This is the {routes.notifications.title} Page
         </DCard>
-      </div>
+      </div> */}
     </PageContainer>
   );
 };

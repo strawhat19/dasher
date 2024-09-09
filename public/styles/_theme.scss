@@ -192,6 +192,18 @@ input {
     .fontColor {
         color: var(--fontColor);
     }
+    .blackButton {
+        &:hover {
+            background: black;
+        }
+    }
+    // .headerToolBarRight {
+    //     button {
+    //         &:hover {
+    //             background: black;
+    //         }
+    //     }
+    // }
     // Menu
     // Menu Sub Headers
     .MuiListSubheader-root {

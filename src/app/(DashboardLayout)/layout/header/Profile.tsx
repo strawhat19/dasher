@@ -24,6 +24,7 @@ export default function Settings({}: any) {
     <Box className={`settings profileOptionsContainer`}>
       <Tooltip title={`Settings`} arrow>
         <IconButton
+          className={`blackButton`}
           size={largeScreenSize ? `medium` : `small`}
           aria-label="show 11 new notifications"
           color="inherit"

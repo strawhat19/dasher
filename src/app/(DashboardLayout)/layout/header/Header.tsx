@@ -68,11 +68,11 @@ const Header = () => {
         <Stack className={`headerToolBarRight`} spacing={2} direction={`row`} alignItems={`center`}>
           <Tooltip title={`${darkMode ? `Light` : `Dark`} Mode`} arrow>
             {largeScreenSize ? (
-              <Button size={`large`} onClick={(e) => setDarkMode(!darkMode)} startIcon={darkMode ? <Brightness7TwoTone /> : <NightsStayTwoTone />}>
+              <Button size={`large`} className={`blackButton`} onClick={(e) => setDarkMode(!darkMode)} startIcon={darkMode ? <Brightness7TwoTone /> : <NightsStayTwoTone />}>
                 {`${darkMode ? `Light` : `Dark`} Mode`}
               </Button>
             ) : (
-              <IconButton size={`small`} onClick={(e) => setDarkMode(!darkMode)}>
+              <IconButton size={`small`} className={`blackButton`} onClick={(e) => setDarkMode(!darkMode)}>
                 {darkMode ? <Brightness7TwoTone /> : <NightsStayTwoTone />}
               </IconButton>
             )}

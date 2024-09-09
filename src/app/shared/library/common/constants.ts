@@ -2,7 +2,7 @@ import { Atlanta } from '../../database/database';
 
 export const logo = `dark-logo.svg`;
 export const brandName = `Dasher`;
-export const icon = `modernize-icon.svg`;
+export const icon = `Modernize-Icon-New-Blue.svg`;
 export const defaultTimezone = `America/New_York`;
 export const iconPNG = `Modernize-Icon-Small.png`;
 

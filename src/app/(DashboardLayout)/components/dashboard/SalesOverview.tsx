@@ -104,7 +104,7 @@ export default function SalesOverview() {
 
     return (
         <DCard title={`Sales Overview`} minHeight={500}>
-            {isLoading ? (
+            {/* {isLoading ? (
                 <Box className={`chartBox`} sx={{ height: 370, width: `100%`, maxWidth: { xs: 325, md: 1045 } }}>
                     <Stack spacing={4.2} direction={`row`}>    
                         {skeletonStacks.map(([firstSkel, secondSkel], index) => {
@@ -123,7 +123,7 @@ export default function SalesOverview() {
                         })}
                     </Stack>
                 </Box>
-            ) : (
+            ) : ( */}
                 <Chart
                     type={`bar`}
                     height={370} 
@@ -133,7 +133,7 @@ export default function SalesOverview() {
                     options={optionscolumnchart}
                     className={`salesOverviewChart`}
                 />
-            )}
+            {/* )} */}
         </DCard>
     );
 };

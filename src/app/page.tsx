@@ -1,7 +1,7 @@
 'use client';
 
 import { useContext } from 'react';
-import { Share } from '@mui/icons-material';
+import { Camera, Share } from '@mui/icons-material';
 import { SharedDatabase } from './shared/shared';
 import { Grid, Box, Button } from '@mui/material';
 import DCard from './(DashboardLayout)/components/shared/DCard';
@@ -60,9 +60,9 @@ export default function Dashboard() {
                 <DCard 
                   title={`${cidx + 1}. ${c.name}`} 
                   action={
-                    c.name == `Camera` ? <Button style={{ color: darkMode ? `var(--fontColor)` : `var(--labelColor)` }} onClick={() => openCamera()}>Open Camera</Button> 
+                    c.name == `Camera` ? <Button className={`mainButton blackButton`} startIcon={<Camera />} style={{ color: darkMode ? `var(--fontColor)` : `var(--labelColor)` }} onClick={() => openCamera()}>Camera</Button> 
                   : 
-                    c.name == `Share` ? <Button startIcon={<Share />} style={{ color: darkMode ? `var(--fontColor)` : `var(--labelColor)` }} onClick={() => openShare()}>Share</Button> 
+                    c.name == `Share` ? <Button className={`mainButton blackButton`} startIcon={<Share />} style={{ color: darkMode ? `var(--fontColor)` : `var(--labelColor)` }} onClick={() => openShare()}>Share</Button> 
                   :  <></>} 
                 />
               </Grid>
