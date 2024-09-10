@@ -1,5 +1,6 @@
-import React from 'react';
-import { Card, CardContent, Typography, Stack, Box } from '@mui/material';
+import React, { useState } from 'react';
+import { IconChevronDown, IconChevronUp } from '@tabler/icons-react';
+import { Card, CardContent, Typography, Stack, Box, Button } from '@mui/material';
 
 type Props = {
   title?: string;
@@ -23,20 +24,23 @@ const DCard = ({
   background,
   middlecontent,
   id = undefined,
+  expanded = true,
   stackColor = ``,
   stackPadding = 0,
   className = `dCard`,
+  expandCollapse = false,
   stackBG = `transparent`,
   stackJustify = `space-between`,
   cardContentClass = `cardContentClass`,
 }: Props | any) => {
+  let [isExpanded, setIsExpanded] = useState<any>(expanded);
   return (
     <Card 
       id={id} 
       elevation={9} 
       style={style}
       variant={undefined}
-      className={`card ${className} ${(style && style.background || background) ? `hasBackground` : ``}`} 
+      className={`card ${className} ${(style && style.background || background) ? `hasBackground` : ``} ${isExpanded ? `expanded` : `collapsed`}`} 
       sx={{ 
         padding: 0, 
         ...(height && height != undefined && height > 0 ? { height: height } : {}), 
@@ -68,7 +72,11 @@ const DCard = ({
                 ``
               )}
             </Box>
-            {action}
+            {expandCollapse ? (
+              <Button style={{ background: `var(--mainDark)` }} onClick={() => setIsExpanded(!isExpanded)} className={`expandCollapse hoverAction fit h100 mainButton expandCollapse`}>
+                {isExpanded ? <IconChevronDown /> : <IconChevronUp />}
+              </Button>
+            ) : action}
           </Stack>
         ) : null}
         {children}

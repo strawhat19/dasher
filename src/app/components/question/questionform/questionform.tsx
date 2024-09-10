@@ -1,12 +1,12 @@
 'use client';
+
 import './questionform.scss';
 
-import Checkbox from '@mui/material/Checkbox';
-import { ChangeEvent, useState } from 'react';
-import { Check, CheckOutlined } from '@mui/icons-material';
+import { useState } from 'react';
+import { Check } from '@mui/icons-material';
 import DCard from '@/app/(DashboardLayout)/components/shared/DCard';
+import { Button, FormControl, Grid, MenuItem, Select, SelectChangeEvent } from '@mui/material';
 import CustomTextField from '@/app/(DashboardLayout)/components/forms/theme-elements/CustomTextField';
-import { Button, FormControl, Grid, InputLabel, MenuItem, Select, SelectChangeEvent } from '@mui/material';
 
 export default function QuestionForm(props: any) {
     let [answer, setAnswer] = useState<any>(`A`);
@@ -28,15 +28,6 @@ export default function QuestionForm(props: any) {
     const onQuestionField = (e?: any) => {
         let { value } = e?.target;
         setQuestion(value);
-    }
-
-    const onCheckboxSelect = (e: ChangeEvent<HTMLInputElement>, choice: any) => {
-        let { checked } = e?.target;
-        if (checked) {
-            setAnswer(choice);
-        } else {
-            setAnswer(``);
-        }
     }
 
     const onTopicChange = (event: SelectChangeEvent<typeof topics>) => {
@@ -63,7 +54,7 @@ export default function QuestionForm(props: any) {
 
     return (
         <Grid item xs={12}>
-          <DCard title={`Create Question Form`} stackPadding={0}>
+          <DCard title={`Create Question Form`} stackPadding={0} expandCollapse={true}>
             <form onSubmit={(e) => onQuestionFormSubmit(e)} className={`flex column`}>
               <Grid className={`formFields`} container spacing={2}>
                 {allTopics && allTopics.length > 0 ? (
@@ -73,6 +64,7 @@ export default function QuestionForm(props: any) {
                         </div>
                         <FormControl className={`selectField topicsField`} fullWidth>
                             <Select
+                                className={`hoverAction`}
                                 onChange={onTopicChange}
                                 id={`diffSelect`}
                                 value={topics}
@@ -108,6 +100,7 @@ export default function QuestionForm(props: any) {
                             <FormControl className={`selectField difficultyField`} fullWidth>
                                 <Select
                                     onChange={onDifficultyChange}
+                                    className={`hoverAction`}
                                     value={difficulty}
                                     id={`diffSelect`}
                                 >
@@ -128,21 +121,20 @@ export default function QuestionForm(props: any) {
                   </div>
                   <Grid container spacing={2}>
                     {choices.map((choice: any, cidx: any) => (
-                        <Grid key={cidx} xs={6} item>
+                        <Grid key={cidx} xs={12} md={6} item>
                             <Grid container spacing={1} alignItems={`center`} direction={`row`}>
-                                <Grid item xs={1} className={`text-center p0Important`}>
+                                <Grid item xs={2} md={1} className={`text-center p0Important`}>
                                     {choice + `)`}
                                 </Grid>
-                                <Grid item xs={8} className={`p0Important`}>
+                                <Grid item xs={6} md={8} className={`p0Important`}>
                                     <CustomTextField id={choice} name={choice} defaultValue={choice} placeholder={`Choice`} type={`text`} className={`field`} variant={`outlined`} fullWidth />
                                 </Grid>
-                                <Grid item xs={3} className={`pt0Important`}>
+                                <Grid item xs={4} md={3} className={`pt0Important`}>
                                     <Button 
                                         value={choice} 
                                         onClick={() => setAnswer(choice)}
                                         color={`success`}
                                         startIcon={<Check className={`startIcon`} />} 
-                                        style={{ background: answer == choice ? `var(--mainDark)` : `var(--darkMain)` }}
                                         className={`mainButton choiceButton fieldHeight ${answer == choice ? `selected` : ``}`} 
                                     >
                                         <strong>Correct</strong>

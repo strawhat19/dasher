@@ -15,13 +15,35 @@
     min-height: var(--fieldHeight);
 }
 
+.light {
+    .selectField {
+        svg {
+            path {
+                fill: var(--fontColor);
+            }
+        }
+    }
+    .choiceButton {
+        background: var(--main);
+        &.selected {
+            .startIcon {
+                path {
+                    fill: white;
+                }
+            }
+            background: var(--iconRight);
+        }
+    }
+}
+
 .choiceButton {
+    background: var(--darkMain);
     &.mainDark {
         background: var(--mainDark);
     }
     &.selected {
+        background: var(--mainDark);
         .startIcon {
-            color: var(--success);
             path {
                 fill: var(--success);
             }

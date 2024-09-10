@@ -33,6 +33,7 @@ $mobileMenuBreakPointL: 1200px;
     --defFontColor: #adb0bb;
     --cardBgViolet: #1c3c81;
     --defaultColor: #2A3547;
+    --darkMainLight: #1972ea;
     --tealSuperLight: #3dd9eb;
     --drawerBorderOld: #152a37;
     --altMain: rgb(61 175 235);
@@ -55,11 +56,30 @@ $mobileMenuBreakPointL: 1200px;
 }
 
 .card {
+    height: 100%;
+    transition: var(--transition);
+    &.collapsed {
+        height: 85px;
+    }
     &.p0 {
         padding: 0;
         .cardContent {
             padding: 0;
         }
+    }
+}
+
+.expandCollapse {
+    margin: 0;
+    padding: 5px !important;
+    background: var(--mainDark);
+}
+
+.hoverAction {
+    transition: var(--transition);
+    &:hover {
+        border-radius: 5px;
+        background: var(--main) !important;
     }
 }
 
@@ -182,9 +202,11 @@ input {
 
 // Theme Colors
 .light {
+    --mainDark: var(--main);
     --darkMain: var(--cardBg);
     --labelColor: var(--main);
     --drawerBorder: var(--fontColor);
+    // --darkMain: var(--darkMainLight);
     header {
         border-bottom: 1px solid var(--drawerBorder);
     }
