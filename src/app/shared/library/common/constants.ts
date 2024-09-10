@@ -16,6 +16,8 @@ export const convertWindSpeedFromMetersPerSecondToMilesPerHour = (speedInMS: any
 export const convertTemperatureFromKelvinToCelsius = (tempInKelvin: any) => parseFloat(removeTrailingZeroDecimal(5, (tempInKelvin - 273.15)));
 export const convertTemperatureFromKelvinToFahrenheit = (tempInKelvin: any) => parseFloat(removeTrailingZeroDecimal(5, ((tempInKelvin - 273.15) * (9/5) + 32)));
 
+export const letters = [`A`,`B`,`C`,`D`,`E`,`F`,`G`,`H`,`I`,`J`,`K`,`L`,`M`,`N`,`O`,`P`,`Q`,`R`,`S`,`T`,`U`,`V`,`W`,`X`,`Y`,`Z`];
+
 export const locations: any = {
   atlanta: Atlanta,
   default: () => locations.atlanta,

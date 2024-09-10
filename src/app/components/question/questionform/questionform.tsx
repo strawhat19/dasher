@@ -3,27 +3,28 @@
 import './questionform.scss';
 
 import { useState } from 'react';
-import { Check, QuestionMark } from '@mui/icons-material';
+import { Check } from '@mui/icons-material';
+import { letters } from '@/app/shared/library/common/constants';
 import DCard from '@/app/(DashboardLayout)/components/shared/DCard';
+import { Difficulties, Topics } from '@/app/shared/library/common/enums';
 import { Button, FormControl, Grid, MenuItem, Select, SelectChangeEvent } from '@mui/material';
 import CustomTextField from '@/app/(DashboardLayout)/components/forms/theme-elements/CustomTextField';
-import { Topics } from '@/app/shared/library/common/enums';
 
 export default function QuestionForm(props: any) {
-    let [answer, setAnswer] = useState<any>(`A`);
-    let [difficulty, setDifficulty] = useState<any>(`Easy`);
+    let [answer, setAnswer] = useState<any>(letters[0]);
     let [question, setQuestion] = useState<any>(`What is 2 + 2?`);
-    let [choices, setChoices] = useState<string[]>([`A`, `B`, `C`, `D`]);
-    let [topics, setTopics] = useState<Topics[] | any[]>([Topics.Math, Topics.Algebra, Topics.Arithmetic]);
-    let [difficulties, setDifficulties] = useState<string[]>([`Easy`, `Medium`, `Hard`, `Extreme`]);
-    let [allTopics, setAllTopics] = useState<string[]>([`Math`, `Arithmetic`, `Algebra`, `Geometry`, `Science`, `Chemistry`]);
+    let [choices, setChoices] = useState<string[]>(letters.slice(0, 4));
+    let [difficulty, setDifficulty] = useState<Difficulties>(Difficulties.Easy);
+    let [allTopics, setAllTopics] = useState<Topics[] | string[]>(Object.values(Difficulties));
+    let [topics, setTopics] = useState<Topics[] | string[]>(Object.values(Difficulties).slice(0, 3));
+    let [difficulties, setDifficulties] = useState<Difficulties[] | string[]>([Difficulties.Easy, Difficulties.Medium, Difficulties.Hard, Difficulties.Extreme]);
 
     const formDisabled = () => {
         return answer == `` || question == ``;
     }
 
     const onDifficultyChange = (event: SelectChangeEvent) => {
-        setDifficulty(event.target.value as string);
+        setDifficulty(event.target.value as Difficulties);
     };
 
     const onQuestionField = (e?: any) => {
