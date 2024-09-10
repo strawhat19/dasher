@@ -15,6 +15,10 @@
     min-height: var(--fieldHeight);
 }
 
+.startIcon {
+    transition: var(--transition);
+}
+
 .light {
     .selectField {
         svg {
@@ -51,6 +55,11 @@
     }
     &:hover {
         background: var(--main) !important;
+        .startIcon {
+            path {
+                fill: var(--fontColor);
+            }
+        }
     }
 }
 

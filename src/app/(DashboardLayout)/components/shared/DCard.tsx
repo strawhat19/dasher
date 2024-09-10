@@ -2,16 +2,37 @@ import React, { useState } from 'react';
 import { IconChevronDown, IconChevronUp } from '@tabler/icons-react';
 import { Card, CardContent, Typography, Stack, Box, Button } from '@mui/material';
 
-type Props = {
+type CardOptions = {
+  style?: any;
   title?: string;
   subtitle?: string;
+  expanded?: boolean;
+  container?: string;
+  className?: string;
+  background?: string;
+  cardTitleBG?: string;
   footer?: JSX.Element;
+  stackJustify?: string;
   children?: JSX.Element;
+  id?: string | undefined;
+  cardTitleColor?: string;
+  expandCollapse?: boolean;
+  cardContentClass?: string;
+  cardTitleLabelBG?: string; 
   action?: JSX.Element | any;
+  component?: React.ElementType;
+  cardTitleBorderColor?: string;
+  height?: string | number | any;
+  minHeight?: string | number | any;
+  expandCollapseButtonColor?: string;
   middlecontent?: string | JSX.Element;
+  cardTitlePadding?: string | number | any;
+  cardTitleLabelPadding?: string | number | any;
+  cardTitleLabelBorderRadius?: string | number | any; 
 };
 
-const DCard = ({
+export default function DCard({
+  id,
   title,
   style,
   height,
@@ -20,26 +41,31 @@ const DCard = ({
   subtitle,
   children,
   minHeight,
-  container,
   background,
   middlecontent,
-  id = undefined,
   expanded = true,
-  stackColor = ``,
-  stackPadding = 0,
+  cardTitleColor = ``,
   className = `dCard`,
+  cardTitlePadding = 0,
   expandCollapse = false,
-  stackBG = `transparent`,
+  cardTitleBG = `transparent`,
+  component: Component = Card,
   stackJustify = `space-between`,
+  cardTitleLabelBorderRadius = 0,
+  cardTitleLabelBG = `transparent`,
+  cardTitleLabelPadding = `0 0 5px 0`,
+  cardTitleBorderColor = `var(--main)`,
   cardContentClass = `cardContentClass`,
-}: Props | any) => {
+  container = `.MuiGrid-root .MuiGrid-item`,
+  expandCollapseButtonColor = `transparent`,
+}: CardOptions) {
   let [isExpanded, setIsExpanded] = useState<any>(expanded);
   return (
     <Card 
-      id={id} 
       elevation={9} 
       style={style}
       variant={undefined}
+      id={id ? id.toString() : undefined} 
       className={`card ${className} ${(style && style.background || background) ? `hasBackground` : ``} ${isExpanded ? `expanded` : `collapsed`}`} 
       sx={{ 
         padding: 0, 
@@ -55,17 +81,31 @@ const DCard = ({
             mb={children ? 3 : 0}
             alignItems={`center`}
             justifyContent={stackJustify}
-            style={{ 
-              padding: stackPadding, 
-              background: stackBG, 
-              color: stackColor != `` ? stackColor : undefined
-            }}
             className={`cardTitleRow titleStack`}
+            style={{ 
+              background: cardTitleBG, 
+              padding: cardTitlePadding,
+            }}
           >
             <Box className={`cardTitleBox`}>
-              {title ? <Typography style={{ color: stackColor != `` ? stackColor : undefined, borderBottom: `1px solid ${stackColor != `` ? stackColor : undefined}` }} className={`cardTitle`} variant={`h5`}>{title}</Typography> : ``}
+              {title ? (
+                <Typography 
+                  variant={`h5`}
+                  className={`cardTitle`} 
+                  style={{ 
+                    background: cardTitleLabelBG, 
+                    padding: cardTitleLabelPadding,
+                    borderColor: cardTitleBorderColor,
+                    borderRadius: cardTitleLabelBorderRadius,
+                    color: cardTitleColor != `` ? cardTitleColor : undefined, 
+                    borderBottom: `1px solid ${cardTitleColor != `` ? cardTitleColor : undefined}` 
+                  }} 
+                >
+                    {title}
+                </Typography>
+              ) : ``}
               {subtitle ? (
-                <Typography style={{ color: stackColor != `` ? stackColor : undefined, borderBottom: `1px solid ${stackColor != `` ? stackColor : undefined}` }} variant={`subtitle2`} color={`textSecondary`}>
+                <Typography style={{ color: cardTitleColor != `` ? cardTitleColor : undefined, borderBottom: `1px solid ${cardTitleColor != `` ? cardTitleColor : undefined}` }} variant={`subtitle2`} color={`textSecondary`}>
                   {subtitle}
                 </Typography>
               ) : (
@@ -73,7 +113,7 @@ const DCard = ({
               )}
             </Box>
             {expandCollapse ? (
-              <Button style={{ background: `var(--mainDark)` }} onClick={() => setIsExpanded(!isExpanded)} className={`expandCollapse hoverAction fit h100 mainButton expandCollapse`}>
+              <Button style={{ background: expandCollapseButtonColor }} onClick={() => setIsExpanded(!isExpanded)} className={`expandCollapse hoverAction fit h100 mainButton expandCollapse`}>
                 {isExpanded ? <IconChevronDown /> : <IconChevronUp />}
               </Button>
             ) : action}
@@ -86,5 +126,3 @@ const DCard = ({
     </Card>
   );
 };
-
-export default DCard;

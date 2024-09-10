@@ -105,18 +105,18 @@
 .mt-5I { margin-top: -5px !important; }
 .p0Important { padding: 0 !important; }
 .overflowXHidden { overflow-x: hidden; }
+.topSpace { padding-top: var(--space); }
 .overflowYHidden { overflow-y: hidden; }
 .whiteText { color: white !important; }
 .blackText { color: black !important; }
+.leftSpace { padding-left: var(--space); }
 .mb15I { margin-bottom: 15px !important; }
 .fit {  @extend .fitMin; @extend .fitMax; }
 .pt0Important { padding-top: 0 !important; }
 .pointerEventsNone { pointer-events: none; }
-.topSpace { padding-top: var(--space); }
-.leftSpace { padding-left: var(--space); }
 .rightSpace { padding-right: var(--space); }
-.mauto { margin-left: auto; margin-right: auto; }
 .bottomSpace { padding-bottom: var(--space); }
+.mauto { margin-left: auto; margin-right: auto; }
 .space { @extend .vertSpace; @extend .sideSpace; }
 .vertSpace { @extend .topSpace; @extend .bottomSpace; }
 .sideSpace { @extend .leftSpace; @extend .rightSpace; }

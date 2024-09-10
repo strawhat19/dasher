@@ -3,31 +3,21 @@ import './question.scss';
 import { Button, Grid } from '@mui/material';
 import DCard from '@/app/(DashboardLayout)/components/shared/DCard';
 
-type QuestionProperties = {
-    idx?: any;
-    answer?: any;
+type QuestionCardOptions = {
     title?: string;
     bgColor?: string;
-    question?: string;
-    topics?: string[];
+    question?: any;
     fontColor?: string;
-    difficulty?: string;
     buttonJustify?: string;
-    choices?: string[] | number[];
 }
 
 export default function Question({
-    idx = 1,
-    answer = 4,
-    title = `Q1.`,
-    difficulty = `easy`,
-    choices = [3, 5, 4, 22],
-    question = `What is 2 + 2?`,
+    question,
+    title = `Q1`,
     buttonJustify = `flex-start`,
-    bgColor = `var(--${difficulty}${idx})`,
-    topics = [`Math, Arithmetic, Algebra`],
-    fontColor = `var(--darkMain) !important`,
-}: QuestionProperties) {
+    bgColor = `var(--${question.difficulty})`,
+    fontColor = `var(--fontColor) !important`,
+}: QuestionCardOptions) {
 
     let buttonStyle = { 
         color: fontColor, 
@@ -36,21 +26,23 @@ export default function Question({
     };
 
     const validateChoice = (choice: any) => {
-        console.log(choice == answer ? `Correct` : `Wrong`, `You clicked`, choice, `Answer was`, answer);
+        console.log(choice == question.answer ? `Correct` : `Wrong`, `You clicked`, choice, `Answer was`, question.answer);
     }
 
     return (
         <DCard 
             title={title} 
-            stackBG={bgColor}
-            stackPadding={12}
-            stackColor={fontColor}
+            cardTitleBG={bgColor}
+            cardTitleLabelPadding={0}
+            cardTitleColor={fontColor}
             stackJustify={buttonJustify} 
             className={`questionCard p0`}
+            cardTitlePadding={`12px var(--space)`}
+            cardTitleBorderColor={`transparent !important`}
             action={(
               <div className={`questionAndTopics flex spaceBetween`}>
                 <strong>{question}</strong>
-                {topics.map((topic: any, tidx: any) => (
+                {question.topics.map((topic: any, tidx: any) => (
                     <strong key={tidx}>
                         <i>{topic}</i>
                     </strong>
@@ -60,7 +52,7 @@ export default function Question({
           >
            <div className={`simpleFlex px5 column gapSpace`}>
             <Grid className={`choices sideSpace bottomSpace`} container spacing={3}>
-              {choices.map((choice: any, cidx: any) => {
+              {question.choices.map((choice: any, cidx: any) => {
                 let letters = [`A`, `B`, `C`, `D`, `E`, `F`, `G`, `H`];
                 let letter = letters[cidx];
                 return (

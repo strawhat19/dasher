@@ -3,27 +3,54 @@ $mobileMenuBreakPointM: 992px;
 $mobileMenuBreakPointL: 1200px;
 
 :root {
+    // Main
     --space: 24px;
+    --borderRadius: 7px;
+    --inputHeight: 42.25px;
+    --transition: 0.24s cubic-bezier(0.77, 0.2, 0.05, 1) !important;
+    --cardShadow: rgb(145 158 171 / 30%) 0px 1px 2px 0px, rgb(145 158 171 / 12%) 0px 12px 24px -4px !important;
+
+    // Breakpoints
+    --mobileMenuBreakPointS: $mobileMenuBreakPointS;
+    --mobileMenuBreakPointM: $mobileMenuBreakPointM;
+    --mobileMenuBreakPointL: $mobileMenuBreakPointL;
+    
+    // Colors
     --bg: #041b44;
-    --teal: #3fa5e3;
     --main: #5D87FF;
-    --mainDark: rgba(0, 130, 198, 1);
-
-    // Difficulties
-    --easy1: #7DF9FF;
-    --easy2: #f0b9b9;
-    --easy3: #c874fe;
-
     --cardBg: #04397b;
     --success: #13DEB9;
-    --borderRadius: 7px;
     --fontColor: white;
-    --darkSub: #1c2a49;
     --darkMain: var(--bg);
     --gameBlue: #00c2ff;
+    --mainDark: #0082c6;
     --iconRight: #3DD9EB;
-    --inputHeight: 42.25px;
     --iconLeft: var(--main);
+    --darkMainLight: #1972ea;
+    --altMain: rgb(61 175 235);
+    --drawerBorder: var(--cardBg);
+    
+    // Questions
+    --Easy1: var(--iconRight);
+    --Easy2: #39d2c0;
+    --Easy3: #7DF9FF;
+    --Easy: var(--Easy1);
+    
+    --Medium1: var(--mainDark);
+    --Medium2: #fae84a;
+    --Medium: var(--Medium1);
+
+    --Hard1: #e72f6e;
+    --Hard2: var(--darkMainLight);
+    --Hard: var(--Hard2);
+    
+    --Extreme1: #6f61ef;
+    --Extreme2: #c874fe;
+    --Extreme: var(--Extreme1);
+
+    // Other Colors
+    --teal: #3fa5e3;
+    --darkSub: #1c2a49;
     --tealLight: #49BEFF;
     --mainLight: #ecf2ff;
     --navyBlueBG: #071632;
@@ -33,18 +60,10 @@ $mobileMenuBreakPointL: 1200px;
     --defFontColor: #adb0bb;
     --cardBgViolet: #1c3c81;
     --defaultColor: #2A3547;
-    --darkMainLight: #1972ea;
     --tealSuperLight: #3dd9eb;
     --drawerBorderOld: #152a37;
-    --altMain: rgb(61 175 235);
-    --drawerBorder: var(--cardBg);
     --lightRipple: rgba(0, 81, 255, 0.1);
     --darkRipple: rgba(93, 135, 255, 0.25);
-    --mobileMenuBreakPointS: $mobileMenuBreakPointS;
-    --mobileMenuBreakPointM: $mobileMenuBreakPointM;
-    --mobileMenuBreakPointL: $mobileMenuBreakPointL;
-    --transition: 0.24s cubic-bezier(0.77, 0.2, 0.05, 1) !important;
-    --cardShadow: rgb(145 158 171 / 30%) 0px 1px 2px 0px, rgb(145 158 171 / 12%) 0px 12px 24px -4px !important;
 }
 
 .bgMain {
@@ -59,7 +78,7 @@ $mobileMenuBreakPointL: 1200px;
     height: 100%;
     transition: var(--transition);
     &.collapsed {
-        height: 85px;
+        height: 58px;
     }
     &.p0 {
         padding: 0;
@@ -86,11 +105,6 @@ $mobileMenuBreakPointL: 1200px;
 .hasBackground {
     background-size: cover !important;
     background-repeat: no-repeat !important;
-}
-
-.cardTitle {
-    padding-bottom: 5px;
-    border-bottom: 2px solid var(--iconRight);
 }
 
 .Mui-focused {
@@ -260,12 +274,7 @@ input {
                 transition: none !important;
             }
             &.Mui-selected {
-                background: var(--main);
-                &:not(:hover) {
-                    .menuIcon {
-                        color: var(--cardBg);
-                    }
-                }
+                background: var(--mainDark);
             }
         }
     }

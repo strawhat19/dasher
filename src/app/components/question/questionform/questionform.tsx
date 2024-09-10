@@ -3,19 +3,20 @@
 import './questionform.scss';
 
 import { useState } from 'react';
-import { Check } from '@mui/icons-material';
+import { Check, QuestionMark } from '@mui/icons-material';
 import DCard from '@/app/(DashboardLayout)/components/shared/DCard';
 import { Button, FormControl, Grid, MenuItem, Select, SelectChangeEvent } from '@mui/material';
 import CustomTextField from '@/app/(DashboardLayout)/components/forms/theme-elements/CustomTextField';
+import { Topics } from '@/app/shared/library/common/enums';
 
 export default function QuestionForm(props: any) {
     let [answer, setAnswer] = useState<any>(`A`);
     let [difficulty, setDifficulty] = useState<any>(`Easy`);
     let [question, setQuestion] = useState<any>(`What is 2 + 2?`);
     let [choices, setChoices] = useState<string[]>([`A`, `B`, `C`, `D`]);
-    let [topics, setTopics] = useState<string[]>([`Math`, `Arithmetic`, `Algebra`]);
+    let [topics, setTopics] = useState<Topics[] | any[]>([Topics.Math, Topics.Algebra, Topics.Arithmetic]);
     let [difficulties, setDifficulties] = useState<string[]>([`Easy`, `Medium`, `Hard`, `Extreme`]);
-    let [allTopics, setAllTopics] = useState<string[]>([`Math`, `Arithmetic`, `Algebra`, `Geometry`]);
+    let [allTopics, setAllTopics] = useState<string[]>([`Math`, `Arithmetic`, `Algebra`, `Geometry`, `Science`, `Chemistry`]);
 
     const formDisabled = () => {
         return answer == `` || question == ``;
@@ -37,6 +38,7 @@ export default function QuestionForm(props: any) {
 
     const onQuestionFormSubmit = (e: any) => {
         e.preventDefault();
+
         const formData = new FormData(e.target);
         let value = Object.fromEntries(formData.entries());
         let { question, A, B, C, D } = value;
@@ -54,8 +56,18 @@ export default function QuestionForm(props: any) {
 
     return (
         <Grid item xs={12}>
-          <DCard title={`Create Question Form`} stackPadding={0} expandCollapse={true}>
-            <form onSubmit={(e) => onQuestionFormSubmit(e)} className={`flex column`}>
+          <DCard 
+            expandCollapse={true}
+            cardTitleLabelPadding={0} 
+            title={`Create Question Form`} 
+            cardTitleLabelBorderRadius={5}
+            cardTitleBG={`var(--mainDark)`} 
+            cardTitleLabelBG={`transparent`}
+            className={`questionFormCard p0`} 
+            cardTitleBorderColor={`transparent`}
+            cardTitlePadding={`12px var(--space)`} 
+        >
+            <form id={`questionForm`} onSubmit={(e) => onQuestionFormSubmit(e)} className={`questionForm flex column sideSpace bottomSpace`}>
               <Grid className={`formFields`} container spacing={2}>
                 {allTopics && allTopics.length > 0 ? (
                     <Grid xs={12} item>
@@ -131,13 +143,13 @@ export default function QuestionForm(props: any) {
                                 </Grid>
                                 <Grid item xs={4} md={3} className={`pt0Important`}>
                                     <Button 
+                                        fullWidth
                                         value={choice} 
                                         onClick={() => setAnswer(choice)}
-                                        color={`success`}
-                                        startIcon={<Check className={`startIcon`} />} 
+                                        endIcon={answer == choice ? <Check className={`startIcon`} /> : undefined} 
                                         className={`mainButton choiceButton fieldHeight ${answer == choice ? `selected` : ``}`} 
                                     >
-                                        <strong>Correct</strong>
+                                        <strong>Correct{answer == choice ? `` : `?`}</strong>
                                     </Button>
                                 </Grid>
                             </Grid>
@@ -147,7 +159,7 @@ export default function QuestionForm(props: any) {
                 </Grid>
                 <Grid item xs={12}>
                   <Button disabled={formDisabled()} className={`w100 mainButton choiceButton mainDark`} type={`submit`}>
-                    <strong>New Question</strong>
+                    <strong>Create Question</strong>
                   </Button>
                 </Grid>
               </Grid>

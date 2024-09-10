@@ -14,6 +14,13 @@ export enum GeoTypes {
     Loc = `loc`,
 }
 
+export enum Difficulties {
+    Easy = `Easy`,
+    Medium = `Medium`,
+    Hard = `Hard`,
+    Extreme = `Extreme`,
+}
+
 export enum States {
     Ready = `Ready`,
     Error = `Error`,
@@ -22,6 +29,18 @@ export enum States {
     Success = `Success`,
     Loading = `Loading`,
     Disabled = `Disabled`,
+}
+
+export enum Topics {
+    Math = `Math`,
+    Geology = `Geology`,
+    Biology = `Biology`,
+    Science = `Science`,
+    Algebra = `Algebra`,
+    Geometry = `Geometry`,
+    Chemistry = `Chemistry`,
+    Astronomy = `Astronomy`,
+    Arithmetic = `Arithmetic`,
 }
 
 export enum GoogleMapZoomLevels {

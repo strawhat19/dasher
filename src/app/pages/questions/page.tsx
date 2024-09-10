@@ -4,44 +4,58 @@ import { useState } from 'react';
 import { Grid } from '@mui/material'
 import Question from '@/app/components/question/question';
 import { routes } from '@/app/(DashboardLayout)/components/nav/nav';
+import { Difficulties, Topics } from '@/app/shared/library/common/enums';
 import QuestionForm from '@/app/components/question/questionform/questionform';
 import PageContainer from '@/app/(DashboardLayout)/components/container/PageContainer';
 
+export class QuestionClass {
+  [key: string]: any;
+  constructor(quesObj: {
+    answer: number,
+    question: string,
+    topics: Topics[],
+    explanation: string,
+    difficulty: Difficulties,
+    choices: string[] | number[] | any[],
+  }) {
+    Object.assign(this, quesObj);
+  }
+}
+
 export default function QuestionsPage() {
   let [questions, setQuestions] = useState<any[]>([
-    {
+    new QuestionClass({
       answer: 4,
-      title: `Q1.`,
-      difficulty: `easy`,
-      bgColor: `var(--easy1)`,
       choices: [3, 5, 4, 22],
       question: `What is 2 + 2?`,
-      buttonJustify: `flex-start`,
-      topics: [`Math, Arithmetic, Algebra`],
-      fontColor: `var(--darkMain) !important`,
-    },
-    {
+      difficulty: Difficulties.Easy,
+      explanation: `2 + 2 = 4 Because I Said So`,
+      topics: [Topics.Math, Topics.Algebra, Topics.Arithmetic],
+    }),
+    new QuestionClass({
       answer: 5,
-      title: `Q1.`,
-      difficulty: `easy`,
-      bgColor: `var(--easy2)`,
       choices: [3, 5, 4, 22],
       question: `What is 3 + 2?`,
-      buttonJustify: `flex-start`,
-      topics: [`Math, Arithmetic, Algebra`],
-      fontColor: `var(--darkMain) !important`,
-    },
-    {
+      difficulty: Difficulties.Medium,
+      explanation: `3 + 2 = 5 Because I Said So`,
+      topics: [Topics.Math, Topics.Algebra, Topics.Arithmetic],
+    }),
+    new QuestionClass({
       answer: 22,
-      title: `Q1.`,
-      difficulty: `easy`,
-      bgColor: `var(--easy3)`,
       choices: [3, 5, 4, 22],
-      buttonJustify: `flex-start`,
       question: `What is 11 + 11?`,
-      topics: [`Math, Arithmetic, Algebra`],
-      fontColor: `var(--darkMain) !important`,
-    },
+      difficulty: Difficulties.Hard,
+      explanation: `11 + 11 = 22 Because I Said So`,
+      topics: [Topics.Math, Topics.Algebra, Topics.Arithmetic],
+    }),
+    new QuestionClass({
+      answer: 100,
+      choices: [100, 5, 4, 22],
+      question: `What is 10 x 10?`,
+      difficulty: Difficulties.Hard,
+      explanation: `10 x 10 = 100 Because I Said So`,
+      topics: [Topics.Math, Topics.Algebra, Topics.Arithmetic],
+    }),
   ])
   return (
     <PageContainer title={routes.questions.title} description={`${routes.questions.title} Page`}>
@@ -53,14 +67,7 @@ export default function QuestionsPage() {
               {questions.map((question: any, qidx: any) => {
                 return (
                   <Grid key={qidx} item xs={12}>
-                    <Question 
-                      idx={qidx + 1}
-                      title={`Q${qidx + 1}.`}
-                      topics={question.topics} 
-                      answer={question.answer}
-                      choices={question.choices}
-                      question={question.question}
-                    />
+                    <Question title={`Q${qidx + 1}.`} question={question} />
                   </Grid>
                 )
               })}
