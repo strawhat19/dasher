@@ -7,6 +7,12 @@ $mobileMenuBreakPointL: 1200px;
     --bg: #041b44;
     --teal: #3fa5e3;
     --main: #5D87FF;
+
+    // Difficulties
+    --easy1: #7DF9FF;
+    --easy2: #f0b9b9;
+    --easy3: #c874fe;
+
     --cardBg: #04397b;
     --borderRadius: 7px;
     --fontColor: white;
@@ -46,6 +52,31 @@ $mobileMenuBreakPointL: 1200px;
     border-radius: var(--borderRadius);
 }
 
+.card {
+    &.p0 {
+        padding: 0;
+        .cardContent {
+            padding: 0;
+        }
+    }
+}
+
+.hasBackground {
+    background-size: cover !important;
+    background-repeat: no-repeat !important;
+}
+
+.cardTitle {
+    padding-bottom: 5px;
+    border-bottom: 2px solid var(--iconRight);
+}
+
+.Mui-focused {
+    fieldset {
+        border-color: var(--main) !important;
+    }
+}
+
 // .gridReset {
 //     @extend .zeroImportant;
 // }
@@ -75,11 +106,6 @@ $mobileMenuBreakPointL: 1200px;
 .MuiInputLabel-root {
     font-weight: 900;
     font-size: 15px;
-}
-
-.cardTitle {
-    padding-bottom: 5px;
-    border-bottom: 2px solid var(--iconRight);
 }
 
 .headerToolBarRight {
@@ -197,13 +223,6 @@ input {
             background: black;
         }
     }
-    // .headerToolBarRight {
-    //     button {
-    //         &:hover {
-    //             background: black;
-    //         }
-    //     }
-    // }
     // Menu
     // Menu Sub Headers
     .MuiListSubheader-root {
@@ -314,7 +333,9 @@ input {
     }
     .MuiPaper-root {
         color: var(--fontColor) !important;
-        background: var(--cardBg) !important;
+        &:not(.hasBackground) {
+            background: var(--cardBg) !important;
+        }
     }
     th, td {
         border-color: var(--teal) !important;

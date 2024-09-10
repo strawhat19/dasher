@@ -1,0 +1,46 @@
+:root {
+    --fieldHeight: 42px;
+}
+
+.flexedField {
+    display: flex;
+    color: white;
+    align-items: center;
+    flex-direction: column;
+    min-height: var(--fieldHeight);
+}
+
+.MuiList-root {
+    background: var(--darkMain);
+    li {
+        transition: var(--transition);
+        &:hover {
+            background: var(--main);
+        }
+    }
+}
+
+.selectField {
+    @extend .flexedField;
+    border-radius: 7px;
+    background: var(--darkMain);
+    justify-content: space-between;
+    .MuiOutlinedInput-root {
+        width: 100%;
+    }
+    .MuiSelect-select {
+        width: 100%;
+    }
+    svg {
+        path {
+            fill: var(--main);
+        }
+    }
+    .MuiInputBase-input {
+        @extend .flexedField;
+        padding-top: 0;
+        padding-left: 0;
+        padding-bottom: 0;
+        justify-content: center;
+    }
+}

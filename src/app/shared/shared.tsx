@@ -1,6 +1,6 @@
 'use client';
 
-import app, { db } from '@/server/firebase';
+import { db } from '@/server/firebase';
 import Logo from '../components/logo/logo';
 import { Atlanta } from './database/database';
 import { States } from './library/common/enums';
@@ -13,6 +13,7 @@ export default function SharedData({ children }: { children: React.ReactNode; })
     let [user, setUser] = useState(null);
     let [cards, setCards] = useState<any>([]);
     let [darkMode, setDarkMode] = useState(true);
+    let [questions, setQuestions] = useState<any>([]);
     let [pageTitle, setPageTitle] = useState(<Logo />);
     let [location, setLocation] = useState<any>(Atlanta);
     let [isSidebarOpen, setSidebarOpen] = useState(true);
@@ -26,11 +27,19 @@ export default function SharedData({ children }: { children: React.ReactNode; })
             const cardsFromDB: any[] = [];
             currentCardsInDB.forEach((doc) => cardsFromDB.push(doc.data()));
             setCards(cardsFromDB);
-          });
-    
-          return () => {
+        });
+       
+        const questionsCollection = collection(db, `questions`);
+        const unsubscribeFromQuestionsDatabase = onSnapshot(questionsCollection, (currentquestionsInDB) => {
+            const questionsFromDB: any[] = [];
+            currentquestionsInDB.forEach((doc) => questionsFromDB.push(doc.data()));
+            setQuestions(questionsFromDB);
+        });
+
+        return () => {
             unsubscribeFromCardsDatabase();
-          };
+            unsubscribeFromQuestionsDatabase();
+        };
     }, [])
 
     return <>

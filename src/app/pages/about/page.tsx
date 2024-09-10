@@ -1,36 +1,73 @@
 'use client';
 
+import { useState } from 'react';
+import { Grid } from '@mui/material';
 import { routes } from '@/app/routes/routes';
-import DCard from '@/app/(DashboardLayout)/components/shared/DCard';
+import Question from '@/app/components/question/question';
+import QuestionForm from '@/app/components/question/questionform/questionform';
 import PageContainer from '@/app/(DashboardLayout)/components/container/PageContainer';
 
 export default function AboutPage() {
+  let [questions, setQuestions] = useState<any[]>([
+    {
+      answer: 4,
+      title: `Q1.`,
+      difficulty: `easy`,
+      bgColor: `var(--easy1)`,
+      choices: [3, 5, 4, 22],
+      question: `What is 2 + 2?`,
+      buttonJustify: `flex-start`,
+      topics: [`Math, Arithmetic, Algebra`],
+      fontColor: `var(--darkMain) !important`,
+    },
+    {
+      answer: 5,
+      title: `Q1.`,
+      difficulty: `easy`,
+      bgColor: `var(--easy2)`,
+      choices: [3, 5, 4, 22],
+      question: `What is 3 + 2?`,
+      buttonJustify: `flex-start`,
+      topics: [`Math, Arithmetic, Algebra`],
+      fontColor: `var(--darkMain) !important`,
+    },
+    {
+      answer: 22,
+      title: `Q1.`,
+      difficulty: `easy`,
+      bgColor: `var(--easy3)`,
+      choices: [3, 5, 4, 22],
+      buttonJustify: `flex-start`,
+      question: `What is 11 + 11?`,
+      topics: [`Math, Arithmetic, Algebra`],
+      fontColor: `var(--darkMain) !important`,
+    },
+  ])
   return (
     <PageContainer title={routes.about.title} description={`${routes.about.title} Page`}>
-      <div className={`pageGrid aboutPageGrid flex column gap20 w100`}>
-        <div className={`pageRow aboutPageRow flex gap20`}>
-          <DCard minHeight={280} title={routes.about.title} className={`w100`}>
-            This is the {routes.about.title} Page
-          </DCard>
-          <div className={`pageColumn aboutPageColumn flex gap20 h100`}>
-            <DCard title={routes.about.title} className={`w100 h100`}>
-              This is the {routes.about.title} Page
-            </DCard>
-            <DCard title={routes.about.title} className={`w100 h100`}>
-              This is the {routes.about.title} Page
-            </DCard>
-          </div>
-        </div>
-        <DCard title={routes.about.title} className={`w100`}>
-          This is the {routes.about.title} Page
-        </DCard>
-        <DCard title={routes.about.title} className={`w100`}>
-          This is the {routes.about.title} Page
-        </DCard>
-        <DCard title={routes.about.title} className={`w100`}>
-          This is the {routes.about.title} Page
-        </DCard>
-      </div>
+      <Grid container spacing={3}>
+        <QuestionForm />
+        {questions && questions.length > 0 ? (
+          <Grid className={`questionsContainerItem`} item xs={12}>
+            <Grid className={`questionsContainer`} container spacing={3}>
+              {questions.map((question: any, qidx: any) => {
+                return (
+                  <Grid key={qidx} item xs={12}>
+                    <Question 
+                      idx={qidx + 1}
+                      title={`Q${qidx + 1}.`}
+                      topics={question.topics} 
+                      answer={question.answer}
+                      choices={question.choices}
+                      question={question.question}
+                    />
+                  </Grid>
+                )
+              })}
+            </Grid>
+          </Grid>
+        ) : <></>}
+      </Grid>
     </PageContainer>
   );
 };

@@ -1,0 +1,6 @@
+.questionButton {
+    transition: var(--transition);
+    &:hover {
+        background: white !important;
+    }
+}

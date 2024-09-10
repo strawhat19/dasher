@@ -1,9 +1,9 @@
 'use client';
 
 import { useContext } from 'react';
-import { Camera, Share } from '@mui/icons-material';
 import { SharedDatabase } from './shared/shared';
 import { Grid, Box, Button } from '@mui/material';
+import { Camera, Share } from '@mui/icons-material';
 import DCard from './(DashboardLayout)/components/shared/DCard';
 import Blog from '@/app/(DashboardLayout)/components/dashboard/Blog';
 import PageContainer from '@/app/(DashboardLayout)/components/container/PageContainer';
@@ -34,8 +34,8 @@ export default function Dashboard() {
     const inputElement = document.createElement(`input`);
     inputElement.type = `file`;
     inputElement.accept = `image/*`;
-    inputElement.capture = `environment`;
     inputElement.style.display = `none`;
+    inputElement.capture = `environment`;
 
     inputElement.addEventListener(`change`, (event: any) => {
       const file = event.target.files[0];
@@ -54,20 +54,35 @@ export default function Dashboard() {
     <PageContainer title={`Dashboard`} description={`Dashboard Page`}>
       <Box>
         <Grid container spacing={3}>
-          {cards && cards.length > 0 ? (
-            cards.map((c: any, cidx: any) => (
-              <Grid key={cidx} item xs={12}>
-                <DCard 
-                  title={`${cidx + 1}. ${c.name}`} 
-                  action={
-                    c.name == `Camera` ? <Button className={`mainButton blackButton`} startIcon={<Camera />} style={{ color: darkMode ? `var(--fontColor)` : `var(--labelColor)` }} onClick={() => openCamera()}>Camera</Button> 
-                  : 
-                    c.name == `Share` ? <Button className={`mainButton blackButton`} startIcon={<Share />} style={{ color: darkMode ? `var(--fontColor)` : `var(--labelColor)` }} onClick={() => openShare()}>Share</Button> 
-                  :  <></>} 
-                />
-              </Grid>
-            ))
-          ) : <></>}
+          <Grid item xs={12} md={8}>
+            <DCard 
+              minHeight={600} 
+              className={`scaleIn`}
+              style={{ 
+                backgroundPosition: `50% 63% !important`,
+                background: `url(/images/hq/siloridge.jpg)`,
+              }} 
+            />
+          </Grid>
+          <Grid item xs={12} md={4}>
+            <Grid container spacing={3} className={`h100`}>
+              {cards && cards.length > 0 ? (
+                cards.map((c: any, cidx: any) => (
+                  <Grid key={cidx} item xs={12}>
+                    <DCard 
+                      className={`h100`}
+                      title={`${cidx + 1}. ${c.name}`} 
+                      action={
+                        c.name == `Camera` ? <Button className={`mainButton blackButton`} startIcon={<Camera />} style={{ color: darkMode ? `var(--fontColor)` : `var(--labelColor)` }} onClick={() => openCamera()}>Camera</Button> 
+                      : 
+                        c.name == `Share` ? <Button className={`mainButton blackButton`} startIcon={<Share />} style={{ color: darkMode ? `var(--fontColor)` : `var(--labelColor)` }} onClick={() => openShare()}>Share</Button> 
+                      :  <></>} 
+                    />
+                  </Grid>
+                ))
+              ) : <></>}
+            </Grid>
+          </Grid>
           <Grid item lg={8} xs={12}>
             <SalesOverview />
           </Grid>
