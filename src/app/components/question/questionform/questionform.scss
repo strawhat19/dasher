@@ -2,6 +2,11 @@
     --fieldHeight: 42px;
 }
 
+.fieldHeight {
+    min-height: var(--fieldHeight);
+    max-height: var(--fieldHeight);
+}
+
 .flexedField {
     display: flex;
     color: white;
@@ -10,12 +15,34 @@
     min-height: var(--fieldHeight);
 }
 
+.choiceButton {
+    &.mainDark {
+        background: var(--mainDark);
+    }
+    &.selected {
+        .startIcon {
+            color: var(--success);
+            path {
+                fill: var(--success);
+            }
+        }
+    }
+    &:hover {
+        background: var(--main) !important;
+    }
+}
+
 .MuiList-root {
-    background: var(--darkMain);
-    li {
-        transition: var(--transition);
-        &:hover {
-            background: var(--main);
+    &:has(.selectItem) {
+        background: var(--darkMain);
+        .selectItem {
+            transition: var(--transition);
+            &.Mui-selected {
+                background: var(--mainDark);
+            }
+            &:hover {
+                background: var(--main);
+            }
         }
     }
 }
@@ -23,7 +50,7 @@
 .selectField {
     @extend .flexedField;
     border-radius: 7px;
-    background: var(--darkMain);
+    background: var(--mainDark);
     justify-content: space-between;
     .MuiOutlinedInput-root {
         width: 100%;

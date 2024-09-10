@@ -10,8 +10,8 @@ import { Button, FormControl, Grid, InputLabel, MenuItem, Select, SelectChangeEv
 
 export default function QuestionForm(props: any) {
     let [answer, setAnswer] = useState<any>(`A`);
-    let [question, setQuestion] = useState<any>(``);
     let [difficulty, setDifficulty] = useState<any>(`Easy`);
+    let [question, setQuestion] = useState<any>(`What is 2 + 2?`);
     let [choices, setChoices] = useState<string[]>([`A`, `B`, `C`, `D`]);
     let [topics, setTopics] = useState<string[]>([`Math`, `Arithmetic`, `Algebra`]);
     let [difficulties, setDifficulties] = useState<string[]>([`Easy`, `Medium`, `Hard`, `Extreme`]);
@@ -82,6 +82,7 @@ export default function QuestionForm(props: any) {
                                     <MenuItem 
                                         key={tidx} 
                                         value={topic}
+                                        className={`selectItem`}
                                         disabled={topics.length == 1 && topics.includes(topic)} 
                                     >
                                         {topic}
@@ -97,7 +98,7 @@ export default function QuestionForm(props: any) {
                         <div className={`p10b`}>
                             <strong>Question</strong>
                         </div>
-                        <CustomTextField onChange={onQuestionField} id={`question`} name={`question`} placeholder={`Enter New Question`} type={`text`} className={`field`} variant={`outlined`} fullWidth />
+                        <CustomTextField onChange={onQuestionField} defaultValue={question} id={`question`} name={`question`} placeholder={`Enter New Question`} type={`text`} className={`field`} variant={`outlined`} fullWidth />
                     </Grid>
                     {difficulties && difficulties.length > 0 ? (
                         <Grid xs={4} item>
@@ -111,7 +112,7 @@ export default function QuestionForm(props: any) {
                                     id={`diffSelect`}
                                 >
                                     {difficulties.map((diff: any, didx: any) => (
-                                        <MenuItem key={didx} value={diff}>
+                                        <MenuItem key={didx} value={diff} className={`selectItem`}>
                                             {diff}
                                         </MenuItem>
                                     ))}
@@ -129,14 +130,23 @@ export default function QuestionForm(props: any) {
                     {choices.map((choice: any, cidx: any) => (
                         <Grid key={cidx} xs={6} item>
                             <Grid container spacing={1} alignItems={`center`} direction={`row`}>
-                                <Grid item xs={2} className={`p0Important`}>
-                                    <Checkbox defaultChecked={cidx == 0} color={`success`} icon={<CheckOutlined />} checkedIcon={<Check />} onChange={(e) => onCheckboxSelect(e, choice)} className={`checkbox p0 m0 ${answer != `` && choice != answer ? `disabled` : ``}`} />
-                                </Grid>
-                                <Grid item xs={2} className={`p0Important`}>
+                                <Grid item xs={1} className={`text-center p0Important`}>
                                     {choice + `)`}
                                 </Grid>
                                 <Grid item xs={8} className={`p0Important`}>
                                     <CustomTextField id={choice} name={choice} defaultValue={choice} placeholder={`Choice`} type={`text`} className={`field`} variant={`outlined`} fullWidth />
+                                </Grid>
+                                <Grid item xs={3} className={`pt0Important`}>
+                                    <Button 
+                                        value={choice} 
+                                        onClick={() => setAnswer(choice)}
+                                        color={`success`}
+                                        startIcon={<Check className={`startIcon`} />} 
+                                        style={{ background: answer == choice ? `var(--mainDark)` : `var(--darkMain)` }}
+                                        className={`mainButton choiceButton fieldHeight ${answer == choice ? `selected` : ``}`} 
+                                    >
+                                        <strong>Correct</strong>
+                                    </Button>
                                 </Grid>
                             </Grid>
                         </Grid>
@@ -144,8 +154,8 @@ export default function QuestionForm(props: any) {
                   </Grid>
                 </Grid>
                 <Grid item xs={12}>
-                  <Button disabled={formDisabled()} className={`w100 mainButton`} type={`submit`}>
-                    New Question
+                  <Button disabled={formDisabled()} className={`w100 mainButton choiceButton mainDark`} type={`submit`}>
+                    <strong>New Question</strong>
                   </Button>
                 </Grid>
               </Grid>

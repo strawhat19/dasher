@@ -3,7 +3,6 @@ const withPWA = require('next-pwa')({
   dest: 'public',
   register: true,
   skipWaiting: true,
-  // disable: process.env.NODE_ENV === 'development',
 });
 
 const nextConfig = withPWA({
@@ -17,6 +16,7 @@ const nextConfig = withPWA({
       { source: `/geodata`, destination: `/pages/geodata` },
       { source: `/profile`, destination: `/pages/profile` },
       { source: `/settings`, destination: `/pages/settings` },
+      { source: `/questions`, destination: `/pages/questions` },
       { source: `/notifications`, destination: `/pages/notifications` },
     ];
   },
@@ -36,6 +36,15 @@ const nextConfig = withPWA({
       { source: `/edit`, destination: `/profile`, permanent: true },
       { source: `/account`, destination: `/profile`, permanent: true },
       { source: `/preferences`, destination: `/profile`, permanent: true },
+      // Settings
+      { source: `/config`, destination: `/settings`, permanent: true },
+      { source: `/general`, destination: `/settings`, permanent: true },
+      // Notifications
+      { source: `/alerts`, destination: `/notifications`, permanent: true },
+      { source: `/notification`, destination: `/notifications`, permanent: true },
+      // Questions
+      { source: `/quiz`, destination: `/questions`, permanent: true },
+      { source: `/question`, destination: `/questions`, permanent: true },
       // About
       { source: `/info`, destination: `/about`, permanent: true },
       { source: `/aboutus`, destination: `/about`, permanent: true },

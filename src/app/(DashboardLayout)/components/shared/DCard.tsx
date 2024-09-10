@@ -24,10 +24,10 @@ const DCard = ({
   middlecontent,
   id = undefined,
   stackColor = ``,
-  stackPadding = 12,
+  stackPadding = 0,
   className = `dCard`,
   stackBG = `transparent`,
-  stackJustify = `flex-start`,
+  stackJustify = `space-between`,
   cardContentClass = `cardContentClass`,
 }: Props | any) => {
   return (

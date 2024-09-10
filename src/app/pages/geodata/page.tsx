@@ -2,11 +2,11 @@
 
 import { useContext } from 'react';
 import { Grid } from '@mui/material';
-import { routes } from '@/app/routes/routes';
 import Map from '@/app/components/geodata/map/map';
 import { SharedDatabase } from '@/app/shared/shared';
 import Time from '@/app/components/geodata/time/time';
 import { devEnv } from '@/app/shared/library/common/constants';
+import { routes } from '@/app/(DashboardLayout)/components/nav/nav';
 import GeoDataForm from '@/app/components/geodata/form/geodataform';
 import DCard from '@/app/(DashboardLayout)/components/shared/DCard';
 import PageContainer from '@/app/(DashboardLayout)/components/container/PageContainer';

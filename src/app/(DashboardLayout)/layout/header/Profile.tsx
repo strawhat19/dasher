@@ -1,9 +1,9 @@
 import Link from 'next/link';
-import { routes } from '@/app/routes/routes';
 import { IconUser } from '@tabler/icons-react';
 import React, { useContext, useState } from 'react';
 import { SharedDatabase } from '@/app/shared/shared';
 import Slashes from '@/app/components/slashes/slashes';
+import { routes } from '@/app/(DashboardLayout)/components/nav/nav';
 import { SettingsOutlined, SettingsTwoTone } from '@mui/icons-material';
 import { Box, Menu, Button, IconButton, MenuItem, ListItemIcon, ListItemText, Tooltip, useMediaQuery } from '@mui/material';
 
@@ -47,7 +47,7 @@ export default function Settings({}: any) {
         anchorEl={anchorEl2}
         onClose={handleClose2}
         open={Boolean(anchorEl2)}
-        className={`profileMenu`}
+        className={`profileMenu overlayMenu`}
         anchorOrigin={{ horizontal: `right`, vertical: `bottom` }}
         transformOrigin={{ horizontal: `right`, vertical: `top` }}
         sx={{

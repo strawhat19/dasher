@@ -18,6 +18,7 @@
 .p10 { padding: 10px; }
 .p15 { padding: 15px; }
 .p20 { padding: 20px; }
+.pt0 { padding-top: 0 }
 .p25 { padding: 25px; }
 .p30 { padding: 30px; }
 .p50 { padding: 50px; }
@@ -109,6 +110,7 @@
 .blackText { color: black !important; }
 .mb15I { margin-bottom: 15px !important; }
 .fit {  @extend .fitMin; @extend .fitMax; }
+.pt0Important { padding-top: 0 !important; }
 .pointerEventsNone { pointer-events: none; }
 .topSpace { padding-top: var(--space); }
 .leftSpace { padding-left: var(--space); }

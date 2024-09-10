@@ -54,7 +54,7 @@ export default function Dashboard() {
     <PageContainer title={`Dashboard`} description={`Dashboard Page`}>
       <Box>
         <Grid container spacing={3}>
-          <Grid item xs={12} md={8}>
+          <Grid item xs={12} md={7}>
             <DCard 
               minHeight={600} 
               className={`scaleIn`}
@@ -64,7 +64,7 @@ export default function Dashboard() {
               }} 
             />
           </Grid>
-          <Grid item xs={12} md={4}>
+          <Grid item xs={12} md={5}>
             <Grid container spacing={3} className={`h100`}>
               {cards && cards.length > 0 ? (
                 cards.map((c: any, cidx: any) => (

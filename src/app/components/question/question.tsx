@@ -28,6 +28,7 @@ export default function Question({
     topics = [`Math, Arithmetic, Algebra`],
     fontColor = `var(--darkMain) !important`,
 }: QuestionProperties) {
+
     let buttonStyle = { 
         color: fontColor, 
         background: bgColor, 
@@ -42,6 +43,7 @@ export default function Question({
         <DCard 
             title={title} 
             stackBG={bgColor}
+            stackPadding={12}
             stackColor={fontColor}
             stackJustify={buttonJustify} 
             className={`questionCard p0`}
@@ -50,9 +52,7 @@ export default function Question({
                 <strong>{question}</strong>
                 {topics.map((topic: any, tidx: any) => (
                     <strong key={tidx}>
-                        <i>
-                            {topic}
-                        </i>
+                        <i>{topic}</i>
                     </strong>
                 ))}
               </div>

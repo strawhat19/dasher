@@ -1,6 +1,6 @@
 'use client';
 
-import { routes } from '@/app/routes/routes';
+import { routes } from '@/app/(DashboardLayout)/components/nav/nav';
 import DCard from '@/app/(DashboardLayout)/components/shared/DCard';
 import PageContainer from '@/app/(DashboardLayout)/components/container/PageContainer';
 

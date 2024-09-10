@@ -1,12 +1,14 @@
 import Link from 'next/link';
 import NavItem from './NavItem';
 import NavGroup from './NavGroup';
+import { uniqueId } from 'lodash';
 import { useContext } from 'react';
-import { routes } from '@/app/routes/routes';
 import { usePathname } from 'next/navigation';
 import Logo from '@/app/components/logo/logo';
 import { Box, Drawer, List } from '@mui/material';
 import { SharedDatabase } from '@/app/shared/shared';
+import { devEnv } from '@/app/shared/library/common/constants';
+import { IconBellRinging, IconLayoutDashboard, IconLogin, IconMailForward, IconQuestionMark, IconSettings, IconUser, IconUserPlus, IconWorld } from '@tabler/icons-react';
 
 export class NavOptions {
   sidebarWidth: any;
@@ -19,6 +21,73 @@ export class NavOptions {
   constructor(data: Partial<NavOptions>) {
     Object.assign(this, data);
   }
+}
+
+export const routes = {
+  home: {
+    href: `/`,
+    id: uniqueId(),
+    title: `Dashboard`,
+    icon: IconLayoutDashboard,
+  },
+  about: {
+    href: `/about`,
+    id: uniqueId(),
+    title: `About`,
+    icon: IconUser,
+  },
+  contact: {
+    id: uniqueId(),
+    href: `/contact`,
+    title: `Contact`,
+    icon: IconMailForward,
+  },
+  signin: {
+    auth: false,
+    id: uniqueId(),
+    href: `/signin`,
+    icon: IconLogin,
+    title: `Sign In`,
+  },
+  signup: {
+    auth: false,
+    id: uniqueId(),
+    href: `/signup`,
+    title: `Sign Up`,
+    icon: IconUserPlus,
+  },
+  profile: {
+    auth: !devEnv,
+    id: uniqueId(),
+    icon: IconUser,
+    href: `/profile`,
+    title: `Profile`,
+  },
+  notifications: {
+    auth: !devEnv,
+    id: uniqueId(),
+    icon: IconBellRinging,
+    href: `/notifications`,
+    title: `Notification(s)`,
+  },
+  geodata: {
+    id: uniqueId(),
+    title: `GeoData`,
+    href: `/geodata`,
+    icon: IconWorld,
+  },
+  questions: {
+    id: uniqueId(),
+    title: `Questions`,
+    href: `/questions`,
+    icon: IconQuestionMark,
+  },
+  settings: {
+    id: uniqueId(),
+    title: `Settings`,
+    href: `/settings`,
+    icon: IconSettings,
+  },
 }
 
 export const Links = [
@@ -37,6 +106,7 @@ export const Links = [
     navlabel: true,
     subheader: `API's`,
   },
+  routes.questions,
   routes.geodata,
   {
     navlabel: true,

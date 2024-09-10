@@ -2,8 +2,8 @@
 
 
 import { Grid } from '@mui/material';
-import { routes } from '@/app/routes/routes';
 import DCard from '@/app/(DashboardLayout)/components/shared/DCard';
+import { routes } from '@/app/(DashboardLayout)/components/nav/nav';
 import PageContainer from '@/app/(DashboardLayout)/components/container/PageContainer';
 
 export default function NotificationsPage() {
