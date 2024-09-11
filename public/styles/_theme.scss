@@ -5,7 +5,9 @@ $mobileMenuBreakPointL: 1200px;
 :root {
     // Main
     --space: 24px;
+    --fontWeight: 600;
     --borderRadius: 5px;
+    --fieldHeight: 42px;
     --inputHeight: 42.25px;
     --collapsedHeight: 58px;
     --transition: 0.24s var(--altTransition) !important;
@@ -100,7 +102,28 @@ $mobileMenuBreakPointL: 1200px;
     max-height: var(--collapsedHeight) !important;
 }
 
+.customCardTitle {
+    h2 {
+        font-size: 18px;
+        font-weight: var(--fontWeight);
+    }
+}
+
+.quizIcon {
+    font-size: 30px;
+    path {
+        &:first-child {
+            fill: var(--mainDark);
+        }
+        &:last-child {
+            fill: var(--main);
+        }
+    }
+}
+
 .card {
+    max-height: 1000px;
+    transition: 500ms var(--altTransition);
     &.p0 {
         padding: 0;
         .cardContent {

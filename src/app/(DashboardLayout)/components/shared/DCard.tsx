@@ -4,7 +4,6 @@ import { Card, CardContent, Typography, Stack, Box, Button } from '@mui/material
 
 type CardOptions = {
   style?: any;
-  title?: string;
   subtitle?: string;
   expanded?: boolean;
   className?: string;
@@ -15,6 +14,7 @@ type CardOptions = {
   id?: string | undefined;
   cardTitleColor?: string;
   expandCollapse?: boolean;
+  title?: JSX.Element | any;
   cardContentClass?: string;
   cardTitleLabelBG?: string; 
   action?: JSX.Element | any;
@@ -22,6 +22,7 @@ type CardOptions = {
   component?: React.ElementType;
   cardTitleBorderColor?: string;
   height?: string | number | any;
+  titleMB?: string | number | any;
   minHeight?: string | number | any;
   expandCollapseButtonColor?: string;
   middlecontent?: string | JSX.Element;
@@ -41,6 +42,7 @@ export default function DCard({
   children,
   minHeight,
   background,
+  titleMB = 3,
   middlecontent,
   expanded = true,
   className = `dCard`,
@@ -76,8 +78,8 @@ export default function DCard({
           <Stack
             spacing={2}
             direction={`row`}
-            mb={children ? 3 : 0}
             alignItems={`center`}
+            mb={children ? titleMB : 0}
             justifyContent={stackJustify}
             className={`cardTitleRow titleStack`}
             style={{ 
@@ -87,20 +89,24 @@ export default function DCard({
           >
             <Box className={`cardTitleBox`}>
               {title ? (
-                <Typography 
-                  variant={`h5`}
-                  className={`cardTitle`} 
-                  style={{ 
-                    background: cardTitleLabelBG, 
-                    padding: cardTitleLabelPadding,
-                    borderColor: cardTitleBorderColor,
-                    borderRadius: cardTitleLabelBorderRadius,
-                    borderBottom: `1px solid ${cardTitleBorderColor}`, 
-                    color: cardTitleColor != `` ? cardTitleColor : undefined, 
-                  }} 
-                >
+                typeof title == `string` ? (
+                  <Typography 
+                    variant={`h5`}
+                    className={`cardTitle`} 
+                    style={{ 
+                      background: cardTitleLabelBG, 
+                      padding: cardTitleLabelPadding,
+                      borderColor: cardTitleBorderColor,
+                      borderRadius: cardTitleLabelBorderRadius,
+                      borderBottom: `1px solid ${cardTitleBorderColor}`, 
+                      color: cardTitleColor != `` ? cardTitleColor : undefined, 
+                    }} 
+                  >
                     {title}
-                </Typography>
+                  </Typography>
+                ) : (
+                  title
+                )
               ) : ``}
               {subtitle ? (
                 <Typography 

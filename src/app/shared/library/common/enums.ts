@@ -3,6 +3,11 @@ export enum NavVariants {
     permanent = `permanent`,
 }
 
+export enum Roles {
+    QuizTaker = `Quiz Taker`,
+    QuizMaker = `Quiz Maker`,
+}
+
 export enum GeoDataFormTypes {
     Locations = `Locations`,
     Coordinates = `Coordinates`,

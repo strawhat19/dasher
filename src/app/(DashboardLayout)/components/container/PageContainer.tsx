@@ -1,7 +1,7 @@
 'use client';
 
 import { Helmet, HelmetProvider } from 'react-helmet-async';
-import { brandName, iconPNG } from '@/app/shared/library/common/constants';
+import { brandName, icon } from '@/app/shared/library/common/constants';
 
 type Props = {
   title?: string;
@@ -18,7 +18,7 @@ export default function PageContainer({ title, description, children }: Props | 
         <meta name={`theme-color`} content={`#000000`} />
         <meta name={`description`} content={description} />
         <link rel={`apple-touch-icon`} href={`/icons/icon-192x192.png`} />
-        <link rel={`icon`} href={`/images/logos/${iconPNG}`} type={`image/x-icon`} />
+        <link rel={`icon`} href={`/images/logos/${icon}`} type={`image/x-icon`} />
         <meta name={`viewport`} content={`width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no`} />
         <link rel={`stylesheet`} href={`https://use.fontawesome.com/releases/v5.8.1/css/all.css`} integrity={`sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf`} crossOrigin={`anonymous`} />
       </Helmet>

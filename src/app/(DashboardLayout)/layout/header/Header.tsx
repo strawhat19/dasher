@@ -51,7 +51,7 @@ const Header = () => {
             <IconMenu style={{ fontSize: 25, color: darkMode ? `var(--fontColor)` : `var(--main)` }} />
           </IconButton>
 
-          <Box className={`mobileMenuLogo p0`} sx={{
+          <Box className={`topHeaderLogo mobileMenuLogo p0`} sx={{
               display: {
                 lg: `inline`,
                 xs: `inline`,

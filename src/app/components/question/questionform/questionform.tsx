@@ -2,24 +2,38 @@
 
 import './questionform.scss';
 
-import { useState } from 'react';
+import { Question } from '../question';
 import { Check } from '@mui/icons-material';
+import { useContext, useState } from 'react';
+import { SharedDatabase } from '@/app/shared/shared';
 import { letters } from '@/app/shared/library/common/constants';
 import DCard from '@/app/(DashboardLayout)/components/shared/DCard';
 import { Difficulties, Topics } from '@/app/shared/library/common/enums';
 import CustomTextField from '@/app/(DashboardLayout)/components/forms/theme-elements/CustomTextField';
 import { Button, FormControl, Grid, MenuItem, Select, SelectChangeEvent, useMediaQuery } from '@mui/material';
 
-export default function QuestionForm({}: any) {
-    const smallScreenSize = useMediaQuery((theme: any) => theme.breakpoints.down(`sm`));
+export type QuestionFormOptions = {
+    topics?: Topics[];
+    choices?: string[];
+    expanded?: boolean;
+    questionToEdit?: Question;
+    difficulties?: Difficulties[];
+} 
 
+export default function QuestionForm({
+    questionToEdit,
+    expanded = false,
+    choices = letters.slice(0, 4),
+    topics = Object.values(Topics),
+    difficulties = Object.values(Difficulties),
+}: QuestionFormOptions) {
+
+    let { setQuestions } = useContext<any>(SharedDatabase);
     let [answer, setAnswer] = useState<any>(letters[0]);
     let [question, setQuestion] = useState<any>(`What is 2 + 2?`);
-    let [choices, setChoices] = useState<string[]>(letters.slice(0, 4));
     let [difficulty, setDifficulty] = useState<Difficulties>(Difficulties.Easy);
-    let [allTopics, setAllTopics] = useState<Topics[] | string[]>(Object.values(Difficulties));
-    let [topics, setTopics] = useState<Topics[] | string[]>(Object.values(Difficulties).slice(0, 3));
-    let [difficulties, setDifficulties] = useState<Difficulties[] | string[]>([Difficulties.Easy, Difficulties.Medium, Difficulties.Hard, Difficulties.Extreme]);
+    const smallScreenSize = useMediaQuery((theme: any) => theme.breakpoints.down(`sm`));
+    let [formTopics, setFormTopics] = useState<Topics[] | string[]>(Object.values(Topics).slice(0, 3));
 
     const formDisabled = () => {
         return answer == `` || question == ``;
@@ -34,9 +48,10 @@ export default function QuestionForm({}: any) {
         setQuestion(value);
     }
 
-    const onTopicChange = (event: SelectChangeEvent<typeof topics>) => {
+    const onTopicChange = (event: SelectChangeEvent<typeof formTopics>) => {
         const { target: { value } } = event;
-        setTopics(typeof value === `string` ? value.split(`,`) : value);
+        let topicToSet: Topics | any = typeof value === `string` ? value.split(`,`) : value;
+        setFormTopics(topicToSet);
     };
 
     const onQuestionFormSubmit = (e: any) => {
@@ -45,35 +60,44 @@ export default function QuestionForm({}: any) {
         const formData = new FormData(e.target);
         let value = Object.fromEntries(formData.entries());
         let { question, A, B, C, D } = value;
+        question = question.toString();
 
-        let questionToCreate = { 
-            topics,
+        let questionToSet: Question = new Question({ 
             question,
             difficulty,
+            explanation: ``,
+            topics: formTopics,
             choices: [A, B, C, D],
             answer: value[answer],
-        };
+        });
 
-        console.log(`Question Form`, questionToCreate);
+        console.log(`Question`, questionToSet);
+
+        setQuestions((prevQuestions: Question[]) => [questionToSet, ...prevQuestions]);
     }
 
     return (
         <Grid item xs={12} className={`questionFormItem`}>
           <DCard 
-            expanded={false}
+            titleMB={`10px`}
+            expanded={expanded}
             expandCollapse={true}
             cardTitleLabelPadding={0} 
-            title={`Create Question Form`} 
             cardTitleLabelBorderRadius={5}
             cardTitleBG={`var(--mainDark)`} 
             cardTitleLabelBG={`transparent`}
             className={`questionFormCard p0`} 
             cardTitleBorderColor={`transparent`}
             cardTitlePadding={`12px var(--space)`} 
+            title={(
+                <div className={`customCardTitle p0 m0`}>
+                    <h2 className={`p0 m0`}>{questionToEdit ? `Update` : `Create`} Question Form</h2>
+                </div>
+            )}
         >
             <form id={`questionForm`} onSubmit={(e) => onQuestionFormSubmit(e)} className={`questionForm flex column sideSpace bottomSpace`}>
               <Grid className={`formFields`} container spacing={2}>
-                {allTopics && allTopics.length > 0 ? (
+                {topics && topics.length > 0 ? (
                     <Grid xs={12} item>
                         <div className={`p10b`}>
                             <strong>Topics</strong>
@@ -83,15 +107,15 @@ export default function QuestionForm({}: any) {
                                 className={`hoverAction`}
                                 onChange={onTopicChange}
                                 id={`diffSelect`}
-                                value={topics}
+                                value={formTopics}
                                 multiple
                             >
-                                {allTopics.map((topic: any, tidx: any) => (
+                                {topics.map((topic: any, tidx: any) => (
                                     <MenuItem 
                                         key={tidx} 
                                         value={topic}
                                         className={`selectItem`}
-                                        disabled={topics.length == 1 && topics.includes(topic)} 
+                                        disabled={formTopics.length == 1 && formTopics.includes(topic)} 
                                     >
                                         {topic}
                                     </MenuItem>
@@ -143,7 +167,7 @@ export default function QuestionForm({}: any) {
                                     {choice + `)`}
                                 </Grid>
                                 <Grid item xs={6} md={8} className={`p0Important`}>
-                                    <CustomTextField id={choice} name={choice} defaultValue={choice} placeholder={`Choice`} type={`text`} className={`field`} variant={`outlined`} fullWidth />
+                                    <CustomTextField required id={choice} name={choice} defaultValue={choice} placeholder={`Choice`} type={`text`} className={`field`} variant={`outlined`} fullWidth />
                                 </Grid>
                                 <Grid item xs={4} md={3} className={`pt0Important`}>
                                     <Button 
@@ -163,7 +187,7 @@ export default function QuestionForm({}: any) {
                 </Grid>
                 <Grid item xs={12}>
                   <Button disabled={formDisabled()} className={`w100 mainButton choiceButton mainDark`} type={`submit`}>
-                    <strong>Create Question</strong>
+                    <strong>{questionToEdit ? `Edit` : `Create`} Question</strong>
                   </Button>
                 </Grid>
               </Grid>

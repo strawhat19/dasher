@@ -1,12 +1,6 @@
-:root {
-    --fontWeight: 600;
-    --fieldHeight: 42px;
-}
-
 .questionFormCard {
     max-height: 600px;
     font-weight: var(--fontWeight);
-    transition: 500ms var(--altTransition);
     input {
         font-weight: var(--fontWeight);
     }

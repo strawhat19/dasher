@@ -16,11 +16,11 @@ export type QuestionCardOptions = {
 export class Question {
   [key: string]: any;
   constructor(quesObj: {
-    answer: number,
-    topics: Topics[],
     question: string,
     explanation: string,
-    difficulty: Difficulties,
+    topics: Topics[] | string[],
+    answer: string | number | any,
+    difficulty: Difficulties | string,
     choices: string[] | number[] | any[],
   }) {
     Object.assign(this, quesObj);
