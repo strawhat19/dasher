@@ -1,8 +1,8 @@
 import './selector.scss';
 
 import { ToggleButton, ToggleButtonGroup } from '@mui/material';
-import { GeoDataFormTypes } from '@/app/shared/library/common/enums';
 import { GpsFixedOutlined, NearMeOutlined } from '@mui/icons-material';
+import { GeoDataFormTypes } from '@/app/shared/library/common/dictionaries';
 
 let value = `Value`;
 

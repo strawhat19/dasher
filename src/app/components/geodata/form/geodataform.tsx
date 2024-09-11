@@ -4,7 +4,7 @@ import { useContext } from 'react';
 import Spinner from '../../loading/spinner/spinner';
 import { PublicOutlined } from '@mui/icons-material';
 import { SharedDatabase } from '@/app/shared/shared';
-import { States } from '@/app/shared/library/common/enums';
+import { States } from '@/app/shared/library/common/dictionaries';
 import { getGeoData, locations } from '@/app/shared/library/common/constants';
 import { Button, Grid, Stack, Theme, useMediaQuery, useTheme } from '@mui/material';
 import CustomTextField from '@/app/(DashboardLayout)/components/forms/theme-elements/CustomTextField';

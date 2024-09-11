@@ -2,45 +2,59 @@
 
 import './questionform.scss';
 
-import { Question } from '../question';
+import { Question } from '../questioncard';
 import { useContext, useState } from 'react';
 import { Check, Edit } from '@mui/icons-material';
 import { SharedDatabase } from '@/app/shared/shared';
 import { letters } from '@/app/shared/library/common/constants';
 import DCard from '@/app/(DashboardLayout)/components/shared/DCard';
-import { Difficulties, Topics } from '@/app/shared/library/common/enums';
+import { SampleQuestions } from '@/app/shared/database/questions/questions';
+import { Difficulties, Subjects } from '@/app/shared/library/common/dictionaries';
 import CustomTextField from '@/app/(DashboardLayout)/components/forms/theme-elements/CustomTextField';
-import { Button, FormControl, Grid, MenuItem, Select, SelectChangeEvent, useMediaQuery } from '@mui/material';
+import { Button, FormControl, Grid, MenuItem, Select, SelectChangeEvent, TextareaAutosize, useMediaQuery } from '@mui/material';
 
 export type QuestionFormOptions = {
-    topics?: Topics[];
+    topics?: string[];
     choices?: string[];
     expanded?: boolean;
+    subjects?: string[];
+    explanation?: string;
+    difficulties?: string[];
     questionToEdit?: Question;
-    difficulties?: Difficulties[];
 } 
 
 export default function QuestionForm({
     questionToEdit,
     expanded = false,
     choices = letters.slice(0, 4),
-    topics = Object.values(Topics),
     difficulties = Object.values(Difficulties),
+    explanation = SampleQuestions[0].explanation,
+    subjects = Object.values(Subjects).map(s => s.name),
 }: QuestionFormOptions) {
 
     let { setQuestions } = useContext<any>(SharedDatabase);
+
     let [answer, setAnswer] = useState<any>(letters[0]);
+    let [subject, setSubject] = useState<any>(Subjects.Math);
     let [question, setQuestion] = useState<any>(`What is 2 + 2?`);
-    let [difficulty, setDifficulty] = useState<Difficulties>(Difficulties.Easy);
+    let [difficulty, setDifficulty] = useState<string>(Difficulties.Easy);
+    let [formTopics, setFormTopics] = useState<string[]>(subject.topics.slice(0, 3));
     const smallScreenSize = useMediaQuery((theme: any) => theme.breakpoints.down(`sm`));
-    let [formTopics, setFormTopics] = useState<Topics[] | string[]>(Object.values(Topics).slice(0, 3));
 
     const formDisabled = () => {
         return answer == `` || question == ``;
     }
 
+    const onSubjectChange = (event: SelectChangeEvent) => {
+        let subjectStr: string = event.target.value as string;
+        let convStr: string = subjectStr.replaceAll(` `, `_`);
+        let subjectToSet = Subjects[convStr as keyof typeof Subjects];
+        setSubject(subjectToSet);
+        setFormTopics(subjectToSet.topics.slice(0,1));
+    };
+
     const onDifficultyChange = (event: SelectChangeEvent) => {
-        setDifficulty(event.target.value as Difficulties);
+        setDifficulty(event.target.value as string);
     };
 
     const onQuestionField = (e?: any) => {
@@ -50,7 +64,7 @@ export default function QuestionForm({
 
     const onTopicChange = (event: SelectChangeEvent<typeof formTopics>) => {
         const { target: { value } } = event;
-        let topicToSet: Topics | any = typeof value === `string` ? value.split(`,`) : value;
+        let topicToSet: any = typeof value === `string` ? value.split(`,`) : value;
         setFormTopics(topicToSet);
     };
 
@@ -59,16 +73,17 @@ export default function QuestionForm({
 
         const formData = new FormData(e.target);
         let value = Object.fromEntries(formData.entries());
-        let { question, A, B, C, D } = value;
+        let { question, A, B, C, D, explanation } = value;
         question = question.toString();
 
         let questionToSet: Question = new Question({ 
             question,
             difficulty,
-            explanation: ``,
             topics: formTopics,
             choices: [A, B, C, D],
             answer: value[answer],
+            subject: subject.name,
+            explanation: explanation as string,
         });
 
         console.log(`Question`, questionToSet);
@@ -91,15 +106,40 @@ export default function QuestionForm({
             cardTitlePadding={`12px var(--space)`} 
             title={(
                 <div className={`customCardTitle p0 m0 flex alignCenter gap5`}>
-                    <span className={`formIcon`}>{questionToEdit ? <Edit style={{fontSize: 12}} /> : `+`}</span>
-                    <h2 className={`p0 m0`}>{questionToEdit ? `Update` : `Create`} Question Form</h2>
+                    <span className={`formIcon`}>
+                        {questionToEdit ? <Edit style={{fontSize: 12}} /> : `+`}
+                    </span>
+                    <h2 className={`p0 m0`}>
+                        {questionToEdit ? `Update` : `Create`} Question
+                    </h2>
                 </div>
             )}
         >
             <form id={`questionForm`} onSubmit={(e) => onQuestionFormSubmit(e)} className={`questionForm flex column sideSpace bottomSpace`}>
               <Grid className={`formFields`} container spacing={2}>
-                {topics && topics.length > 0 ? (
-                    <Grid xs={12} item>
+                {subjects && subjects.length > 0 ? (
+                    <Grid xs={formTopics.length > 2 ? 12 : 5} item>
+                        <div className={`p10b`}>
+                            <strong>Subject</strong>
+                        </div>
+                        <FormControl className={`selectField subjectField`} fullWidth>
+                            <Select
+                                id={`subjSelect`}
+                                value={subject.name}
+                                className={`hoverAction`}
+                                onChange={onSubjectChange}
+                            >
+                                {subjects.map((subj: any, sidx: any) => (
+                                    <MenuItem key={sidx} value={subj} className={`selectItem`}>
+                                        {subj}
+                                    </MenuItem>
+                                ))}
+                            </Select>
+                        </FormControl>
+                    </Grid>
+                ) : <></>}
+                {subject.topics && subject.topics.length > 0 ? (
+                    <Grid xs={formTopics.length > 2 ? 12 : 7} item>
                         <div className={`p10b`}>
                             <strong>Topics</strong>
                         </div>
@@ -107,11 +147,11 @@ export default function QuestionForm({
                             <Select
                                 className={`hoverAction`}
                                 onChange={onTopicChange}
-                                id={`diffSelect`}
                                 value={formTopics}
+                                id={`diffSelect`}
                                 multiple
                             >
-                                {topics.map((topic: any, tidx: any) => (
+                                {subject.topics.map((topic: any, tidx: any) => (
                                     <MenuItem 
                                         key={tidx} 
                                         value={topic}
@@ -140,10 +180,10 @@ export default function QuestionForm({
                             </div>
                             <FormControl className={`selectField difficultyField`} fullWidth>
                                 <Select
-                                    onChange={onDifficultyChange}
-                                    className={`hoverAction`}
-                                    value={difficulty}
                                     id={`diffSelect`}
+                                    value={difficulty}
+                                    className={`hoverAction`}
+                                    onChange={onDifficultyChange}
                                 >
                                     {difficulties.map((diff: any, didx: any) => (
                                         <MenuItem key={didx} value={diff} className={`selectItem`}>
@@ -165,10 +205,20 @@ export default function QuestionForm({
                         <Grid key={cidx} xs={12} md={6} item>
                             <Grid container spacing={1} alignItems={`center`} direction={`row`}>
                                 <Grid item xs={2} md={1} className={`text-center p0Important`}>
-                                    {choice + `)`}
+                                    Opt. {choice}
                                 </Grid>
                                 <Grid item xs={6} md={8} className={`p0Important`}>
-                                    <CustomTextField required id={choice} name={choice} defaultValue={choice} placeholder={`Choice`} type={`text`} className={`field`} variant={`outlined`} fullWidth />
+                                    <CustomTextField 
+                                        required 
+                                        id={choice} 
+                                        name={choice} 
+                                        defaultValue={`Option ${choice}`} 
+                                        placeholder={`Choice`} 
+                                        type={`text`} 
+                                        className={`field`} 
+                                        variant={`outlined`} 
+                                        fullWidth 
+                                    />
                                 </Grid>
                                 <Grid item xs={4} md={3} className={`pt0Important`}>
                                     <Button 
@@ -187,8 +237,28 @@ export default function QuestionForm({
                   </Grid>
                 </Grid>
                 <Grid item xs={12}>
-                  <Button disabled={formDisabled()} className={`w100 mainButton choiceButton mainDark`} type={`submit`}>
-                    <strong>{questionToEdit ? `Edit` : `Create`} Question</strong>
+                    <div className={`p10b`}>
+                        <strong>Explanation</strong>
+                    </div>
+                    <TextareaAutosize 
+                        name={`explanation`}
+                        defaultValue={explanation} 
+                        className={`field customFormField`} 
+                        placeholder={`Enter Explanation...`}
+                        style={{ 
+                            padding: 12, 
+                            fontWeight: 600,
+                            letterSpacing: 0.5,
+                            // fontStyle: `italic`,
+                            fontFamily: `var(--font)`, 
+                            fontSize: `12px !important`,
+                        }}
+                    />    
+                </Grid>
+                <Grid item xs={12}>
+                  <Button disabled={formDisabled()} className={`w100 ignoreFontButton mainButton choiceButton mainDark simpleFlex alignCenter center gap5`} type={`submit`}>
+                    {questionToEdit ? <Edit style={{fontSize: 12}} /> : `+`}
+                    <strong>{questionToEdit ? `Update` : `Create`} Question</strong>
                   </Button>
                 </Grid>
               </Grid>

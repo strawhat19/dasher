@@ -3,7 +3,6 @@ import './question.scss';
 import { Button, Grid } from '@mui/material';
 import { letters } from '@/app/shared/library/common/constants';
 import DCard from '@/app/(DashboardLayout)/components/shared/DCard';
-import { Difficulties, Topics } from '@/app/shared/library/common/enums';
 
 export type QuestionCardOptions = {
   title?: string;
@@ -16,11 +15,12 @@ export type QuestionCardOptions = {
 export class Question {
   [key: string]: any;
   constructor(quesObj: {
+    subject: string;
+    topics: string[],
     question: string,
+    difficulty: string,
     explanation: string,
-    topics: Topics[] | string[],
     answer: string | number | any,
-    difficulty: Difficulties | string,
     choices: string[] | number[] | any[],
   }) {
     Object.assign(this, quesObj);

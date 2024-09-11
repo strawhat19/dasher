@@ -5,6 +5,7 @@ import React, { useContext } from 'react';
 import Title from '@/app/components/title/title';
 import DCard from '../../components/shared/DCard';
 import { SharedDatabase } from '@/app/shared/shared';
+import { devEnv } from '@/app/shared/library/common/constants';
 import MobileMenu from '@/app/components/mobilemenu/mobilemenu';
 import { Box, AppBar, Toolbar, styled, Stack } from '@mui/material';
 import ChangeTheme from '@/app/components/theme/buttons/changetheme/changetheme';
@@ -41,7 +42,7 @@ export default function Header({}: any) {
         <Box className={`emptySpace stretchSpace`} flexGrow={1} />
         {/* Header Right */}
         <Stack className={`headerRight`} spacing={2} direction={`row`} alignItems={`center`}>
-          <ChangeTheme />
+          {devEnv ? <ChangeTheme /> : <></>}
           <Settings />
           <MobileMenu onClick={() => setMenuOpen(!menuOpen)} />
         </Stack>

@@ -3,10 +3,10 @@
 import { db } from '@/server/firebase';
 import Logo from '../components/logo/logo';
 import { Atlanta } from './database/database';
-import { States } from './library/common/enums';
+import { States } from './library/common/dictionaries';
 import { createContext, useEffect, useState } from 'react';
-import { Question } from '../components/question/question';
 import { collection, onSnapshot } from 'firebase/firestore';
+import { Question } from '../components/question/questioncard';
 import { SampleQuestions } from './database/questions/questions';
 
 export const SharedDatabase = createContext({});

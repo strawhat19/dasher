@@ -13,6 +13,7 @@ $mobileMenuBreakPointL: 1200px;
     --transition: 0.24s var(--altTransition) !important;
     --altTransition: cubic-bezier(0.77, 0.2, 0.05, 1) !important;
     --cardShadow: rgb(145 158 171 / 30%) 0px 1px 2px 0px, rgb(145 158 171 / 12%) 0px 12px 24px -4px !important;
+    --font: '__Plus_Jakarta_Sans_a182b8', '__Plus_Jakarta_Sans_Fallback_a182b8', Helvetica, Arial, sans-serif;
 
     // Breakpoints
     --mobileMenuBreakPointS: $mobileMenuBreakPointS;
@@ -115,6 +116,16 @@ $mobileMenuBreakPointL: 1200px;
             fill: var(--main);
         }
     }
+}
+
+.customFormField {
+    width: 100%;
+    border: none;
+    outline: none;
+    color: var(--fontColor);
+    background: var(--darkMain);
+    min-height: var(--fieldHeight);
+    border-radius: var(--borderRadius);
 }
 
 .card {
@@ -275,8 +286,12 @@ input {
     &:not(.MuiIconButton-root) {
         padding-left: 15px;
     }
+    &:not(.ignoreFontButton) {
+        svg {
+            font-size: 25px !important;
+        }
+    }
     svg {
-        font-size: 25px !important;
         color: var(--fontColor) !important;
     }
     &:hover {
@@ -290,8 +305,10 @@ input {
         &:has(.homeIcon) {
             padding: 4px;
         }
-        svg {
-            font-size: 20px !important;
+        &:not(.ignoreFontButton) {
+            svg {
+                font-size: 20px !important;
+            }
         }
     }
 }

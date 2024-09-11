@@ -1,13 +1,14 @@
 'use client';
 
 import './map.scss';
+
 import { useContext } from 'react';
 import { SharedDatabase } from '@/app/shared/shared';
 import { Skeleton } from '../../loading/skeleton/skeleton';
 import { locations } from '@/app/shared/library/common/constants';
-import { GoogleMapZoomLevels, States } from '@/app/shared/library/common/enums';
+import { GoogleMapZoomLevels, States } from '@/app/shared/library/common/dictionaries';
 
-type MapOptions = {
+export type MapOptions = {
     height?: number;
     shadow?: boolean;
     rounded?: boolean;
