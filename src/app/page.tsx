@@ -15,7 +15,7 @@ import RecentTransactions from '@/app/(DashboardLayout)/components/dashboard/Rec
 import ProductPerformance from '@/app/(DashboardLayout)/components/dashboard/ProductPerformance';
 
 export default function Dashboard() {
-  let { darkMode, cards } = useContext<any>(SharedDatabase);
+  let { beta, darkMode, cards } = useContext<any>(SharedDatabase);
 
   const openShare = () => {
     if (navigator.share) {
@@ -55,7 +55,7 @@ export default function Dashboard() {
     <PageContainer title={`Dashboard`} description={`Dashboard Page`}>
       <Box>
         <Grid container spacing={3}>
-          {devEnv ? <>
+          {(devEnv || beta) ? <>
             <Grid item xs={12} md={7}>
               <DCard 
                 minHeight={600} 

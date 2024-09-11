@@ -13,9 +13,11 @@ export const SharedDatabase = createContext({});
 
 export default function SharedData({ children }: { children: React.ReactNode; }) {
   let [user, setUser] = useState(null);
+  let [beta, setBeta] = useState(false);
   let [cards, setCards] = useState<any>([]);
   let [darkMode, setDarkMode] = useState(true);
   let [menuOpen, setMenuOpen] = useState(false);
+  let [features, setFeatures] = useState<any>([]);
   let [pageTitle, setPageTitle] = useState(<Logo />);
   let [location, setLocation] = useState<any>(Atlanta);
   let [isSidebarOpen, setSidebarOpen] = useState(true);
@@ -25,6 +27,14 @@ export default function SharedData({ children }: { children: React.ReactNode; })
   let [questions, setQuestions] = useState<Question[]>(SampleQuestions);
 
   useEffect(() => {
+    const featuresCollection = collection(db, `features`);
+    const unsubscribeFromFeaturesDatabase = onSnapshot(featuresCollection, (currentFeaturesInDB) => {
+      const featuresFromDB: any[] = [];
+      currentFeaturesInDB.forEach((doc) => featuresFromDB.push(doc.data()));
+      setFeatures(featuresFromDB);
+      setBeta(featuresFromDB[0].enabled);
+    });
+
     const cardsCollection = collection(db, `cards`);
     const unsubscribeFromCardsDatabase = onSnapshot(cardsCollection, (currentCardsInDB) => {
       const cardsFromDB: any[] = [];
@@ -34,6 +44,7 @@ export default function SharedData({ children }: { children: React.ReactNode; })
 
     return () => {
       unsubscribeFromCardsDatabase();
+      unsubscribeFromFeaturesDatabase();
     };
   }, [])
 
@@ -41,6 +52,7 @@ export default function SharedData({ children }: { children: React.ReactNode; })
     <SharedDatabase.Provider value={{
       user, setUser, 
       time, setTime,
+      beta, setBeta,
       cards, setCards,
       menuOpen, setMenuOpen,
       location, setLocation,
