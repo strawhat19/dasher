@@ -6,6 +6,12 @@
     opacity: 0.55;
 }
 
+.topHeaderLogo {
+    .logoContainer {
+        padding-left: 0;
+    }
+}
+
 .mobileMenuIconButton {
     svg {
         top: 3px;
@@ -50,6 +56,9 @@
 @media (max-width: $mobileMenuBreakPointL) {
     .hideOnMobileL {
         display: none;
+    }
+    .sidebarLogoContainer {
+        justify-content: center;
     }
 }
 

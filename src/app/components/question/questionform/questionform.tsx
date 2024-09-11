@@ -3,8 +3,8 @@
 import './questionform.scss';
 
 import { Question } from '../question';
-import { Check } from '@mui/icons-material';
 import { useContext, useState } from 'react';
+import { Check, Edit } from '@mui/icons-material';
 import { SharedDatabase } from '@/app/shared/shared';
 import { letters } from '@/app/shared/library/common/constants';
 import DCard from '@/app/(DashboardLayout)/components/shared/DCard';
@@ -90,7 +90,8 @@ export default function QuestionForm({
             cardTitleBorderColor={`transparent`}
             cardTitlePadding={`12px var(--space)`} 
             title={(
-                <div className={`customCardTitle p0 m0`}>
+                <div className={`customCardTitle p0 m0 flex alignCenter gap5`}>
+                    <span className={`formIcon`}>{questionToEdit ? <Edit style={{fontSize: 12}} /> : `+`}</span>
                     <h2 className={`p0 m0`}>{questionToEdit ? `Update` : `Create`} Question Form</h2>
                 </div>
             )}

@@ -98,10 +98,6 @@ $mobileMenuBreakPointL: 1200px;
     transition: var(--transition);
 }
 
-.collapsed {
-    max-height: var(--collapsedHeight) !important;
-}
-
 .customCardTitle {
     h2 {
         font-size: 18px;
@@ -110,7 +106,7 @@ $mobileMenuBreakPointL: 1200px;
 }
 
 .quizIcon {
-    font-size: 30px;
+    font-size: 27px;
     path {
         &:first-child {
             fill: var(--mainDark);
@@ -123,7 +119,7 @@ $mobileMenuBreakPointL: 1200px;
 
 .card {
     max-height: 1000px;
-    transition: 500ms var(--altTransition);
+    @extend .altTransition;
     &.p0 {
         padding: 0;
         .cardContent {
@@ -136,6 +132,60 @@ $mobileMenuBreakPointL: 1200px;
     margin: 0;
     padding: 5px !important;
     background: var(--mainDark);
+}
+
+.collapsed {
+    max-height: var(--collapsedHeight) !important;
+}
+
+.altTransition {
+    overflow: hidden !important;
+    transition: all 650ms var(--altTransition) !important;
+}
+
+.headerCardMenu {
+    @extend .altTransition;
+    max-height: 0 !important;
+    &.expanded {
+        max-height: 620px !important;
+    }
+    .sidebarItems {
+        padding-left: 16px;
+        padding-right: 16px;
+        li {
+            margin: 0;
+        }
+    }
+    .expandCollapse {
+        top: 13px;
+        margin: 0;
+        opacity: 1;
+        right: 16px;
+        position: absolute;
+        padding: 3px !important;
+        border-radius: 100% !important;
+        background: var(--main) !important;
+        svg {
+            position: relative;
+            top: 1px;
+        }
+        strong {
+            display: none;
+        }
+        span {
+            margin: 0;
+        }
+        &:hover {
+            background: var(--mainDark) !important;
+        }
+        @media (max-width: 1200px) and (min-width: 600px) {
+            top: 16px;
+            right: 23px;
+        }
+    }
+    @media (min-width: $mobileMenuBreakPointL) {
+        display: none;
+    }
 }
 
 .hoverAction {
@@ -188,7 +238,7 @@ $mobileMenuBreakPointL: 1200px;
     font-size: 15px;
 }
 
-.headerToolBarRight {
+.headerRight {
     button {
         @extend .mainButton;
     }
@@ -230,7 +280,19 @@ input {
         color: var(--fontColor) !important;
     }
     &:hover {
-        background: var(--darkMain);
+        background: var(--mainDark) !important;
+    }
+    &:has(.homeIcon) {
+        padding: 5px;
+    }
+    @media (max-width: $mobileMenuBreakPointL) {
+        padding: 5px;
+        &:has(.homeIcon) {
+            padding: 4px;
+        }
+        svg {
+            font-size: 20px !important;
+        }
     }
 }
 

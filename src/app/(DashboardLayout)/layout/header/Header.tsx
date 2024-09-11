@@ -1,19 +1,16 @@
 import Settings from './Profile';
 import PropTypes from 'prop-types';
+import NavMenu from './navmenu/navmenu';
 import React, { useContext } from 'react';
-import { IconMenu } from '@tabler/icons-react';
+import Title from '@/app/components/title/title';
+import DCard from '../../components/shared/DCard';
 import { SharedDatabase } from '@/app/shared/shared';
-import { Brightness7TwoTone, NightsStayTwoTone } from '@mui/icons-material';
-import { Box, AppBar, Toolbar, styled, Stack, IconButton, Tooltip, Button, useMediaQuery } from '@mui/material';
+import MobileMenu from '@/app/components/mobilemenu/mobilemenu';
+import { Box, AppBar, Toolbar, styled, Stack } from '@mui/material';
+import ChangeTheme from '@/app/components/theme/buttons/changetheme/changetheme';
 
-const Header = () => {
-  const largeScreenSize = useMediaQuery((theme: any) => theme.breakpoints.up(`lg`));
-
-  const { 
-    pageTitle,
-    darkMode, setDarkMode, 
-    isMobileSidebarOpen, setMobileSidebarOpen, 
-  } = useContext<any>(SharedDatabase);
+export default function Header({}: any) {
+  let { menuOpen, setMenuOpen } = useContext<any>(SharedDatabase);
 
   const ToolbarStyled = styled(Toolbar)(({ theme }) => ({
     width: `100%`,
@@ -30,57 +27,36 @@ const Header = () => {
     },
   }));
 
+  const toggleExpanded = () => {
+    let toggleEl = document.querySelector(`.headerCardMenu`);
+    if (toggleEl) toggleEl.classList.toggle(`expanded`);
+  }
+
   return (
     <AppBarStyled id={`header`} className={`header`} position={`sticky`} color={`default`}>
       <ToolbarStyled className={`headerToolbar`}>
-        
-        <Stack spacing={2} direction={`row`} alignItems={`center`}>
-          <IconButton
-            size={`medium`}
-            color={`inherit`}
-            aria-label={`menu`}
-            className={`mobileMenuIconButton p0`}
-            onClick={() => setMobileSidebarOpen(!isMobileSidebarOpen)}
-            sx={{
-              display: {
-                lg: `none`,
-                xs: `inline`,
-              },
-            }}
-          >
-            <IconMenu style={{ fontSize: 25, color: darkMode ? `var(--fontColor)` : `var(--main)` }} />
-          </IconButton>
-
-          <Box className={`topHeaderLogo mobileMenuLogo p0`} sx={{
-              display: {
-                lg: `inline`,
-                xs: `inline`,
-              },
-            }}
-          >
-            {pageTitle}
-          </Box>
-
-        </Stack>
-
-        <Box flexGrow={1} />
-
-        <Stack className={`headerToolBarRight`} spacing={2} direction={`row`} alignItems={`center`}>
-          <Tooltip title={`${darkMode ? `Light` : `Dark`} Mode`} arrow>
-            {largeScreenSize ? (
-              <Button size={`large`} className={`blackButton`} onClick={(e) => setDarkMode(!darkMode)} startIcon={darkMode ? <Brightness7TwoTone /> : <NightsStayTwoTone />}>
-                {`${darkMode ? `Light` : `Dark`} Mode`}
-              </Button>
-            ) : (
-              <IconButton size={`small`} className={`blackButton`} onClick={(e) => setDarkMode(!darkMode)}>
-                {darkMode ? <Brightness7TwoTone /> : <NightsStayTwoTone />}
-              </IconButton>
-            )}
-          </Tooltip>
+        {/* Page Icon & Title */}
+        <Title />
+        {/* End Header Left */}
+        <Box className={`emptySpace stretchSpace`} flexGrow={1} />
+        {/* Header Right */}
+        <Stack className={`headerRight`} spacing={2} direction={`row`} alignItems={`center`}>
+          <ChangeTheme />
           <Settings />
+          <MobileMenu onClick={() => setMenuOpen(!menuOpen)} />
         </Stack>
-
+        {/* End Header Right */}
       </ToolbarStyled>
+      <DCard 
+        titleMB={0} 
+        title={`Menu`} 
+        showTitle={false}
+        expanded={menuOpen} 
+        expandCollapse={true} 
+        className={`p0 headerCardMenu`}
+      >
+        <NavMenu showLogo={false} onItemClick={toggleExpanded} />
+      </DCard>
     </AppBarStyled>
   );
 };
@@ -88,5 +64,3 @@ const Header = () => {
 Header.propTypes = {
   sx: PropTypes.object,
 };
-
-export default Header;

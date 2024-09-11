@@ -1,31 +1,29 @@
 import dynamic from 'next/dynamic';
-import { Box, Stack } from '@mui/material';
 import { useTheme } from '@mui/material/styles';
 import { SharedDatabase } from '@/app/shared/shared';
 import React, { useState, useEffect, useContext } from 'react';
 import DCard from '@/app/(DashboardLayout)/components/shared/DCard';
-import { Skeleton } from '@/app/components/loading/skeleton/skeleton';
 
 const Chart = dynamic(() => import('react-apexcharts'), { ssr: false });
 
 export default function SalesOverview() {
     const theme = useTheme();
+    const [, setIsLoading] = useState(true);
     const primary = theme.palette.primary.main;
     const secondary = theme.palette.secondary.main;
-    const [isLoading, setIsLoading] = useState(true);
     let { darkMode } = useContext<any>(SharedDatabase);
 
-    let [skeletonStacks, ] = useState([
-        [275, 400],
-        [155, 375],
-        [69, 320],
-        [100, 269],
-        [175, 175],
-        [369, 200],
-        [215, 15],
-        [400, 300],
-        [275, 400],
-    ]);
+    // let [skeletonStacks, ] = useState([
+    //     [275, 400],
+    //     [155, 375],
+    //     [69, 320],
+    //     [100, 269],
+    //     [175, 175],
+    //     [369, 200],
+    //     [215, 15],
+    //     [400, 300],
+    //     [275, 400],
+    // ]);
 
     const optionscolumnchart: any = {
         chart: {

@@ -8,6 +8,7 @@ type CardOptions = {
   expanded?: boolean;
   className?: string;
   background?: string;
+  showTitle?: boolean;
   cardTitleBG?: string;
   footer?: JSX.Element;
   stackJustify?: string;
@@ -49,6 +50,7 @@ export default function DCard({
   cardTitleColor = ``,
   cardTitlePadding = 0,
   expandCollapse = false,
+  showTitle = title != ``,
   cardTitleBG = `transparent`,
   component: Component = Card,
   stackJustify = `space-between`,
@@ -60,6 +62,11 @@ export default function DCard({
   expandCollapseButtonColor = `transparent`,
 }: CardOptions) {
   let [isExpanded, setIsExpanded] = useState<any>(expanded);
+
+  const handleExpandCollapse = () => {
+    setIsExpanded(!isExpanded);
+  };
+
   return (
     <Card 
       elevation={9} 
@@ -102,10 +109,10 @@ export default function DCard({
                       color: cardTitleColor != `` ? cardTitleColor : undefined, 
                     }} 
                   >
-                    {title}
+                    {showTitle ? title : ``}
                   </Typography>
                 ) : (
-                  title
+                  showTitle ? title : ``
                 )
               ) : ``}
               {subtitle ? (
@@ -122,7 +129,7 @@ export default function DCard({
             </Box>
             {expandCollapse ? (
               <Button 
-                onClick={() => setIsExpanded(!isExpanded)} 
+                onClick={handleExpandCollapse} 
                 style={{ background: expandCollapseButtonColor }} 
                 endIcon={isExpanded ? <IconChevronUp /> : <IconChevronDown />}
                 className={`expandCollapse hoverAction fit h100 mainButton expandCollapse`}

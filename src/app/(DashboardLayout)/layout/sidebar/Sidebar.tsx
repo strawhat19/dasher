@@ -32,13 +32,14 @@ export default function Sidebar({
       scrollbarStyles={scrollbarStyles}
       largeScreenSize={largeScreenSize} 
       isMobileSidebarOpen={isMobileSidebarOpen} 
+      anchor={largeScreenSize ? `left` : `right`}
     />
   )
 
   return (
     <aside className={`sidebar`}>
       {largeScreenSize ? (
-        <Box className={`drawerContainer`} sx={{ width: sidebarWidth, flexShrink: 0 }}>
+        <Box className={`menuSidebar drawerContainer`} sx={{ width: sidebarWidth, flexShrink: 0 }}>
           {getNav()}
         </Box>
       ) : getNav()}
