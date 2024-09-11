@@ -1,5 +1,15 @@
 :root {
+    --fontWeight: 600;
     --fieldHeight: 42px;
+}
+
+.questionFormCard {
+    max-height: 600px;
+    font-weight: var(--fontWeight);
+    transition: 500ms var(--altTransition);
+    input {
+        font-weight: var(--fontWeight);
+    }
 }
 
 .fieldHeight {
@@ -15,10 +25,6 @@
     min-height: var(--fieldHeight);
 }
 
-.startIcon {
-    transition: var(--transition);
-}
-
 .light {
     .selectField {
         svg {
@@ -30,7 +36,7 @@
     .choiceButton {
         background: var(--main);
         &.selected {
-            .startIcon {
+            .iconButtonIcon {
                 path {
                     fill: white;
                 }
@@ -47,7 +53,7 @@
     }
     &.selected {
         background: var(--mainDark);
-        .startIcon {
+        .iconButtonIcon {
             path {
                 fill: var(--success);
             }
@@ -55,11 +61,6 @@
     }
     &:hover {
         background: var(--main) !important;
-        .startIcon {
-            path {
-                fill: var(--fontColor);
-            }
-        }
     }
 }
 
@@ -80,18 +81,19 @@
 
 .selectField {
     @extend .flexedField;
-    border-radius: 7px;
     background: var(--mainDark);
     justify-content: space-between;
+    border-radius: var(--borderRadius);
     .MuiOutlinedInput-root {
         width: 100%;
     }
     .MuiSelect-select {
         width: 100%;
+        font-weight: var(--fontWeight);
     }
     svg {
         path {
-            fill: var(--main);
+            fill: var(--fontColor);
         }
     }
     .MuiInputBase-input {

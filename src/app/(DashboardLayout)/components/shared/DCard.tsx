@@ -7,7 +7,6 @@ type CardOptions = {
   title?: string;
   subtitle?: string;
   expanded?: boolean;
-  container?: string;
   className?: string;
   background?: string;
   cardTitleBG?: string;
@@ -44,8 +43,8 @@ export default function DCard({
   background,
   middlecontent,
   expanded = true,
-  cardTitleColor = ``,
   className = `dCard`,
+  cardTitleColor = ``,
   cardTitlePadding = 0,
   expandCollapse = false,
   cardTitleBG = `transparent`,
@@ -56,7 +55,6 @@ export default function DCard({
   cardTitleLabelPadding = `0 0 5px 0`,
   cardTitleBorderColor = `var(--main)`,
   cardContentClass = `cardContentClass`,
-  container = `.MuiGrid-root .MuiGrid-item`,
   expandCollapseButtonColor = `transparent`,
 }: CardOptions) {
   let [isExpanded, setIsExpanded] = useState<any>(expanded);
@@ -97,15 +95,19 @@ export default function DCard({
                     padding: cardTitleLabelPadding,
                     borderColor: cardTitleBorderColor,
                     borderRadius: cardTitleLabelBorderRadius,
+                    borderBottom: `1px solid ${cardTitleBorderColor}`, 
                     color: cardTitleColor != `` ? cardTitleColor : undefined, 
-                    borderBottom: `1px solid ${cardTitleColor != `` ? cardTitleColor : undefined}` 
                   }} 
                 >
                     {title}
                 </Typography>
               ) : ``}
               {subtitle ? (
-                <Typography style={{ color: cardTitleColor != `` ? cardTitleColor : undefined, borderBottom: `1px solid ${cardTitleColor != `` ? cardTitleColor : undefined}` }} variant={`subtitle2`} color={`textSecondary`}>
+                <Typography 
+                  variant={`subtitle2`} 
+                  color={`textSecondary`}
+                  style={{ color: cardTitleColor != `` ? cardTitleColor : undefined, borderBottom: `1px solid ${cardTitleBorderColor}` }} 
+                >
                   {subtitle}
                 </Typography>
               ) : (
@@ -113,8 +115,13 @@ export default function DCard({
               )}
             </Box>
             {expandCollapse ? (
-              <Button style={{ background: expandCollapseButtonColor }} onClick={() => setIsExpanded(!isExpanded)} className={`expandCollapse hoverAction fit h100 mainButton expandCollapse`}>
-                {isExpanded ? <IconChevronDown /> : <IconChevronUp />}
+              <Button 
+                onClick={() => setIsExpanded(!isExpanded)} 
+                style={{ background: expandCollapseButtonColor }} 
+                endIcon={isExpanded ? <IconChevronUp /> : <IconChevronDown />}
+                className={`expandCollapse hoverAction fit h100 mainButton expandCollapse`}
+              >
+                <strong>{isExpanded ? `Collapse ` : `Expand `}</strong>
               </Button>
             ) : action}
           </Stack>

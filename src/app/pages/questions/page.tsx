@@ -3,7 +3,7 @@
 import { useContext } from 'react';
 import { Grid } from '@mui/material'
 import { SharedDatabase } from '@/app/shared/shared';
-import Question from '@/app/components/question/question';
+import QuestionCard from '@/app/components/question/question';
 import { routes } from '@/app/(DashboardLayout)/components/nav/nav';
 import QuestionForm from '@/app/components/question/questionform/questionform';
 import PageContainer from '@/app/(DashboardLayout)/components/container/PageContainer';
@@ -20,7 +20,7 @@ export default function QuestionsPage() {
               {questions.map((question: any, qidx: any) => {
                 return (
                   <Grid key={qidx} item xs={12}>
-                    <Question title={`Q${qidx + 1}.`} question={question} />
+                    <QuestionCard title={`Q${qidx + 1}.`} question={question} />
                   </Grid>
                 )
               })}

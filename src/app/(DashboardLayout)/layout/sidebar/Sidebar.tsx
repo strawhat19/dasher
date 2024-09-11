@@ -17,11 +17,10 @@ export default function Sidebar({
   const scrollbarStyles = {
     '&::-webkit-scrollbar': {
       width: `7px`,
-
     },
     '&::-webkit-scrollbar-thumb': {
-      backgroundColor: `#eff2f7`,
       borderRadius: `15px`,
+      backgroundColor: `#eff2f7`,
     },
   };
 

@@ -5,9 +5,11 @@ $mobileMenuBreakPointL: 1200px;
 :root {
     // Main
     --space: 24px;
-    --borderRadius: 7px;
+    --borderRadius: 5px;
     --inputHeight: 42.25px;
-    --transition: 0.24s cubic-bezier(0.77, 0.2, 0.05, 1) !important;
+    --collapsedHeight: 58px;
+    --transition: 0.24s var(--altTransition) !important;
+    --altTransition: cubic-bezier(0.77, 0.2, 0.05, 1) !important;
     --cardShadow: rgb(145 158 171 / 30%) 0px 1px 2px 0px, rgb(145 158 171 / 12%) 0px 12px 24px -4px !important;
 
     // Breakpoints
@@ -34,15 +36,22 @@ $mobileMenuBreakPointL: 1200px;
     --Easy1: var(--iconRight);
     --Easy2: #39d2c0;
     --Easy3: #7DF9FF;
-    --Easy: var(--Easy1);
+    --Easy4: var(--mainDark);
+    --Easy: var(--Easy4);
     
     --Medium1: var(--mainDark);
     --Medium2: #fae84a;
-    --Medium: var(--Medium1);
+    --Medium3: var(--darkMainLight);
+    --Medium4: #20a797;
+    --Medium5: #01ae9a;
+    --Medium: var(--Medium5);
 
     --Hard1: #e72f6e;
     --Hard2: var(--darkMainLight);
-    --Hard: var(--Hard2);
+    --Hard3: #c20042;
+    --Hard4: #bd3966;
+    --Hard5: #c01d55;
+    --Hard: var(--Hard5);
     
     --Extreme1: #6f61ef;
     --Extreme2: #c874fe;
@@ -74,12 +83,24 @@ $mobileMenuBreakPointL: 1200px;
     border-radius: var(--borderRadius);
 }
 
-.card {
-    height: 100%;
-    transition: var(--transition);
-    &.collapsed {
-        height: 58px;
+.iconButton {
+    grid-gap: 5px;
+    padding: 0 !important;
+    justify-content: center;
+    .MuiButton-icon {
+        margin: 0;
     }
+}
+
+.iconButtonIcon {
+    transition: var(--transition);
+}
+
+.collapsed {
+    max-height: var(--collapsedHeight) !important;
+}
+
+.card {
     &.p0 {
         padding: 0;
         .cardContent {
@@ -247,6 +268,7 @@ input {
 
 .dark {
     --main: var(--altMain);
+    // --mainDark: var(--main);
     --labelColor: var(--iconRight);
     background: var(--bg) !important;
     // Sidebar & Top Bar

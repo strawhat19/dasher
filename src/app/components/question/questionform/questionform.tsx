@@ -7,10 +7,12 @@ import { Check } from '@mui/icons-material';
 import { letters } from '@/app/shared/library/common/constants';
 import DCard from '@/app/(DashboardLayout)/components/shared/DCard';
 import { Difficulties, Topics } from '@/app/shared/library/common/enums';
-import { Button, FormControl, Grid, MenuItem, Select, SelectChangeEvent } from '@mui/material';
 import CustomTextField from '@/app/(DashboardLayout)/components/forms/theme-elements/CustomTextField';
+import { Button, FormControl, Grid, MenuItem, Select, SelectChangeEvent, useMediaQuery } from '@mui/material';
 
-export default function QuestionForm(props: any) {
+export default function QuestionForm({}: any) {
+    const smallScreenSize = useMediaQuery((theme: any) => theme.breakpoints.down(`sm`));
+
     let [answer, setAnswer] = useState<any>(letters[0]);
     let [question, setQuestion] = useState<any>(`What is 2 + 2?`);
     let [choices, setChoices] = useState<string[]>(letters.slice(0, 4));
@@ -56,8 +58,9 @@ export default function QuestionForm(props: any) {
     }
 
     return (
-        <Grid item xs={12}>
+        <Grid item xs={12} className={`questionFormItem`}>
           <DCard 
+            expanded={false}
             expandCollapse={true}
             cardTitleLabelPadding={0} 
             title={`Create Question Form`} 
@@ -98,7 +101,7 @@ export default function QuestionForm(props: any) {
                     </Grid>
                 ) : <></>}
                 <Grid item xs={12}>
-                  <Grid container spacing={3} alignItems={`flex-end`}>
+                  <Grid container spacing={smallScreenSize ? 1 : 3} alignItems={`flex-end`}>
                     <Grid xs={8} item>
                         <div className={`p10b`}>
                             <strong>Question</strong>
@@ -147,8 +150,8 @@ export default function QuestionForm(props: any) {
                                         fullWidth
                                         value={choice} 
                                         onClick={() => setAnswer(choice)}
-                                        endIcon={answer == choice ? <Check className={`startIcon`} /> : undefined} 
-                                        className={`mainButton choiceButton fieldHeight ${answer == choice ? `selected` : ``}`} 
+                                        endIcon={answer == choice ? <Check className={`iconButtonIcon`} /> : undefined} 
+                                        className={`mainButton choiceButton iconButton fieldHeight ${answer == choice ? `selected` : ``}`} 
                                     >
                                         <strong>Correct{answer == choice ? `` : `?`}</strong>
                                     </Button>
