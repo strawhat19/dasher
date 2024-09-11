@@ -12,13 +12,13 @@ type CardOptions = {
   cardTitleBG?: string;
   footer?: JSX.Element;
   stackJustify?: string;
-  children?: JSX.Element;
   id?: string | undefined;
   cardTitleColor?: string;
   expandCollapse?: boolean;
   cardContentClass?: string;
   cardTitleLabelBG?: string; 
   action?: JSX.Element | any;
+  children?: JSX.Element | any;
   component?: React.ElementType;
   cardTitleBorderColor?: string;
   height?: string | number | any;
